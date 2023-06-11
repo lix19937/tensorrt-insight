@@ -1,2 +1,2 @@
 # tensorrt-cookbook
-deep insight tensorrt
+deep insight tensorrt and oss  
