@@ -59,7 +59,7 @@ PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是�
 
 |No saturation | Saturate|    
 |--------------|---------|    
-|Quantize(x, max) = round(s * x) ,  where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127 / T|   
+|Quantize(x, max) = round(s * x) , where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127.f / T|   
 |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/11a78549-eac2-41fb-8a75-0db83dee8ab0) |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/575e24e5-7ad1-40a8-a35a-693bf8b4dc6d)|   
 
  
