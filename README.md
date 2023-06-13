@@ -27,7 +27,6 @@ Batch推理
 * 在GPU上使用较大的batch几乎总是更有效，batch的作用在于能尽可能多地并行计算。模型的输入只有单个batch的时候，单个batch的计算量并不能充分的利用CUDA核心的计算资源，有相当一部分的核心在闲置等待中；当输入有多个batch的时候，由于GPU的并行计算的特性，不同的batch会同步到不同的CUDA核心中进行并行计算，提高了单位时间GPU的利用率。   
 例如：FullyConnected层有V个输入和K个输出，对于1个batch的实例，可以实现为 1xV 的input矩阵乘以 VxK 的weight矩阵。如果是 N个batch的实例，这就可以实现为 NxV 乘以 VxK 矩阵。将向量-矩阵乘法变为矩阵-矩阵乘法，效率更高。此外，当网络包含MatrixMultiply层或FullyConnected层时，如果硬件支持Tensor Core，对于FP16和INT8的推理模式，将batch大小设置为32的倍数往往具有最佳性能。  
 
-
 TensorRT对计算图执行优化：  
 * 消除输出不被使用的层。
 * 消除等同于无操作的操作。
@@ -39,7 +38,8 @@ TensorRT对计算图执行优化：
 以一个典型的inception block为例，优化过程如下：    
 首先对网络结构进行垂直整合，即将目前主流神经网络的conv、BN、Relu三个层融合为了一个层，称之为CBR。    
 然后对网络结构进行水平组合，水平组合是指将输入为相同张量和执行相同操作的层融合一起。inception block中将三个相连的1×1的CBR组合为一个大的1×1的CBR。   
-最后处理concat层，将contact层的输入直接送入下面的操作中，不用单独进行concat后在输入计算，相当于减少了一次传输吞吐。 
+最后处理concat层，将contact层的输入直接送入下面的操作中，不用单独进行concat后在输入计算，相当于减少了一次传输吞吐。  
+<div align=center><img src="https://github.com/lix19937/tensorrt-cookbook/assets/38753233/b5f07bf2-9bd3-4543-9b29-9eb5aa54eda7"></div>     
 
 ## 量化    
 <div align=center><img src="https://github.com/lix19937/tensorrt-cookbook/assets/38753233/ca903fd9-84f6-407f-a42e-d2909833bd61"></div>
@@ -53,7 +53,7 @@ TensorRT对计算图执行优化：
 直观的来讲，对于一个专用寄存器宽度为512位的SIMD指令，当数据类型为FP32而言一条指令能一次处理 16个数值，但是当我们采用INT8表示数据时，一条指令一次可以处理64个数值。因此，在这种情况下可以让芯片的理论计算峰值增加4倍。   
 Tesla T4 GPU 引入了 Turing Tensor Core 技术，涵盖所有的精度范围，从 FP32 到FP16 到 INT8。在 Tesla T4 GPU 上，Tensor Cores 可以进行30万亿次浮点计算（TOPS）。通过TensorRT我们可以将一个原本为FP32的weight/activation浮点数张量转化成一个fp16/int8/uint8的张量来处理。使用 INT8 和混合精度可以降低内存消耗，这样就跑的模型就可以更大，用于推理的mini-batch size可以更大，模型的单位推理速率就越快。   
 
-* INT8量化的本质是一种缩放（scaling）操作，通过缩放因子将模型的分布值从FP32范围缩放到 INT8 范围之内。按照量化阶段的不同，一般将量化分为quantization aware training(QAT)和post-training quantization(PTQ)。QAT需要在训练阶段就对量化误差进行建模，这种方法一般能够获得较低的精度损失。PTQ直接对普通训练后的模型进行量化，过程简单，不需要在训练阶段考虑量化问题，因此，在实际的生产环境中对部署人员的要求也较低，但是在精度上一般要稍微逊色于QAT。  
+TensorRT可以将以单精度（FP32）或者半精度（FP16）训练的模型转化为以INT8量化部署的模型，同时可以最小化准确率损失。由于INT8的表达范围远远小于FP32，生成8位整数精度的网络时不能像FP16一样直接缩减精度，TensorRT对精度为FP32的模型进行校验来确定中间激活的动态范围，从而确定适当的用于量化的缩放因子。INT8量化的本质是一种缩放（scaling）操作，通过缩放因子将模型的分布值从FP32范围缩放到 INT8 范围之内。按照量化阶段的不同，一般将量化分为quantization aware training(QAT)和post-training quantization(PTQ)。QAT需要在训练阶段就对量化误差进行建模，这种方法一般能够获得较低的精度损失。PTQ直接对普通训练后的模型进行量化，过程简单，不需要在训练阶段考虑量化问题，因此，在实际的生产环境中对部署人员的要求也较低，但是在精度上一般要稍微逊色于QAT。  
 PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是通过收缩因子和零点将FP32张量的min/max映射分别映射到UINT8数据的min/max， min/max -> 0 ~ 255。**对称算法**是通过一个收缩因子将FP32中的最大绝对值映射到INT8数据的最大值，将最大绝对值的负值映射到INT8数据的最小值，-|max|/|max| -> -128 ~ 127。TensorRT中范围选取为-127 ~ 127。  
 对称算法中使用的映射方法又分为**不饱和映射**和**饱和映射**，两种映射的区别是FP32张量的值在映射后是否能够大致均匀分布在0的左右。如果分布不均匀，量化之后将不能够充分利用INT8的数据表示能力。   
 简单的将一个tensor 中的 -|max| 和 |max|的FP32值映射到 -127和 127 ，中间值按照线性关系进行映射。这种对称映射关系为**不饱和的（No saturation）**。   
