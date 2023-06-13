@@ -25,7 +25,7 @@ TensorRT的解决方案是：
 
 Batch推理    
 * 在GPU上使用较大的batch几乎总是更有效，batch的作用在于能尽可能多地并行计算。模型的输入只有单个batch的时候，单个batch的计算量并不能充分的利用CUDA核心的计算资源，有相当一部分的核心在闲置等待中；当输入有多个batch的时候，由于GPU的并行计算的特性，不同的batch会同步到不同的CUDA核心中进行并行计算，提高了单位时间GPU的利用率。   
-例如：FullyConnected层有V个输入和K个输出，对于1个batch的实例，可以实现为1xV的input矩阵乘以VxK的weight矩阵。如果是N个batch的实例，这就可以实现为NxV乘以VxK矩阵。将向量-矩阵乘法变为矩阵-矩阵乘法，效率更高。此外，当网络包含MatrixMultiply层或FullyConnected层时，如果硬件支持Tensor Core，对于FP16和INT8的推理模式，将batch大小设置为32的倍数往往具有最佳性能。  
+例如：FullyConnected层有V个输入和K个输出，对于1个batch的实例，可以实现为 1xV 的input矩阵乘以 VxK 的weight矩阵。如果是 N个batch的实例，这就可以实现为 NxV 乘以 VxK 矩阵。将向量-矩阵乘法变为矩阵-矩阵乘法，效率更高。此外，当网络包含MatrixMultiply层或FullyConnected层时，如果硬件支持Tensor Core，对于FP16和INT8的推理模式，将batch大小设置为32的倍数往往具有最佳性能。  
 
 
 TensorRT对计算图执行优化：  
