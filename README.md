@@ -42,7 +42,7 @@ TensorRT对计算图执行优化：
 最后处理concat层，将contact层的输入直接送入下面的操作中，不用单独进行concat后在输入计算，相当于减少了一次传输吞吐。 
 
 ## 量化    
-<div align=center><img src="[https://github.com/lix19937/tensorrt-cookbook/assets/38753233/ca903fd9-84f6-407f-a42e-d2909833bd61]"></div>
+<div align=center><img src="https://github.com/lix19937/tensorrt-cookbook/assets/38753233/ca903fd9-84f6-407f-a42e-d2909833bd61"></div>
 
 <!-- ![range](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/ca903fd9-84f6-407f-a42e-d2909833bd61)   -->   
 量化是将数值x映射到y的过程，其中 x 的定义域是一个大集合(通常是连续的)，而 y 的定义域是一个小集合（通常是可数的）。大部分深度学习框架在训练神经网络时网络中的张量都是32位浮点数的精度（Full 32-bit precision，FP32）。一旦网络训练完成，在部署推理的过程中由于不需要反向传播，完全可以适当降低数据精度，比如降为FP16或INT8的精度。量化后模型的体积更小，将带来以下的优势：     
