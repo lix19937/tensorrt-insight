@@ -49,11 +49,19 @@ TensorRT对计算图执行优化：
 
 * 提高系统吞吐量（throughput），降低系统延时（latency）   
 直观的来讲，对于一个专用寄存器宽度为512位的SIMD指令，当数据类型为FP32而言一条指令能一次处理 16个数值，但是当我们采用INT8表示数据时，一条指令一次可以处理64个数值。因此，在这种情况下可以让芯片的理论计算峰值增加4倍。   
-Tesla T4 GPU 引入了 Turing Tensor Core 技术，涵盖所有的精度范围，从 FP32 到FP16 到 INT8。在 Tesla T4 GPU 上，Tensor Cores 可以进行30万亿次浮点计算（TOPS）。通过TensorRT我们可以将一个原本为FP32的weight/activation浮点数张量转化成一个fp16/int8/uint8的张量来处理。使用 INT8 和混合精度可以降低内存消耗，这样就跑的模型就可以更大，用于推理的mini-batch size可以更大，模型的单位推理速度就越快。   
+Tesla T4 GPU 引入了 Turing Tensor Core 技术，涵盖所有的精度范围，从 FP32 到FP16 到 INT8。在 Tesla T4 GPU 上，Tensor Cores 可以进行30万亿次浮点计算（TOPS）。通过TensorRT我们可以将一个原本为FP32的weight/activation浮点数张量转化成一个fp16/int8/uint8的张量来处理。使用 INT8 和混合精度可以降低内存消耗，这样就跑的模型就可以更大，用于推理的mini-batch size可以更大，模型的单位推理速率就越快。   
 
 * INT8量化的本质是一种缩放（scaling）操作，通过缩放因子将模型的分布值从FP32范围缩放到 INT8 范围之内。按照量化阶段的不同，一般将量化分为quantization aware training(QAT)和post-training quantization(PTQ)。QAT需要在训练阶段就对量化误差进行建模，这种方法一般能够获得较低的精度损失。PTQ直接对普通训练后的模型进行量化，过程简单，不需要在训练阶段考虑量化问题，因此，在实际的生产环境中对部署人员的要求也较低，但是在精度上一般要稍微逊色于QAT。  
 PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是通过收缩因子和零点将FP32张量的min/max映射分别映射到UINT8数据的min/max， min/max -> 0 ~ 255。**对称算法**是通过一个收缩因子将FP32中的最大绝对值映射到INT8数据的最大值，将最大绝对值的负值映射到INT8数据的最小值 ,-|max|/|max| -> -128 ~ 127。TensorRT中范围选取为-127 ~ 127。  
-对称算法中使用的映射方法又分为**不饱和映射**和**饱和映射**，两种映射方的区别就是FP32张量的值在映射后是否能够大致均匀分布在0的左右。如果分布不均匀，量化之后将不能够充分利用INT8的数据表示能力。   
+对称算法中使用的映射方法又分为**不饱和映射**和**饱和映射**，两种映射的区别是FP32张量的值在映射后是否能够大致均匀分布在0的左右。如果分布不均匀，量化之后将不能够充分利用INT8的数据表示能力。   
 简单的将一个tensor 中的 -|max| 和 |max|的FP32值映射到-127和 127 ，中间值按照线性关系进行映射。这种对称映射关系为**不饱和的（No saturation）**。   
 根据tensor的分布计算一个阈值|T|，将范围在 ±|T|的FP32值映映射到±127的范围中，其中|T|<|max|。超出阈值 ±|T|的值直接映射为 ±127。这种不对称的映射关系为**饱和的（Saturate）**。
+|No saturation| Saturate|  
+|---|---|  
+|Quantize(x, max) = round(s * x) ,  where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127 / T |  
+|![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/11a78549-eac2-41fb-8a75-0db83dee8ab0)  |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/575e24e5-7ad1-40a8-a35a-693bf8b4dc6d)
+|   
+
+ 
+
 
