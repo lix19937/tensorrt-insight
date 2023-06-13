@@ -52,9 +52,9 @@ TensorRT对计算图执行优化：
 Tesla T4 GPU 引入了 Turing Tensor Core 技术，涵盖所有的精度范围，从 FP32 到FP16 到 INT8。在 Tesla T4 GPU 上，Tensor Cores 可以进行30万亿次浮点计算（TOPS）。通过TensorRT我们可以将一个原本为FP32的weight/activation浮点数张量转化成一个fp16/int8/uint8的张量来处理。使用 INT8 和混合精度可以降低内存消耗，这样就跑的模型就可以更大，用于推理的mini-batch size可以更大，模型的单位推理速率就越快。   
 
 * INT8量化的本质是一种缩放（scaling）操作，通过缩放因子将模型的分布值从FP32范围缩放到 INT8 范围之内。按照量化阶段的不同，一般将量化分为quantization aware training(QAT)和post-training quantization(PTQ)。QAT需要在训练阶段就对量化误差进行建模，这种方法一般能够获得较低的精度损失。PTQ直接对普通训练后的模型进行量化，过程简单，不需要在训练阶段考虑量化问题，因此，在实际的生产环境中对部署人员的要求也较低，但是在精度上一般要稍微逊色于QAT。  
-PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是通过收缩因子和零点将FP32张量的min/max映射分别映射到UINT8数据的min/max， min/max -> 0 ~ 255。**对称算法**是通过一个收缩因子将FP32中的最大绝对值映射到INT8数据的最大值，将最大绝对值的负值映射到INT8数据的最小值 ,-|max|/|max| -> -128 ~ 127。TensorRT中范围选取为-127 ~ 127。  
+PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是通过收缩因子和零点将FP32张量的min/max映射分别映射到UINT8数据的min/max， min/max -> 0 ~ 255。**对称算法**是通过一个收缩因子将FP32中的最大绝对值映射到INT8数据的最大值，将最大绝对值的负值映射到INT8数据的最小值，-|max|/|max| -> -128 ~ 127。TensorRT中范围选取为-127 ~ 127。  
 对称算法中使用的映射方法又分为**不饱和映射**和**饱和映射**，两种映射的区别是FP32张量的值在映射后是否能够大致均匀分布在0的左右。如果分布不均匀，量化之后将不能够充分利用INT8的数据表示能力。   
-简单的将一个tensor 中的 -|max| 和 |max|的FP32值映射到-127和 127 ，中间值按照线性关系进行映射。这种对称映射关系为**不饱和的（No saturation）**。   
+简单的将一个tensor 中的 -|max| 和 |max|的FP32值映射到 -127和 127 ，中间值按照线性关系进行映射。这种对称映射关系为**不饱和的（No saturation）**。   
 根据tensor的分布计算一个阈值|T|，将范围在 ±|T|的FP32值映映射到±127的范围中，其中|T|<|max|。超出阈值 ±|T|的值直接映射为 ±127。这种不对称的映射关系为**饱和的（Saturate）**。   
 
 |No saturation | Saturate|    
@@ -62,6 +62,8 @@ PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是�
 |Quantize(x, max) = round(s * x) , where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127.f / T|   
 |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/11a78549-eac2-41fb-8a75-0db83dee8ab0) |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/575e24e5-7ad1-40a8-a35a-693bf8b4dc6d)|   
 
- 
+对不同网络结构的不同layer的激活值进行直方图统计，如卷积层，有池化层。激活值并不是均匀的分布在[-max, max]之间，过大或者过小的激活值其实只占参数总体的一小部分，因此如果直接使用不饱和的映射关系不能有效利用INT8的表达范围，就会导致比较大的精度损失。如果可以找到一个范围，使网络中tensor 的绝大多数的值都存在于这个范围内，就可以利用这个范围来对 tensor进行量化。只要阈值|T|选取得当，就能将分布散乱的较大的激活值舍弃掉，也就有可能使精度损失不至于降低太多。根据实验，weights在这两种方式上没有显著的差异，而对activation使用饱和的量化方式会有比较显著的性能提升。因此TensorRT在模型上使用了这两种方法进行了混合量化。 **weights采取不饱和量化，activation使用饱和量化**。
+
+
 
 
