@@ -56,9 +56,10 @@ PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是�
 对称算法中使用的映射方法又分为**不饱和映射**和**饱和映射**，两种映射的区别是FP32张量的值在映射后是否能够大致均匀分布在0的左右。如果分布不均匀，量化之后将不能够充分利用INT8的数据表示能力。   
 简单的将一个tensor 中的 -|max| 和 |max|的FP32值映射到-127和 127 ，中间值按照线性关系进行映射。这种对称映射关系为**不饱和的（No saturation）**。   
 根据tensor的分布计算一个阈值|T|，将范围在 ±|T|的FP32值映映射到±127的范围中，其中|T|<|max|。超出阈值 ±|T|的值直接映射为 ±127。这种不对称的映射关系为**饱和的（Saturate）**。   
+
 |No saturation | Saturate|    
 |--------------|---------|    
-|Quantize(x, max) = round(s * x) ,  where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127 / T |   
+|Quantize(x, max) = round(s * x) ,  where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127 / T|   
 |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/11a78549-eac2-41fb-8a75-0db83dee8ab0) |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/575e24e5-7ad1-40a8-a35a-693bf8b4dc6d)|   
 
  
