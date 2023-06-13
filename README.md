@@ -57,10 +57,9 @@ PTQ的量化方法分为非对称算法和对称算法。**非对称算法**是�
 简单的将一个tensor 中的 -|max| 和 |max|的FP32值映射到-127和 127 ，中间值按照线性关系进行映射。这种对称映射关系为**不饱和的（No saturation）**。   
 根据tensor的分布计算一个阈值|T|，将范围在 ±|T|的FP32值映映射到±127的范围中，其中|T|<|max|。超出阈值 ±|T|的值直接映射为 ±127。这种不对称的映射关系为**饱和的（Saturate）**。   
 |No saturation | Saturate|    
-|---|---|    
+|--------------|---------|    
 |Quantize(x, max) = round(s * x) ,  where s = 127.f / amax, amax = abs(max) | Quantize(x, T) = round(s * clip(x, -T, T)) , where s = 127 / T |   
-|![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/11a78549-eac2-41fb-8a75-0db83dee8ab0) |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/575e24e5-7ad1-40a8-a35a-693bf8b4dc6d)
-|   
+|![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/11a78549-eac2-41fb-8a75-0db83dee8ab0) |![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/575e24e5-7ad1-40a8-a35a-693bf8b4dc6d)|   
 
  
 
