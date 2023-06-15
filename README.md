@@ -8,7 +8,9 @@
 
 [plugin](./plugin.md)
 
-[int4](./int4.md)
+[int4](./int4.md)  
+
+[fp8](./fp8.md)
 
 [faqs](./faqs.md)
 
