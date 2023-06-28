@@ -1,20 +1,20 @@
 # deep insight tensorrt    
 
-[overview](./overview.md)  
+[overview](./doc/overview.md)  
 
-[calibration](./calibration.md)
+[calibration](./doc/calibration.md)
 
-[asp](./asp.md)
+[asp](./doc/asp.md)
 
-[layout](./layout.md)
+[layout](./doc/layout.md)
 
-[plugin](./plugin.md)
+[plugin](./doc/plugin.md)
 
-[int4](./int4.md)  
+[int4](./doc/int4.md)  
 
-[fp8](./fp8.md)
+[fp8](./doc/fp8.md)
 
-[faqs](./faqs.md)
+[faqs](./doc/faqs.md)
 
 
 
