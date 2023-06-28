@@ -3,7 +3,7 @@
 * 使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 ptq
 
 ## fuse  
-ptq calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差    
+* ptq calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差    
 
 ## sensitivity layer profile  
 *  找到所有quant layer  
