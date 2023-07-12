@@ -34,7 +34,16 @@ TensorRT对计算图执行优化：
 * 汇总具有足够相似的参数和相同的源张量的操作（例如，GoogleNet v5的初始模块中的1x1卷积）。
 * 通过将层输出定向到正确的最终目的地来合并串联图层（例如，消除concat）。
 * 在构建阶段会在虚拟数据上运行各层，以从其核目录中选择最快的核，并在适当的情况下执行权重预格式化和内存优化。
-
+```
+[05/09/2022-12:23:21] [V] [TRT] After Myelin optimization: 1 layers
+[05/09/2022-12:23:21] [V] [TRT] Applying ScaleNodes fusions.
+[05/09/2022-12:23:21] [V] [TRT] After scale fusion: 1 layers
+[05/09/2022-12:23:21] [V] [TRT] After vertical fusions: 1 layers
+[05/09/2022-12:23:21] [V] [TRT] After dupe layer removal: 1 layers
+[05/09/2022-12:23:21] [V] [TRT] After final dead-layer removal: 1 layers
+[05/09/2022-12:23:21] [V] [TRT] After tensor merging: 1 layers
+[05/09/2022-12:23:21] [V] [TRT] After concat removal: 1 layers
+```   
 以一个典型的inception block为例，优化过程如下：    
 首先对网络结构进行垂直整合，即将目前主流神经网络的conv、BN、Relu三个层融合为了一个层，称之为CBR。    
 然后对网络结构进行水平组合，水平组合是指将输入为相同张量和执行相同操作的层融合一起。inception block中将三个相连的1×1的CBR组合为一个大的1×1的CBR。   
