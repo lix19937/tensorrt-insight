@@ -50,3 +50,36 @@ in the padded part (that is, where C=3,4,…,7 in this example) must be filled w
 ```   
 Refer to Data Format Descriptions for how the data are actually laid out in memory for these formats.
 
+```
+/// NCHW --> NHWC8,  idx in linear plane, dst_idx is in NHWC8
+__forceinline__ __device__ void convert_to_hwc8plane(const size_t idx, const size_t area, size_t* dst_idx)
+{
+    //////////////////////////////// python snippet ////////////////////////////
+    // area = H * W
+    // voc = C*area
+    // # idx is linear plane,
+    // voc_idx = idx // voc
+    // row_idx = idx % voc // area
+    // col_idx = idx % voc % area
+    // dst_idx = voc_idx * voc + C* col_idx + row_idx  # find idx in NHWC8 plane
+    ////////////////////////////////////////////////////////////////////////////
+    const auto voc = area << 8;  // C = 256
+    *dst_idx = (idx / voc * voc) + ((idx % voc / area) << 8) + (idx % voc % area);
+}
+
+/// NCHW --> NC/32HW32,  idx in linear plane, dst_idx is in NC/32HW32 plane
+__forceinline__ __device__ void convert_to_chw32plane(const size_t idx, const size_t area, size_t* dst_idx)
+{
+    //////////////////////////////// python snippet ////////////////////////////
+    // area = H * W
+    // voc = 32*area
+    // # idx is linear plane,
+    // voc_idx = idx // voc
+    // row_idx = idx % area
+    // col_idx = idx // area % 32
+    // chw32_idx = voc_idx * voc + row_idx*32 + col_idx  # find idx in NCHW32 plane
+    ////////////////////////////////////////////////////////////////////////////
+    const auto voc = area << 5;
+    *dst_idx = (idx / voc * voc) + (idx % area << 5) + (idx / area & 31);
+}
+```
