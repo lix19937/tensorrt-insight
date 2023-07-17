@@ -5,6 +5,7 @@ BERT's model architecture is a multi-layer bidirectional Transformer encoder.
 
 https://github.com/NVIDIA/TensorRT/issues/2655#issue-1575787745   
 https://developer.nvidia.com/zh-cn/blog/real-time-nlp-with-bert-using-tensorrt-updated/   
+https://zhuanlan.zhihu.com/p/79344309     
 
 * 对应的 python 实现
 ```
