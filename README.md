@@ -19,5 +19,4 @@
 
 ref   
 
-https://docs.nvidia.com/deeplearning/tensorrt/release-notes/#rel-8-6-1   
-
+https://docs.nvidia.com/deeplearning/tensorrt/archives/   
