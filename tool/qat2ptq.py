@@ -92,7 +92,7 @@ def get_quantized_tensor(node: gs.Node, graph: gs.Graph) -> Union[gs.Variable, g
         return quantize_tensor
 
 #
-# python3 QAT2PTQ_new.py --model qat1112_3head.onnx  
+# python3 QAT2PTQ.py --model qat1112_3head.onnx  
 #
 if __name__ == "__main__":
     # merge_calib(qat_calib="CalibrationTableqat1112_3head", ptq_calib="qat1112_3headmodified.onnx.calib")
