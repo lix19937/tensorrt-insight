@@ -2,17 +2,15 @@
 
 [overview](./doc/overview.md)  
 
+[layout](./doc/layout.md)  
+
 [calibration](./doc/calibration.md)
 
 [asp](./doc/asp.md)
 
-[layout](./doc/layout.md)
-
 [plugin](./doc/plugin.md)
 
-[int4](./doc/int4.md)  
-
-[fp8](./doc/fp8.md)
+[qat](./doc/qat.md)  
 
 [faqs](./doc/faqs.md)
 
