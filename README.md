@@ -10,7 +10,9 @@
 
 [asp](./doc/asp.md)
 
-[qat](./doc/qat.md)  
+[qat](./doc/qat.md)   
+
+[orin](./doc/orin.md)   
 
 [faqs](./doc/faqs.md)
 
