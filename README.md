@@ -16,6 +16,7 @@
 
 [faqs](./doc/faqs.md)
 
+[more](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/readme_cn.md)      
 ------------------------------------------------    
 
 ref   
