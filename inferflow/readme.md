@@ -2,6 +2,7 @@
 # cudagraph + stream  + thread     
 
 在GPU上，kernel的调用分为 kernel launch和kernel run 两步，kernel launch负责准备好执行kernel需要的资源，通常在us级别；kernel执行则是实际上GPU完成的计算。一些比较简单的kernel执行时间可能也在us级别，但却不得不等待数us的kernel launch，即所谓的kernel launch瓶颈。在很多推理场景中，由于graph包含的kernel数量极多，单流模型的调度效率又低，常常是kernel launch bound。       
+
 缓解kernel launch瓶颈主要有两个思路，一个就是`kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；另一个思路就是`提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。      
 CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一个完整的GPU子图），将graph里数量众多的kernel launch转化成一次graph launch，以降低launch在device和host上的开销，几乎可以说是解决了kernel launch瓶颈的问题。    
 
@@ -22,15 +23,20 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 ![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/36587883-522d-42d4-8d85-74b429e5e929)
 
 直接创建多个Stream group的性能提升是比较有限的。通过分析GPU timeline，会发现在每个Stream group内，都存在大量的cuEventRecord和cuEventQuery，这些Event大部分都来源于Compute Stream和 Memcpy Stream间的同步。在整个进程只有一个Stream group时，通过将计算和传输行为分配到多个Stream上以尽可能overlap，并通过必要的同步来保证行为当然是非常合理的。      
+
 但当有多个Stream group后，是不是Stream group间的overlap就足以提升device利用率了呢？实验证明，**当整个device存在多个Compute Stream时，把相对应的Memcpy Stream合并到comput Stream中，可以有效减少Stream间的同步行为，提高GPU利用率**。    
 此外，我们在GPU timeline中看到层出不穷的pthread_rwlock_wrlock，阻碍了kernel launch。这是因为GPU driver对cuda context有读写保护。当一个cuda context向多个Stream launch kernel时，driver会给kernel launch上比较重的锁。事实上这层锁随着driver更新在逐步减轻，driver510已经将读写锁改成读锁，这层限制大概率会随着驱动的升级进一步被弱化。   
+
 但当前最好的方法还是**直接把合并后的每个Stream都放到各自不同的context中去，并通过MPS实现context间的并行**。MPS是Nvidia对于多process/context的优化方案，将多个process/context放到同一个control daemon下，共享一个context，是一个比较成熟，且相对易用的方案。    
+
 还有一个相对简单的点是，开启多流后，为了避免多个thread向同一个Stream launch kernel的pthread_mutex_lock，**给每个Stream配了一个私有的CPU thread，让这一个thread去完成对应Stream上的所有kernel launch**。当然这种做法依然无法避免多个thread一起H2D的launch竞争。也做了尝试，但都不是很成功。    
+
 在几个场景做了验证，测试下来多流的性能提升大概能够接近CUDA Graph的性能，创建了4个context，每个context各一个Stream，且对应一个thread，Stream与Stream间，计算与传输间，都可以比较好的overlap。    
 
 简单的比较一下这两种方案：   
 * CUDA Graph作为有硬件支持的方案，将大量kernel launch转换为一次graph launch，可以同时节省host和device开销，在应用得当的前提下应当是最优性能的最佳选择；       
 * Multi Stream主要是通过创建多个Stream的做法增加了kernel执行的并行，从而更好的利用资源，在易用性上远超CUDA Graph。
+
 
 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？     taskflow + tensorrt 
 
