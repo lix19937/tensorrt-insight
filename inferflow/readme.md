@@ -1,0 +1,2 @@
+
+cudagraph + stream  + thread     
