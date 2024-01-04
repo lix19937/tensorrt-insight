@@ -3,7 +3,9 @@
 
 在GPU上，kernel的调用分为 kernel launch和kernel run 两步，kernel launch负责准备好执行kernel需要的资源，通常在us级别；kernel执行则是实际上GPU完成的计算。一些比较简单的kernel执行时间可能也在us级别，但却不得不等待数us的kernel launch，即所谓的kernel launch瓶颈。在很多推理场景中，由于graph包含的kernel数量极多，单流模型的调度效率又低，常常是kernel launch bound。       
 
-缓解kernel launch瓶颈主要有两个思路，一个就是`kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；另一个思路就是`提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。      
+缓解kernel launch瓶颈主要有两个思路，一个就是`kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；另一个思路就是`提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。   
+
+-----------------------------------------------------------     
 CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一个完整的GPU子图），将graph里数量众多的kernel launch转化成一次graph launch，以降低launch在device和host上的开销，几乎可以说是解决了kernel launch瓶颈的问题。    
 
 但实际应用CUDA Graph需要满足特定的要求：     
@@ -37,6 +39,7 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 * CUDA Graph作为有硬件支持的方案，将大量kernel launch转换为一次graph launch，可以同时节省host和device开销，在应用得当的前提下应当是最优性能的最佳选择；       
 * Multi Stream主要是通过创建多个Stream的做法增加了kernel执行的并行，从而更好的利用资源，在易用性上远超CUDA Graph。
 
+-----------------------------------------------------------
 
 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？     taskflow + tensorrt 
 
