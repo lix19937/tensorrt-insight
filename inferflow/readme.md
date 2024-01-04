@@ -15,9 +15,9 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
 
 * 第二个要求是对于CUDA Graph来说，必须保证Graph的输入输出地址固定。针对这个限制，当前采取的方案是将来自CPU的输入先放到GPU上，然后和在GPU上完成了一些计算的tensor一起作为CUDA Graph的输入，通过D2D copy到Graph里面。增加了一层数据传输必然会带来延时的增长。当然还可以有另一个方案，先保证整个GPU子图都可以被capture，然后将CPU输入拷贝到固定的host地址上，将原方案里的H2D+D2D转换成H2H+H2D。但无论如何，多一级Memcpy是不可避免的。   
 在这些限制下，对CUDA Graph的用法就变成了，先通过kernel fusion将整个GPU子图整理成一张结构干净，shape“固定”的子图，然后再capture整理完的子图，让CUDA Graph照顾一些手工的kernel fusion难以整理到位，但实际计算又很轻的计算，比如常见的elementwise操作等，让这些本身计算开销小的kernel的launch开销也几乎可以忽略不计。基于这种比较精细的用法，CUDA Graph的收益主要有：   
-* 将大量的kernel launch转化为一次graph launch，从而极大的节省了host和device开销；     
-* 多个CUDA Graph的执行是完全独立、可并行的，因此会直接被分配到多个Stream上，这种多Stream的并行也极大的提升了吞吐，很好的增强了单机服务能力。     
-不过这种能够保证CUDA Graph优化效果的用法事实上对工程化提出了不低的要求，需要用户既熟悉模型结构（且能做一定程度的图优化），也熟悉模型流量分布，还要简单了解device arch（至少是不同型号的GPU memory大小）。这些要求稍不满足，便很容易得出一个效果不佳，提升有限的结论。
+    * 将大量的kernel launch转化为一次graph launch，从而极大的节省了host和device开销；     
+    * 多个CUDA Graph的执行是完全独立、可并行的，因此会直接被分配到多个Stream上，这种多Stream的并行也极大的提升了吞吐，很好的增强了单机服务能力。     
+    不过这种能够保证CUDA Graph优化效果的用法事实上对工程化提出了不低的要求，需要用户既熟悉模型结构（且能做一定程度的图优化），也熟悉模型流量分布，还要简单了解device arch（至少是不同型号的GPU memory大小）。这些要求稍不满足，便很容易得出一个效果不佳，提升有限的结论。
 
 ----------------------- 
 
