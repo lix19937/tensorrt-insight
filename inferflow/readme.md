@@ -6,18 +6,18 @@
 缓解kernel launch瓶颈主要有两个思路，一个就是`kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；另一个思路就是`提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。   
 
 -----------------------------------------------------------     
-CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一个完整的GPU子图），将graph里数量众多的kernel launch转化成一次graph launch，以降低launch在device和host上的开销，几乎可以说是解决了kernel launch瓶颈的问题。    
+CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一个完整的GPU子图），将graph里数量众多的kernel launch转化成一次graph launch，以降低launch在device和host上的开销，几乎是解决了kernel launch瓶颈的问题。    
 
 但实际应用CUDA Graph需要满足特定的要求：     
-* 一个是CUDA Graph并不支持动态shape，而搜推场景的batch size大部分都是动态的。为了满足这个条件，方案是预先capture多张不同batch size的子图供运行时的请求选择；要是请求的batch size超过预先capture的最大值，就得使用一般方法。   
+* 一个是CUDA Graph并不支持动态shape，而部分场景的batch size大部分都是动态的。为了满足这个条件，方案是预先capture多张不同batch size的子图供运行时的请求选择；要是请求的batch size超过预先capture的最大值，就得使用一般方法。   
 这已经是一个相对合理的方案，但实际应用的时候还是会有不少问题。一个问题是，经过预先的填充，当前graph里只能有唯一一个动态的维度，且它的值必须是batch size，这也意味着，子图里一些诸如Concat，Gather，Split等可能会导致破坏这一条件的操作应当要被谨慎的排除出去。另一个问题是，对于batch size的选择依赖于模型输入的分布和实际硬件的显存（因为多份图当然占用了多份存储），这就依靠经验，或工具层自动的根据历史流量分布选择参数。
 ![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/13e81ae0-77be-4c2b-a795-52dea22c6f5e)     
 
 * 第二个要求是对于CUDA Graph来说，必须保证Graph的输入输出地址固定。针对这个限制，当前采取的方案是将来自CPU的输入先放到GPU上，然后和在GPU上完成了一些计算的tensor一起作为CUDA Graph的输入，通过D2D copy到Graph里面。增加了一层数据传输必然会带来延时的增长。当然还可以有另一个方案，先保证整个GPU子图都可以被capture，然后将CPU输入拷贝到固定的host地址上，将原方案里的H2D+D2D转换成H2H+H2D。但无论如何，多一级Memcpy是不可避免的。   
-在这些限制下，对CUDA Graph的用法就变成了，先通过kernel fusion将整个GPU子图整理成一张结构干净，shape“固定”的子图，然后再capture整理完的子图，让CUDA Graph照顾一些手工的kernel fusion难以整理到位，但实际计算又很轻的计算，比如常见的elementwise操作等，让这些本身计算开销小的kernel的launch开销也几乎可以忽略不计。基于这种比较精细的用法，CUDA Graph的收益主要有：   
+在这些限制下，对CUDA Graph的用法就变成了，先通过kernel fusion将整个GPU子图整理成一张结构干净，shape“固定”的子图，然后再capture整理完的子图，让CUDA Graph照顾一些手工的kernel fusion难以整理到位，但实际计算很轻的计算，比如常见的elementwise操作等，让这些本身计算开销小的kernel的launch开销也几乎可以忽略不计。基于这种比较精细的用法，CUDA Graph的收益主要有：   
     * 将大量的kernel launch转化为一次graph launch，从而极大的节省了host和device开销；     
     * 多个CUDA Graph的执行是完全独立、可并行的，因此会直接被分配到多个Stream上，这种多Stream的并行也极大的提升了吞吐，很好的增强了单机服务能力。     
-    不过这种能够保证CUDA Graph优化效果的用法事实上对工程化提出了不低的要求，需要用户既熟悉模型结构（且能做一定程度的图优化），也熟悉模型流量分布，还要简单了解device arch（至少是不同型号的GPU memory大小）。这些要求稍不满足，便很容易得出一个效果不佳，提升有限的结论。
+    不过这种能够保证CUDA Graph优化效果的用法事实上对工程化提出了不低的要求，需要用户既熟悉模型结构（且能做一定程度的图优化），也熟悉模型流量分布，还要简单了解device arch（至少是不同型号的GPU memory大小）。这些要求稍不满足，便易得出一个效果不佳，提升有限的结论。
 
 ----------------------- 
 
