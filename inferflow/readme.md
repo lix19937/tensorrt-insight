@@ -48,7 +48,7 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 v-camera + preprocess node + infer node + decode node + postprocess node + display node     
 
 + 组合试验     
-  + 隐藏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同一时刻，选择合适的模型进行并行，利用overlab掩盖小模型（指低算力）latency，完全消弭小模型推理耗时     
+  + 隐藏&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同一时刻，选择合适的模型进行并行，利用overlab掩盖小模型（指低算力）latency，完全消弭小模型推理耗时     
   + 确定性&nbsp;&nbsp;&nbsp;&nbsp;任务编排
   + multi-task模型head拆分并行       
 
