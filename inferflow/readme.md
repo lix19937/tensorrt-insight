@@ -42,9 +42,10 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 -----------------------------------------------------------
 
 
-如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？     taskflow + tensorrt 
++ 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？     taskflow + tensorrt 
 
-同一时刻 选择合适的模型进行并行，利用overlab 掩盖小模型latency      
++ 组合试验     
+同一时刻，选择合适的模型进行并行，利用overlab掩盖小模型（指低算力）latency，完全消弭小模型推理耗时           
 
 
 -----------------------------------------------------------  
