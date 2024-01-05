@@ -58,12 +58,12 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 [01]Multi Stream     
 https://github.com/tensorflow/tensorflow/pull/59843     
 
-[02] CUDA Graph
+[02] CUDA Graph     
 https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s31312/
 
-[03] Introduce multiple streams execution in TensorFlow.        
+[03] Introduce multiple streams execution in TensorFlow.          
 https://github.com/tensorflow/tensorflow/pull/59843
 
-[04] Nvidia MPS     
-https://docs.nvidia.com/deploy/mps/
+[04] Nvidia MPS       
+https://docs.nvidia.com/deploy/mps/       
 
