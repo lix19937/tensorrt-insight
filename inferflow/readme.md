@@ -49,7 +49,8 @@ v-camera + preprocess node + infer node + decode node + postprocess node + displ
 
 + 组合试验     
   + 隐藏 同一时刻，选择合适的模型进行并行，利用overlab掩盖小模型（指低算力）latency，完全消弭小模型推理耗时     
-  + 确定性 任务编排            
+  + 确定性 任务编排
+  + multi-task模型head拆分并行       
 
 
 -----------------------------------------------------------  
