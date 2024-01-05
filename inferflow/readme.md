@@ -4,8 +4,8 @@
 在GPU上，kernel的调用分为 kernel launch和kernel run 两步，kernel launch负责准备好执行kernel需要的资源，通常在us级别；kernel执行则是实际上GPU完成的计算。一些比较简单的kernel执行时间可能也在us级别，但却不得不等待数us的kernel launch，即所谓的kernel launch瓶颈。在很多推理场景中，由于graph包含的kernel数量极多，单流模型的调度效率又低，常常是kernel launch bound。       
 
 缓解kernel launch瓶颈主要有两个思路：  
-* 一个就是`kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；      
-* 另一个思路就是`提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。         
+* `kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；      
+* `提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。         
 
 -----------------------------------------------------------     
 CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一个完整的GPU子图），将graph里数量众多的kernel launch转化成一次graph launch，以降低launch在device和host上的开销，几乎是解决了kernel launch瓶颈的问题。    
