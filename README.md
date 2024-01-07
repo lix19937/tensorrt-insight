@@ -1,17 +1,15 @@
 # deep insight tensorrt    
 
-[overview](./doc/overview.md)   
-[layout](./doc/layout.md)  
-[plugin](./doc/plugin.md)   
-[calibration](./doc/calibration.md)    
-[asp](./doc/asp.md)   
-[qat](./doc/qat.md)   
-[orin](./doc/orin.md)     
-[inferflow](./inferflow/readme.md)      
-[faqs](./doc/faqs.md)   
+[overview](./doc/overview.md)   &emsp;概述     
+[layout](./doc/layout.md)       &emsp;tensor内存布局    
+[plugin](./doc/plugin.md)       &emsp;插件    
+[calibration](./doc/calibration.md)   &emsp;标定      
+[asp](./doc/asp.md)             &emsp;稀疏   
+[qat](./doc/qat.md)             &emsp;量化感知训练        
+[inferflow](./inferflow/readme.md)&emsp;模型调度    
+[faqs](./doc/faqs.md)           &emsp;快速问答
 
 ## [more](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/readme_cn.md)    
-
 
 --------------------------------------    
 
