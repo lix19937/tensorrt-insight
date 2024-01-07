@@ -1,9 +1,9 @@
 # deep insight tensorrt   深入洞悉tensorrt    
 
-|topic                           | 主题|     
+|**topic**                       | **主题**|     
 |    ---                         | --- |     
 |[overview](./overview.md)       |概述  |         
-|[layout](./layout/readme.md)    |tensor内存布局|         
+|[layout](./layout/readme.md)    |内存布局|         
 |[dynamic](./dynamic/readme.md)  |动态shape |    
 |[plugin](./plugin/readme.md)    |插件  |       
 |[calibration](./calibration/readme.md)  |标定 |          
