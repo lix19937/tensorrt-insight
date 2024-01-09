@@ -28,7 +28,8 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 
 直接创建多个Stream group的性能提升是比较有限的。通过分析GPU timeline，会发现在每个Stream group内，都存在大量的cuEventRecord和cuEventQuery，这些Event大部分都来源于Compute Stream和 Memcpy Stream间的同步。在整个进程只有一个Stream group时，通过将计算和传输行为分配到多个Stream上以尽可能overlap，并通过必要的同步来保证行为当然是非常合理的。      
 
-但当有多个Stream group后，是不是Stream group间的overlap就足以提升device利用率了呢？ 实验证明：**当整个device存在多个Compute Stream时，把相对应的Memcpy Stream合并到comput Stream中，可以有效减少Stream间的同步行为，提高GPU利用率**。    
+但当有多个Stream group后，是不是Stream group间的overlap就足以提升device利用率了呢？   
+实验证明：**当整个device存在多个Compute Stream时，把相对应的Memcpy Stream合并到comput Stream中，可以有效减少Stream间的同步行为，提高GPU利用率**。    
 此外，可以在GPU timeline中看到层出不穷的pthread_rwlock_wrlock，阻碍了kernel launch。这是因为GPU driver对cuda context有读写保护。当一个cuda context向多个Stream launch kernel时，driver会给kernel launch上比较重的锁。事实上这层锁随着driver更新在逐步减轻，driver510已经将读写锁改成读锁，这层限制大概率会随着驱动的升级进一步被弱化。   
 
 但当前最好的方法还是**直接把合并后的每个Stream都放到各自不同的context中去，并通过MPS实现context间的并行**。MPS是Nvidia对于多process/context的优化方案，将多个process/context放到同一个control daemon下，共享一个context，是一个比较成熟，且相对易用的方案。    
