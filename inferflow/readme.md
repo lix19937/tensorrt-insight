@@ -45,7 +45,8 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 
 ## 环境模型压测
 
-+ 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？    @ taskflow + tensorrt   
++ 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？    @ taskflow + tensorrt
+
 |  0      |  1              |          2 |     3       |  4               |   5          |    
 |  -------|  ----           | ---------- | ----------  | ---------------- | ------------ |    
 |v-camera | preprocess node | infer node | decode node | postprocess node | display node |   
