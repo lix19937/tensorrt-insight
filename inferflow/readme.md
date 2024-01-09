@@ -1,5 +1,5 @@
 
-# cudagraph + stream  + thread     
+# multi-cudagraph + stream  + thread 加速        
 
 在NV-GPU上，kernel的调用分为 kernel launch和kernel run 两步，kernel launch负责准备好执行kernel需要的资源，通常在us级别；kernel执行则是实际上GPU完成的计算。一些比较简单的kernel执行时间可能也在us级别，但却不得不等待数us的kernel launch，即所谓的kernel launch瓶颈。在很多推理场景中，由于graph包含的kernel数量极多，单流模型的调度效率又低，常常是kernel launch bound。       
 
