@@ -41,8 +41,9 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 * CUDA Graph作为有硬件支持的方案，将大量kernel launch转换为一次graph launch，可以同时节省host和device开销，在应用得当的前提下应当是最优性能的最佳选择；       
 * Multi Stream主要是通过创建多个Stream的做法增加了kernel执行的并行，从而更好的利用资源，在易用性上远超CUDA Graph。
 
------------------------------------------------------------
+-----------------------------------------------------------  
 
+## 环境模型压测
 
 + 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？    @ taskflow + tensorrt         
 v-camera + preprocess node + infer node + decode node + postprocess node + display node     
