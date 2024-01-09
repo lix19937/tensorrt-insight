@@ -44,7 +44,7 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 
 -----------------------------------------------------------  
 
-## 环境模型压测
+## 环境模型压测与资源分析    
 
 + 如何利用multi-cudagraph + stream + thread 设计一个多模型调度框架？    @ taskflow + tensorrt
 
