@@ -9,4 +9,5 @@
 |-1 x C x H x W     | -1 x M x N  |       
 |-1 x C x H x W <br> 1 x P x Q  | -1 x M x N  |      
 |-1 x C x H x W <br> 1 x P x Q  | -1 x M x N <br> 1 x R |   
+|-1 x C x H x W <br> 1 x P x Q <br> -1 x K x K| -1 x M x N <br> 1 x R  <br>  -1 x K|   
  
