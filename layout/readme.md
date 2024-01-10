@@ -1,3 +1,5 @@
+## io format    
+
 ```
 For the generalized NC/xHWx layout format, the following observations apply:
 Only the channel dimension, C, is grouped into x channels each.
