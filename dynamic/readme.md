@@ -6,5 +6,6 @@
 
 |输入      |输出|  
 |-------- | ------|     
-|-1x C xH x W  <br> vvv | -1 x M x N  |       
+|-1x C x H x W     | -1 x M x N  |       
+|-1x C x H x W <br> 1 x P x Q  | -1 x M x N  |      
  
