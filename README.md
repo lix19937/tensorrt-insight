@@ -3,7 +3,8 @@
 |**topic**                       | **主题**|     
 |    ---                         | --- |     
 |[overview](./overview.md)       |概述  |         
-|[layout](./layout/readme.md)    |内存布局|         
+|[layout](./layout/readme.md)    |内存布局|        
+|[graph-optimize](./graph-optimize/readme.md)    |图优化|      
 |[dynamic](./dynamic/readme.md)  |动态shape |    
 |[plugin](./plugin/readme.md)    |插件  |       
 |[calibration](./calibration/readme.md)  |标定 |          
