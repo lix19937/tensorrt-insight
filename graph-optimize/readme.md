@@ -7,3 +7,40 @@
 * 第二个阶段离线优化，是对导出的模型进行优化，例如对导出的ONNX模型进行优化。第三个阶段是在深度学习引擎内部运行时进行优化，可以结合硬件特点和输入shape对应的性能信息进行更加针对性和极致的优化。     
 
 
+## OneHot+MatMul  to  Gather    
+
+
+## 多个gather可以替换为split    
+
+## 统一归一化函数  
+其实由F.normalize(x, p=2.0, dim=-1)导出，可以进行针对性合并。第二个图计算跟第一个图类似，但是为不同代码编写方式，这种最好是修改模型pytorch代码改成同一种norm函数，降低模型图优化代码开发。  
+
+## SpaceToDepth与DepthToSpace算子   
+图中reshape+transpose(perm=[0, 1, 3, 5, 2, 4])计算等价于SpaceToDepth，由于transpose场景特别多，这里替换后可以在计算上进行更加针对性优化，此外，这个优化使得做NCHW到NHWC等格式转换优化也更加容易    
+
+transpose(perm=[0, 1, 4, 2, 5, 3])等价于DepthToSpace   
+
+## transpose+reshape+transpose to  transpose    
+
+## 矩阵乘+BN融合
+
+
+## 反卷积+BN也应该能进行融合    
+
+## 合并相邻的Conv2D或MatMul   
+
+## 特殊的1x1 depthwise卷积替换为elemwise
+
+
+## MatMul与Add, Mul向量计算融合
+
+
+## LayerNorm算子合并
+ 
+
+
+
+ 
+
+ 
+
