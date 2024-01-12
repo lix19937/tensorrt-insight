@@ -52,7 +52,7 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
    |  -------|  ----           | ---------- | ----------  | ---------------- | ------------ |  ----     |    
    |v-camera | preprocess node | infer node | decode node | postprocess node | display node |   pipeline|     
    | nvmedia |  cuda           | cuda + dla | cuda        |  cpu             |   cpu        |           |       
-
+   |  class  | class           |  class     |  class      |  class           |  class       | class     |     
 
   zero copy + io-free reformat           
 
