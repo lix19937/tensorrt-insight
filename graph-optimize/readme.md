@@ -4,7 +4,7 @@
 
 ## 如何做图优化？  
 * 第一个阶段在线优化，是直接对代码（网络的forward）进行修改，从而导出的模型直接具有优化后的特性。对于一些算法依赖，通用性并不是很强，或者底层实施图优化困难的优化可以考虑该方法。     
-* 第二个阶段离线优化，是对导出的模型进行优化，例如对导出的ONNX模型进行优化。第三个阶段是在深度学习引擎内部运行时进行优化，可以结合硬件特点和输入shape对应的性能信息进行更加针对性和极致的优化。     
+* 第二个阶段离线优化，是对导出的模型进行优化，例如对导出的ONNX模型进行优化。第三个阶段是在深度学习引擎内部运行时进行优化，可以结合硬件特点和输入shape对应的性能信息进行更加针对性和极致的优化。一般离线优化前可使用推理引擎如TensorRT进行 layer info profile，看看layer 的融合情况，再针对性优化onnx 。        
 
 
 ## OneHot+MatMul  to  Gather    
@@ -25,9 +25,14 @@ transpose(perm=[0, 1, 4, 2, 5, 3])等价于DepthToSpace
 ## 矩阵乘+BN融合
 
 
-## 反卷积+BN也应该能进行融合    
+## 反卷积+BN也应该能进行融合      
 
-## 合并相邻的Conv2D或MatMul   
+
+## 合并相邻的Conv2D或MatMul，无非线性层     
+
+
+## 相邻的卷积/matmul+bias，中间没有非线性层的话可以基于卷积和矩阵乘的线性性直接合并
+
 
 ## 特殊的1x1 depthwise卷积替换为elemwise
 
@@ -35,8 +40,23 @@ transpose(perm=[0, 1, 4, 2, 5, 3])等价于DepthToSpace
 ## MatMul与Add, Mul向量计算融合
 
 
-## LayerNorm算子合并
+## LayerNorm算子合并   
  
+
+## squeeze  unsqueeze 去除      
+
+
+## reshape去除 
+
+## 多路相同计算patten合并为batch计算，显著降低算子数量，提升算子计算密集性       
+如图的场景；此外另一个场景是transformer模型中attention三个矩阵乘合可以并成为batch matmul，或者自己实现的特殊能够同时接受多个输入和bias的矩阵乘。  
+
+## 多路并行的slice在特定情况下可以换成gather，并且后面所有的这些elemwise都可以合成一路计算。   
+下图中这个稍微复杂点，slice可以替换为gahter，elemwise可以跟着合并，但gatherV2合并需要自定义算子batch gatherV2。   
+
+
+## 调整顺序从而把div折叠到matmul和bias_add参数里面    
+
 
 
 
