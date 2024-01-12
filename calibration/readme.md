@@ -7,7 +7,9 @@
 * plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale     
 
 ## 显示量化设置   
-插入 Q/DQ 在插件层的前后     
+插入 Q/DQ 在插件层的前后       
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/99191e22-7c9f-4774-ade8-665575e5f155)       
+
 
 ## fuse  
 * ptq calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差    
