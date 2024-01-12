@@ -9,4 +9,4 @@
 
 
 ## 示例  
-![transformer decoder plugin](./svt.md)    
+[transformer decoder plugin](./svt.md)    
