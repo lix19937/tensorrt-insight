@@ -2,7 +2,7 @@
 * 使用 TensorRT 闭源方法进行 ptq  
 * 使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 ptq
 
-## 带自定义插件的量化     
+## 带自定义插件的后量化     
 
 ## fuse  
 * ptq calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差    
