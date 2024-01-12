@@ -50,10 +50,11 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
 
    |  0      |  1              |          2 |     3       |  4               |   5          |   6       |     
    |  -------|  ----           | ---------- | ----------  | ---------------- | ------------ |  ----     |    
-   |v-camera | preprocess node | infer node | decode node | postprocess node | display node |   pipeline|     
-   | nvmedia |  cuda           | cuda + dla | cuda        |  cpu             |   cpu        |           |       
-   |  class  | class           |  class     |  class      |  class           |  class       | class     |     
-
+   |v-camera | preprocess node | infer node | decode node | postprocess node | display node |  pipeline |     
+   | nvmedia |  cuda           | cuda + dla | cuda        |  cpu             |   cpu        |     -     |       
+   |  class  | class (Init, Run, DeInit)    |  class      |  class      |  class           |  class       | -     |      
+   |  debug  | stub/fileio   |  stub/fileio |  stub/fileio      |  stub/fileio             |  stub/fileio | -     |   
+  
   zero copy + io-free reformat           
 
 + 基于 OpenVX 实现一个多模型调度框架
