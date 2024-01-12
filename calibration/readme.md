@@ -3,6 +3,11 @@
 * 使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 ptq
 
 ## 带自定义插件的后量化     
+* onnx 上构建带plugin的层，标记plugin的输出tensor      
+* plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale     
+
+## 显示量化设置   
+插入 Q/DQ 在插件层的前后     
 
 ## fuse  
 * ptq calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差    
