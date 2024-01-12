@@ -53,7 +53,7 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
    |v-camera | preprocess node | infer node | decode node | postprocess node | display node |   
    | nvmedia |  cuda           | cuda + dla | cuda        |  cpu             |   cpu        |
 
-  zero copy + io-free reformat   
+  zero copy + io-free reformat           
 
 + 基于 OpenVX 实现一个多模型调度框架
   
