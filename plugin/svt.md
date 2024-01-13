@@ -247,7 +247,8 @@ You can assemble an optimal data pipeline by profiling the available I/O formats
 ```
 如果采用默认方式，TRT基于全局最优性能自动增加了Reformatting CopyNode，即从FP16 NC/32HW32到FP16 NCHW的layout转换，如下所示:      
 
-![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/e7d140c8-5fda-442b-9737-51ac5a70fdb2)
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/e7d140c8-5fda-442b-9737-51ac5a70fdb2)  
+
 
 free reformat v1与free reformat v2分别如下所示:  
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/cf14d2e4-e1d2-4f98-b907-83f8c67123f1)
@@ -256,9 +257,7 @@ free reformat v1与free reformat v2分别如下所示:
 
 #### 1.6.2 free reformatting的实现 
 kCHW32与kLinear数据分布分别如下:     
-![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/48a06bc2-cfce-43a4-a654-b2fcc46f1cd8)
-
-![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/795a3853-0601-4bfe-a4a6-a1c3d953e2a6)    
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/48a06bc2-cfce-43a4-a654-b2fcc46f1cd8) ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/795a3853-0601-4bfe-a4a6-a1c3d953e2a6)    
 
 kCHW32与kLinear索引转换函数如下:   
 
