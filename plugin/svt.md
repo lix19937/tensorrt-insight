@@ -104,7 +104,7 @@ logger.info('{}'.format(torch.equal(mask, mask_v2)))
 即分两个流:一个流用来计算svca.output_proj操作，另一个流计算svca.position_encoder 操作，最后在主流（@stream1）中同步。   
 
 #### 1.2.3 访存: 减少内存移动      
-如采用half2:   
+如采用向量类型数据half2:   
 ```cpp 
 template<typename T>
 __global__ void svt_add_bias_slice(
@@ -162,7 +162,7 @@ void SvtAddBiasSlice(T* in, T* out, const T* bias, const int m, const int n, con
 [24, 4] * [4, 512]
 ```
 
-两个版本对应的代码如下:   
+两个版本对应的python代码如下:   
 ```py
 import torch
 import numpy as np 
@@ -212,8 +212,9 @@ def main():
 if __name__ == '__main__':
   main()
 ```
+cuda实现可按此原理开展。   
 
-### 1.4 cudagraph应用  
+### 1.4 cudagraph    
 主要是解决模型运行的launch bound问题，TRT build infer without cudagraph与with cudagraph对比如下:       
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/61d0f9d5-a639-4f26-922f-32aba6c20b99)
 
@@ -222,7 +223,7 @@ if __name__ == '__main__':
 2, 全部使用非默认流；    
 3, 流之间同步采用流派生和事件机制。        
 
-### 1.5 backbone maxpool融合  
+### 1.5 maxpool融合  
 默认with maxpool（MaxPool由1个Conv操作输出导入）与without maxpool（MaxPool融于到插件中），两者的onnx片段如下:    
  
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/0fb83d6f-65f0-4709-ad86-30c66eb219b8)
@@ -242,7 +243,7 @@ linear_to_convertchw32_maxpool2d(const size_t idx, const size_t area, const size
 ```
 
 ## 1.6 free reformat 
-#### 1.6.1 reformatting copynode的产生   
+#### 1.6.1 reformatting copynode    
 ```
 TensorRT optimizes a network using many different data formats. In order to allow efficient passing of data between TensorRT and a client application, 
 these underlying data formats are exposed at network I/O boundaries, that is, for Tensors marked as network input or output, and when passing data to and from plug-ins. 
@@ -258,10 +259,9 @@ free reformat v1与free reformat v2分别如下所示:
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/be9bfe7d-6e26-4de5-9d9c-db3b46dcdb02)
 
-#### 1.6.2 free reformatting的实现 
+#### 1.6.2 free reformatting    
 kCHW32与kLinear数据分布分别如下:     
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/48a06bc2-cfce-43a4-a654-b2fcc46f1cd8) ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/7f8f2c22-584d-46df-8e3c-519fe366d830)
-
 
 kCHW32与kLinear索引转换函数如下:   
 
@@ -428,7 +428,6 @@ without identify layer与with identify layer的onnx节点图如下:
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/98308909-0144-4e88-b1ec-d78e9a0dab15) ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/671c56d5-6151-4382-8813-e092aa370176)
 
-
 identify layer起到占位符的作用，方便进行格式转换和网络模块构建时数目保持相同。
 ```
 batch_norm = nn.BatchNorm2d
@@ -578,7 +577,7 @@ tanh函数可展开为:tanh(x) = 2sigmoid(2x) − 2，与2sigmoid可等效处理
 
 ### 4.2 backbone中slices sampling等价替换     
 
-8slices + concat(EE + OE + EO + OO)与reshape + permute的等价替换onnx节点图:    
+`8slices + concat(EE + OE + EO + OO)`与`reshape + permute`的等价替换onnx节点图:    
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/ea0e528d-7074-469f-a935-5f764e015b04)
 
 代码验证如下:      
@@ -739,11 +738,11 @@ print(cc0.is_contiguous(), cc1.is_contiguous(), cc2.is_contiguous(), cc3.is_cont
 1.2.2 横向: 相互操作独立，不同数据流或同一数据流中运算数据无依赖
 1.2.3 访存: 减少内存移动    
 1.3 高维矩阵乘除法交换与乘法降维        
-1.4 cudagraph应用  
-1.5 backbone maxpool融合  
+1.4 cudagraph   
+1.5 maxpool融合  
 1.6 free reformat 
-1.6.1 reformatting copynode的产生  
-1.6.2 free reformatting的实现 
+1.6.1 reformatting copynode     
+1.6.2 free reformatting     
 2 插件封装   
 2.1 超参数据储存与加载       
 2.1.1 将超参数作为插件的输入   
