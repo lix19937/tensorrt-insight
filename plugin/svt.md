@@ -38,11 +38,10 @@
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/3ca42737-1264-42a4-a9cc-aa5d42c1dadf)   
 
 #### 1.1.2 decoder pipeline (mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | --> mha --> mha_norm ... )     
-![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/69dc3afa-77e2-4a3f-a157-35300612c8c2)   
-
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/69dc3afa-77e2-4a3f-a157-35300612c8c2)     
 
 #### 1.1.3 svt dummy node in onnx (SvTransformerDecoder: 14 configuration parameter, 160 weight/bias, total 174 attributes)     
-![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/bd35fc7d-6ebd-4105-a36d-92bd21e85f83)
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/bd35fc7d-6ebd-4105-a36d-92bd21e85f83)     
 
 ### 1.2 kernel融合    
 #### 1.2.1 纵向: 同一条数据流中操作，elementwise     
@@ -51,8 +50,9 @@ svexp::invokeGeneralAddBiasResidualPreLayerNorm与invokeGeneralAddBiasResidualPr
 ```
 mha_norm_in = mha_out_without_bias + residual + bias + query_pos
 svca_norm_in = svca_out_without_bias + residual + bias + svca_pos_feat
-ffn_norm_in = ffn_out_without_bias + svca_norm_out_buf + bias
+ffn_norm_in = ffn_out_without_bias + svca_norm_out_buf + bias   
 ```
+
 如shape型op与elementwise合并:
 ```py
 import torch 
@@ -90,12 +90,14 @@ mask_v2 = reference_points_cam[..., 2:3, :] > 1e-2
 mask_v2 = mask_v2.permute(0, 1, 3, 2)
 logger.info('{}'.format(torch.equal(mask, mask_v2)))
 ```
+
 #### 1.2.2 横向: 相互操作独立，不同数据流或同一数据流中运算数据无依赖   
 ```
  svca.output_proj(@stream1)      
                                      |--> (@stream1) 
  svca.position_encoder(@stream2)
-```  
+```
+
 即分两个流:一个流用来计算svca.output_proj操作，另一个流计算svca.position_encoder 操作，最后在主流（@stream1）中同步。   
 
 #### 1.2.3 访存: 减少内存移动      
@@ -156,6 +158,7 @@ void SvtAddBiasSlice(T* in, T* out, const T* bias, const int m, const int n, con
 [1, 6, 4, 4] / [4, 1] 
 [24, 4] * [4, 512]
 ```
+
 两个版本对应的代码如下:   
 ```py
 import torch
@@ -211,16 +214,17 @@ if __name__ == '__main__':
 主要是解决模型运行的launch bound问题，TRT build infer without cudagraph与with cudagraph对比如下:       
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/61d0f9d5-a639-4f26-922f-32aba6c20b99)
 
-注意:
+注意:    
 1, 在运行时（每一次迭代）没有阻塞式cuda api，如cudaMemcpy/cudaMalloc/cudaMemset等；
 2, 全部使用非默认流；
 3, 流之间同步采用流派生和事件机制。  
 1.5 backbone maxpool融合  
- 默认with maxpool（MaxPool由1个Conv操作输出导入）与without maxpool（MaxPool融于到插件中），两者的onnx片段如下:    
+默认with maxpool（MaxPool由1个Conv操作输出导入）与without maxpool（MaxPool融于到插件中），两者的onnx片段如下:    
  
  ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/0fb83d6f-65f0-4709-ad86-30c66eb219b8)
 
 MaxPool融合到format转换过程中，完全消除了传统滑窗法“Z”字型全局遍历找到pool目标（MaxPool计算完成后，再进行下一步逻辑，阻塞式串行），优化后（在取值进行MaxPool的同时进行下一步逻辑），具体实现如下代码片段:  
+```cpp    
 __forceinline__ __device__ void
 linear_to_convertchw32_maxpool2d(const size_t idx, const size_t area, const size_t w, const int8_t* __restrict__ input, const float scale, half* __restrict__ value){
     const auto AREA = area << 2;  /// 4 * area, W = 2 * w, before pool
@@ -231,17 +235,19 @@ linear_to_convertchw32_maxpool2d(const size_t idx, const size_t area, const size
     linear_convert_to_chw32plane(raw_idx, AREA, &dst_idx);
     *value = __ldg(&input[dst_idx]) * scale;
 }
+```
 
 ## 1.6 free reformat 
-#### 1.6.1 reformatting copynode的产生  
+#### 1.6.1 reformatting copynode的产生   
+```
 TensorRT optimizes a network using many different data formats. In order to allow efficient passing of data between TensorRT and a client application, 
 these underlying data formats are exposed at network I/O boundaries, that is, for Tensors marked as network input or output, and when passing data to and from plug-ins. 
 For other tensors, TensorRT picks formats that result in the fastest overall execution, and may insert reformats to improve performance.
 You can assemble an optimal data pipeline by profiling the available I/O formats in combination with the formats most efficient for the operations preceding and following TensorRT.
+```
 如果采用默认方式，TRT基于全局最优性能自动增加了Reformatting CopyNode，即从FP16 NC/32HW32到FP16 NCHW的layout转换，如下所示:      
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/e7d140c8-5fda-442b-9737-51ac5a70fdb2)
-
 
 free reformat v1与free reformat v2分别如下所示:  
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/cf14d2e4-e1d2-4f98-b907-83f8c67123f1)
@@ -249,13 +255,13 @@ free reformat v1与free reformat v2分别如下所示:
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/be9bfe7d-6e26-4de5-9d9c-db3b46dcdb02)
 
 #### 1.6.2 free reformatting的实现 
-kCHW32与kLinear数据分布分别如下:    
+kCHW32与kLinear数据分布分别如下:     
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/48a06bc2-cfce-43a4-a654-b2fcc46f1cd8)
-
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/795a3853-0601-4bfe-a4a6-a1c3d953e2a6)    
 
 kCHW32与kLinear索引转换函数如下:   
+
 ```cpp  
 /// NCHW --> NC/32HW32,  idx is in linear plane, dst_idx(chw32_idx) is in NC/32HW32 plane
 /// Now find *idx(value in idx pos) through chw32_idx 
@@ -275,6 +281,7 @@ __forceinline__ __device__ void linear_convert_to_chw32plane(const size_t idx, c
     *dst_idx = (idx / voc * voc) + (idx % area << 5) + (idx / area & 31);
 }
 ```
+
 对于shape为288*736的模型包含3次reformat，在Orin OS6040 TRT8410环境下，会产生1.9ms左右的耗时，通过linear_convert_to_chw32plane函数实现free reformat，从而消除了这一阶段的耗时。 
 ## 2 插件封装    
 ### 2.1 超参数据储存与加载          
@@ -284,20 +291,19 @@ __forceinline__ __device__ void linear_convert_to_chw32plane(const size_t idx, c
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/37ce6bc8-0b75-4a74-be89-73e1a8dbfd2b)
 
-
 #### 2.1.2 将超参数作为插件的属性，以const类型存储到value info中，方便大批量权重参数按统一方式设置，减少了插件的输入tensor数目，因此在svt中优先采用
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/961e1272-610a-4d98-97ff-cda44402a667)    
 
-
 ### 2.2 运行时同时支持fp32、half和int8     
-插件的输入输出数据类型是在 
+插件的输入输出数据类型是在  
+```
 int enqueue(const nvinfer1::PluginTensorDesc* inputDesc,
   const nvinfer1::PluginTensorDesc* outputDesc,
   const void* const* inputs,
   void* const* outputs,
   void* workspace,
   cudaStream_t stream) noexcept override 
-
+``` 
 中inputDesc和outputDesc参数得到的，即运行时才能知道当前tensor数据类型是fp32、half、int8、int32或其它，因此在createPlugin函数中需要创建支持多种数据类型的plugin实现，另外在supportsFormatCombination函数中如下设置:
 ```cpp 
 bool SVTransformerPlugin::supportsFormatCombination(
@@ -403,6 +409,7 @@ mul_tmp = __hmul(__float2half(__ldg(&input[dst_idx]) * dq_scale_2), sw);
 
 ## 3 插件联调
 ### 3.1 identify layer    
+```
 If the output type is explicitly specified via setOutputType, IIdentityLayer can be used to convert from one type to another. 
 Other than conversions between the same type (kFLOAT -> kFLOAT for example), the only valid conversions are:
 
@@ -413,11 +420,13 @@ Two types are compatible if they are identical, or are both in {kFLOAT, kHALF}. 
 i.e. without using setOutputType, is recognized as incorrect as of TensorRT 8.4, but is retained for API compatibility within TensorRT 8.x releases. 
 In a future major release the behavior will change to record an error if the network output tensor type is incompatible with the layer output type. 
 E.g., implicit conversion from kFLOAT to kINT32 will not be allowed, and instead such a conversion will require calling setOutputType(DataType::kINT32).
+```
 without identify layer与with identify layer的onnx节点图如下:     
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/98308909-0144-4e88-b1ec-d78e9a0dab15)
 
 identify layer起到占位符的作用，方便进行格式转换和网络模块构建时数目保持相同。
+```
 batch_norm = nn.BatchNorm2d
 if dont_use_batch_norm:
     batch_norm = Identity
@@ -430,22 +439,23 @@ nn.Sequential(
 )
 
 nn.AvgPool1d(_kernel, 1, padding=_kernel // 2, count_include_pad=True) if _kernel is not None else nn.Identity()
-TRT8410 trtexec在build engine如果没有增加Identify layer会报以下错误:
+```   
+TRT8410 trtexec在build engine如果没有增加Identify layer会报以下错误:     
+```
 "Error[2]: [optimizer.cpp::getFormatRequirements::2291] Error Code 2: Internal Error (Assertion !n->candidateRequirements.empty() failed. no unquantized formats available)" 
-
-注:
+```   
+注:     
 TRT8411 trtexec已可以直接使用without identify layer版本   
 
 ### 3.2 带插件PTQ  
 INT8量化的本质是一种缩放（scaling）操作，通过缩放因子将模型的分布值从FP32范围缩放到INT8范围之内，因此必须实现FP32版本的插件跑完整个网络，PTQ会迭代若干次FP32，找到最佳的阈值|T|，使得kl_divergence最小（或余弦相似度最大，或percentile_0.999）。 
 以kl_divergence 为例:   
-```
+```py   
 from scipy.special import rel_entr
 
 # define two probability distributions
 P = [.05, .1, .2, .05, .15, .25, .08, .12]
 Q = [.23, .1, .2, .12, .14, .02, .09, .11]
-
 
 # calculate KL(P || Q)
 print('kl:', sum(rel_entr(P, Q))) #0.522723562143904
@@ -552,19 +562,20 @@ if (x > inverse_sigmoid(threshold)){
 
 }
 ```
+
 只需要离线将inverse_sigmoid(threshold)计算好即可，从而完全规避了exp和div这类耗时严重的数学运算，只有一个比较运算，因此可显著降低运算时间。       
-注:     
+注:       
 仅适用于sigmoid的输出与常量进行比较的情形（对于网络若干输出tensor的产生来自sigmoid的输出，并且在decode中存在与阈值比较）；      
 只要反函数定义域内严格单向单调的，即可推广适用，logsigmoid、softmax、logsoftmax、softmin、tanh、softplus、selu可同理优化； 
 
 tanh函数可展开为:tanh(x) = 2sigmoid(2x) − 2，与2sigmoid可等效处理。   
 
-### 4.2 backbone中slices sampling等价替换 
+### 4.2 backbone中slices sampling等价替换     
 
 8slices + concat(EE + OE + EO + OO)与reshape + permute的等价替换onnx节点图:    
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/ea0e528d-7074-469f-a935-5f764e015b04)
 
-代码验证如下:   
+代码验证如下:      
 ```py 
 from loguru import logger as LOG
 import torch
@@ -606,7 +617,8 @@ def img_slice_convert():
   C = 1
   e = v1.reshape(B, C*4, H//2, W//2) 
 ```
-分步处理结果如下:    
+
+分步处理结果如下:     
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/28fd3313-0c89-4e58-89ed-98a877b6b655)    
 
 ### 4.3 permute操作转换辅助函数 
