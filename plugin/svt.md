@@ -549,6 +549,8 @@ fast sigmoid与sigmoid分布、误差对比图:
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/8e323a6c-6edd-4941-9cac-0fe223a250de)   
 
 #### 4.1.2 反函数    
+sigmoid函数实现，进行恒等处理:![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/1cccab48-35d4-401e-af08-f70c231b6d16) 从而得到inverse_sigmoid。由于inverse_sigmoid函数在定义域内严格单调递增
+
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/7c46d021-fe24-4f80-bc6c-9dc64adc0b2f)
 
 可知下面两个if判断等价:  
