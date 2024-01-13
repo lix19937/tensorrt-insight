@@ -218,14 +218,15 @@ if __name__ == '__main__':
 主要是解决模型运行的launch bound问题，TRT build infer without cudagraph与with cudagraph对比如下:       
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/61d0f9d5-a639-4f26-922f-32aba6c20b99)
 
-注意:    
-1, 在运行时（每一次迭代）没有阻塞式cuda api，如cudaMemcpy/cudaMalloc/cudaMemset等；
-2, 全部使用非默认流；
-3, 流之间同步采用流派生和事件机制。  
-1.5 backbone maxpool融合  
+注意:       
+1, 在运行时（每一次迭代）没有阻塞式cuda api，如cudaMemcpy/cudaMalloc/cudaMemset等；    
+2, 全部使用非默认流；    
+3, 流之间同步采用流派生和事件机制。        
+
+### 1.5 backbone maxpool融合  
 默认with maxpool（MaxPool由1个Conv操作输出导入）与without maxpool（MaxPool融于到插件中），两者的onnx片段如下:    
  
- ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/0fb83d6f-65f0-4709-ad86-30c66eb219b8)
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/0fb83d6f-65f0-4709-ad86-30c66eb219b8)
 
 MaxPool融合到format转换过程中，完全消除了传统滑窗法“Z”字型全局遍历找到pool目标（MaxPool计算完成后，再进行下一步逻辑，阻塞式串行），优化后（在取值进行MaxPool的同时进行下一步逻辑），具体实现如下代码片段:  
 ```cpp    
