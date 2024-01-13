@@ -48,20 +48,20 @@
     - 1.6.1 reformatting copynode的产生    
     - 1.6.2 free reformatting的实现     
 - [2 插件封装](#2-插件封装)       
-- 2.1 超参数据储存与加载        
-- 2.1.1 将超参数作为插件的输入   
-- 2.1.2 将超参数作为插件的属性    
-- 2.2 运行时同时支持fp32、half和int8     
-- 2.3 fake-int8支持    
+  - 2.1 超参数据储存与加载        
+    - 2.1.1 将超参数作为插件的输入   
+    - 2.1.2 将超参数作为插件的属性    
+  - 2.2 运行时同时支持fp32、half和int8     
+  - 2.3 fake-int8支持    
 - [3 插件联调](#3-插件联调)    
-- 3.1 identify layer     
-- 3.2 带插件PTQ   
+  - 3.1 identify layer     
+  - 3.2 带插件PTQ   
 - [4 其它](#4-其它)    
-- 4.1 sigmoid函数加速      
-- 4.1.1 线性逼近    
-- 4.2 backbone中slices sampling等价替换    
-- 4.3 permute操作转换辅助函数               
-- 4.4 拓展的torch代码   
+  - 4.1 sigmoid函数加速      
+    - 4.1.1 线性逼近    
+  - 4.2 backbone中slices sampling等价替换    
+  - 4.3 permute操作转换辅助函数               
+  - 4.4 拓展的torch代码   
 - [参考](#参考)    
 
 ## 1 插件实现    
