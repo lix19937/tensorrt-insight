@@ -427,7 +427,8 @@ E.g., implicit conversion from kFLOAT to kINT32 will not be allowed, and instead
 ```
 without identify layer与with identify layer的onnx节点图如下:     
 
-![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/98308909-0144-4e88-b1ec-d78e9a0dab15)
+![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/98308909-0144-4e88-b1ec-d78e9a0dab15) ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/671c56d5-6151-4382-8813-e092aa370176)
+
 
 identify layer起到占位符的作用，方便进行格式转换和网络模块构建时数目保持相同。
 ```
