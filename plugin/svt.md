@@ -726,3 +726,10 @@ cc2 = cost[:, idx, :]
 cc3 = cost[:, [0, 1], :]  
 print(cc0.is_contiguous(), cc1.is_contiguous(), cc2.is_contiguous(), cc3.is_contiguous())    
 ```
+
+------------------------------------------------------------------------------    
+
+## 参考    
+
+https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html     
+https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/namespacenvinfer1.html 
