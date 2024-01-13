@@ -33,20 +33,20 @@
 ```
 
 - [1 插件实现](#1-插件实现)     
-- 1.1 插件组成         
-- 1.1.1 svt overview    
-- 1.1.2 decoder pipeline   
-- 1.1.3 svt dummy node in onnx    
-- 1.2 kernel融合      
-- 1.2.1 纵向: 同一条数据流中操作，elementwise         
-- 1.2.2 横向: 相互操作独立，不同数据流或同一数据流中运算数据无依赖     
-- 1.2.3 访存: 减少内存移动    
-- 1.3 高维矩阵乘除法交换与乘法降维       
-- 1.4 cudagraph应用      
-- 1.5 backbone maxpool融合   
-- 1.6 free reformat   
-  1.6.1 reformatting copynode的产生    
-- 1.6.2 free reformatting的实现     
+  - 1.1 插件组成         
+    - 1.1.1 svt overview    
+    - 1.1.2 decoder pipeline   
+    - 1.1.3 svt dummy node in onnx    
+  - 1.2 kernel融合      
+    - 1.2.1 纵向: 同一条数据流中操作，elementwise         
+    - 1.2.2 横向: 相互操作独立，不同数据流或同一数据流中运算数据无依赖     
+    - 1.2.3 访存: 减少内存移动    
+  - 1.3 高维矩阵乘除法交换与乘法降维       
+  - 1.4 cudagraph应用      
+  - 1.5 backbone maxpool融合   
+  - 1.6 free reformat   
+    - 1.6.1 reformatting copynode的产生    
+    - 1.6.2 free reformatting的实现     
 - [2 插件封装](#2-插件封装)       
 - 2.1 超参数据储存与加载        
 - 2.1.1 将超参数作为插件的输入   
