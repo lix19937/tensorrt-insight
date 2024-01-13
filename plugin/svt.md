@@ -45,7 +45,11 @@
 
 ### 1.2 kernel融合    
 #### 1.2.1 纵向: 同一条数据流中操作，elementwise     
-Decoder block数据流:| mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | [loop] |--> cls，在各功能单元中可进行拆解然后融合，如使用
+Decoder block数据流:
+```
+| mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | [loop] |--> cls    
+```    
+在各功能单元中可进行拆解然后融合，如使用
 svexp::invokeGeneralAddBiasResidualPreLayerNorm与invokeGeneralAddBiasResidualPreLayerNorm进行了跨阶段操作的合并工作，具体如下:   
 ```
 mha_norm_in = mha_out_without_bias + residual + bias + query_pos
