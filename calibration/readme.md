@@ -1,7 +1,12 @@
 ## ptq   
 * 使用 TensorRT 闭源方法进行 ptq  
 * 使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 ptq
-
+  + max
+  + hist
+    + 交叉熵
+    + mse
+    + 统计分位数
+       
 ## 带自定义插件的后量化     
 * onnx 上构建带plugin的层，标记plugin的输出tensor      
 * plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale     
