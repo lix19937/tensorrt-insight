@@ -64,6 +64,14 @@ MultiStream基础思路非常简单：一个Stream的device利用率低，就分
   + 确定性&nbsp;&nbsp;&nbsp;&nbsp;任务编排
   + multi-task模型head拆分并行       
 
++ 软件工程目录结构参考https://github.com/sogou/workflow
+  |目录|说明|备注|       
+  |---|---|----|     
+  |benchmark|||     
+  |docs|||
+  |src|||
+  |test|||
+  |tutorial|||      
 更多见 https://github.com/lix19937/history/edit/main/infer/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6.md   
 
 -----------------------------------------------------------  
