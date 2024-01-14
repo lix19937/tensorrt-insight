@@ -1,6 +1,6 @@
-## ptq   
-* 使用 TensorRT 闭源方法进行 ptq  
-* 使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 ptq
+## PTQ     
+* 使用 TensorRT 闭源方法进行 PTQ   
+* **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**        
   + max
   + hist
     + 交叉熵
@@ -17,7 +17,7 @@
 
 
 ## fuse  
-* ptq calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差    
+* PTQ calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差      
 
 ## sensitivity layer profile  
 * 找到所有 quant layer   
