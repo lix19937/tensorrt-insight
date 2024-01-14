@@ -1,7 +1,7 @@
 # /**************************************************************
-#  * @Author: lijinwen 
+#  * @Author: ljw 
 #  * @Date: 2021-12-17 09:06:42 
-#  * @Last Modified by: lijinwen 
+#  * @Last Modified by: ljw 
 #  * @Last Modified time: 2021-12-17 09:06:42 
 #  **************************************************************/
 
@@ -26,9 +26,7 @@ link_directories(/usr/local/cuda-11.4/lib64)  # or /usr/local/cuda-11.4/targets/
 
 set(EXE_NAME mytrtexec)
 
-set(SOURCE_FILES 
-  ${srcdir}/src/mytrtexec-use-the-same-binds_no_thirdparty.cpp  )
- # ${debout}/usr/src/tensorrt/samples/common/logger.cpp)
+set(SOURCE_FILES ${srcdir}/src/mytrtexec-use-the-same-binds_no_thirdparty.cpp  )
 
 ### Build executable
 add_executable(${EXE_NAME}     ${SOURCE_FILES})
