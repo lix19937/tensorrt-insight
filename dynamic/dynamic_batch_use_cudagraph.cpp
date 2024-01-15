@@ -688,6 +688,7 @@ int main(int argc, char** argv) {
   return main_loop(argc, argv);
 }
 
+/// ~/nfs/ljw/cudaacc/share/trt++/run_engine/orin_local_compile    
 /// ./build/mytrtexec --plan=fvModule_vlr_int8_GPU_20230103.plan -i 1 -b 4 -g 1
 //  -->> 0.001941
 //  -->> 0.012328
