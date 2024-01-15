@@ -8,6 +8,7 @@
 
 #include <cuda_fp16.h>
 #include <cuda_runtime_api.h>
+
 #include <dlfcn.h>
 #include <sys/stat.h>
 
@@ -15,11 +16,14 @@
 #include <unordered_map>
 #include <vector>
 #include <memory>
+
 #include <NvInfer.h>
 #include <NvOnnxParser.h>
+
+// from /usr/src/tensorrt/samples/common/logging.h    
 #include "logging.h"
 
-// parse cmd para from github 
+// parse command line from https://github.com/tanakh/cmdline
 #include "cmdline.h"
 
 static const std::string red{"\033[31m"};
