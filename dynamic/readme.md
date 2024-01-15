@@ -10,9 +10,10 @@
      return false;
  }
 ```
- https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/api/c_api/classnvinfer1_1_1_i_execution_context.html#a5815b590a2936a3d4066b54f89861a8b  
 
-如 动态batch  
+https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/api/c_api/classnvinfer1_1_1_i_execution_context.html#a5815b590a2936a3d4066b54f89861a8b  
+
+如**动态batch**        
 
 |输入      |输出|  
 |-------- | ------|     
