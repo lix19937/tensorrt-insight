@@ -1,4 +1,4 @@
-# deep insight tensorrt   深入洞悉tensorrt    
+# 洞悉tensorrt    
 
 |**topic**                       | **主题**|     
 |    ---                         | --- |     
