@@ -1,6 +1,6 @@
  
 [需求设计与功能定义](#需求设计与功能定义)     
-[multi-cudagraph+stream+thread](#multi-cudagraph+stream+thread)  
+[技术验证与实现](#技术验证与实现)    
 
 ## 需求设计与功能定义     
 ### 环境模型压测与资源分析    
@@ -32,9 +32,9 @@
   |tutorial|||      
 更多见 https://github.com/lix19937/history/edit/main/infer/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6.md
 
-## multi-cudagraph+stream+thread        
+## 技术验证与实现   
+### multi-cudagraph+stream+thread        
 在NV-GPU上，kernel的调用分为 kernel launch和kernel run 两步，kernel launch负责准备好执行kernel需要的资源，通常在us级别；kernel执行则是实际上GPU完成的计算。一些比较简单的kernel执行时间可能也在us级别，但却不得不等待数us的kernel launch，即所谓的kernel launch瓶颈。在很多推理场景中，由于graph包含的kernel数量极多，单流模型的调度效率又低，常常是kernel launch bound。       
-
 缓解kernel launch瓶颈主要有两个思路：  
 * `kernel fusion`，通过减少kernel数量减少launch数量，同时也会带来访存和计算上的优化；      
 * `提高kernel launch 效率`，减少每一次kernel launch的代价或者并行launch kernel。        
