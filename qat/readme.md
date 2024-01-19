@@ -5,7 +5,7 @@
   + 在qat onnx生成后替换相应的op   
   + 插件在网络尾部(插件的输出就是网络的输出) ，这时候插件对应的op可以不参与量化训练       
 
-https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/nn   
+  https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/nn   
 
 
 ## 示例  
