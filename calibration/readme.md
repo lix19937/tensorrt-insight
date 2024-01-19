@@ -1,6 +1,6 @@
 ## PTQ     
 * 使用 TensorRT 闭源方法进行 PTQ   
-* **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**
+* **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**     
 https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/calib    
   + max   
   + hist
