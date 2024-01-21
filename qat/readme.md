@@ -8,7 +8,7 @@
   https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/nn   
 
 # auto qat    
-
+https://github.com/lix19937/auto_qat    
 
 ## 示例  
 * yolox
