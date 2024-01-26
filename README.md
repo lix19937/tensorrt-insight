@@ -19,3 +19,4 @@ https://docs.nvidia.com/deeplearning/tensorrt/
 --------------------------------------     
 ## ref    
 https://docs.nvidia.com/deeplearning/tensorrt/archives/   
+https://github.com/HeKun-NVIDIA/TensorRT-Developer_Guide_in_Chinese/tree/main   
