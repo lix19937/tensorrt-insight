@@ -1,5 +1,5 @@
 
-![Developer Guide lix19937个人中文版本] (./developer_guide/readme.md)   
+![Developer Guide lix19937个人中文版本](./developer_guide/readme.md)   
 
 
 |**topic**                       | **主题**| **备注**   |      
