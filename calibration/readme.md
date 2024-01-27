@@ -1,6 +1,7 @@
 ## PTQ     
 * 使用 TensorRT 闭源方法进行 PTQ     
-https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B    
+https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B
+
 * **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**     
 https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/calib    
   + max   
