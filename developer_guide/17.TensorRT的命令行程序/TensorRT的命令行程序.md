@@ -129,8 +129,7 @@ enqueue batch 0
 * `--noDataTransfers` ：关闭主机到设备和设备到主机的数据传输。
 * `--streams=<N>` ：并行运行多个流的推理。
 * `--verbose` ：打开详细日志记录。
-* `--dumpProfile, --exportProfile=<file> `：打印/保存每层性能配置文件。
-
+* `--dumpProfile, --exportProfile=<file> `：打印/保存每层性能配置文件。   
 
 有关所有受支持的标志和详细说明，请参阅`trtexec --help` 。
 

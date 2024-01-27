@@ -12,8 +12,7 @@
 时序缓存可以被序列化和反序列化。您可以通过`IBuilderConfig::createTimingCache`从缓冲区加载序列化缓存：
 
 ```C++
-ITimingCache* cache = 
- config->createTimingCache(cacheFile.data(), cacheFile.size());
+ITimingCache* cache = config->createTimingCache(cacheFile.data(), cacheFile.size());
 ```
 将缓冲区大小设置为0会创建一个新的空时序缓存。
 
@@ -50,8 +49,7 @@ IRefitter* refitter = createInferRefitter(*engine,gLogger)
 然后更新权重。例如，要更新名为“`MyLayer`”的卷积层的内核权重：
 ```C++
 Weights newWeights = ...;
-refitter->setWeights("MyLayer",WeightsRole::kKERNEL,
-                    newWeights);
+refitter->setWeights("MyLayer",WeightsRole::kKERNEL, newWeights);
 ```
 新的权重应该与用于构建引擎的原始权重具有相同的计数。如果出现问题，例如错误的层名称或角色或权重计数发生变化， `setWeights`返回 `false`。
 

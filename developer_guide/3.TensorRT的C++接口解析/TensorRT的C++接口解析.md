@@ -19,8 +19,7 @@ CUDA 上下文会在 TensorRT 第一次调用 CUDA 时自动创建，如果在�
 要创建构建器，首先需要实例化ILogger接口。此示例捕获所有警告消息，但忽略信息性消息：
 
 ```C++
-class Logger : public ILogger           
-{
+class Logger : public ILogger {
     void log(Severity severity, const char* msg) noexcept override
     {
         // suppress info-level messages
@@ -64,8 +63,7 @@ IParser*  parser = createParser(*network, logger);
 ```C++
 parser->parseFromFile(modelFile, 
     static_cast<int32_t>(ILogger::Severity::kWARNING));
-for (int32_t i = 0; i < parser.getNbErrors(); ++i)
-{
+for (int32_t i = 0; i < parser.getNbErrors(); ++i){
 std::cout << parser->getError(i)->desc() << std::endl;
 }
 ```
@@ -80,7 +78,6 @@ IBuilderConfig* config = builder->createBuilderConfig();
 
 ```C++
 config->setMemoryPoolLimit(MemoryPoolType::kWORKSPACE, 1U << 20);
-
 ```
 
 一旦指定了配置，就可以构建引擎。
@@ -115,7 +112,6 @@ IRuntime* runtime = createInferRuntime(logger);
 ICudaEngine* engine = 
   runtime->deserializeCudaEngine(modelData, modelSize);
 ```
-
 
 ## 3.3. Performing Inference
 引擎拥有优化的模型，但要执行推理，我们需要管理中间激活的额外状态。这是通过`ExecutionContext`接口完成的：
