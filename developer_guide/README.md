@@ -10,7 +10,7 @@ NVIDIA TensorRT的中文版开发手册。
 有关历史发布的 TensorRT 开发人员文档，请参阅 [TensorRT 档案](https://docs.nvidia.com/deeplearning/tensorrt/archives/index.html)。
 
 1. [简介](1.简介/1.简介.md)
-2. [TensorRT的能力](2.TensorRT的能力/2.TensorRT的能力.md)
+2. [TensorRT的功能](2.TensorRT的能力/2.TensorRT的功能.md)
 3. [TensorRT的C++接口解析](3.TensorRT的C++接口解析/TensorRT的C++接口解析.md)
 4. [TensorRT的Python接口解析](4.TensorRT的Python接口解析/TensorRT的Python接口解析.md)
 5. [TensorRT如何工作](5.TensorRT如何工作/5.TensorRT如何工作.md)
