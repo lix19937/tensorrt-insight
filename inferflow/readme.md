@@ -76,7 +76,8 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 https://github.com/tensorflow/tensorflow/pull/59843     
 
 [02] CUDA Graph     
-https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s31312/
+https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s31312/     
+https://github.com/NVIDIA/TensorRT/blob/release/8.6/samples/common/sampleDevice.h#L161    
 
 [03] Introduce multiple streams execution in TensorFlow.          
 https://github.com/tensorflow/tensorflow/pull/59843
