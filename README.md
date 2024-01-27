@@ -1,5 +1,6 @@
-https://docs.nvidia.com/deeplearning/tensorrt/     
-![trt-overview.png](trt-overview.png)     
+
+![Developer Guide lix19937个人中文版本] (./developer_guide/readme.md)   
+
 
 |**topic**                       | **主题**| **备注**   |      
 |    ---                         | --- |     --- |          
@@ -15,6 +16,10 @@ https://docs.nvidia.com/deeplearning/tensorrt/
 |[inferflow](./inferflow/readme.md) |模型调度|      |         
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
 |[faqs](./faqs.md)                  |快速问答|      |           
+
+
+https://docs.nvidia.com/deeplearning/tensorrt/     
+![trt-overview.png](trt-overview.png)   
 
 --------------------------------------     
 ## ref    
