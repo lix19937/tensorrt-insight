@@ -7,17 +7,14 @@ class ViT_Attention(torch.nn.Module):
     def __init__(self, embed_dim, num_heads, batch_first=False):
         super(ViT_Attention, self).__init__()
         self.num_attention_heads = num_heads  # 8
-        self.hidden_size = embed_dim  # 256
-        self.attention_head_size = int(embed_dim / self.num_attention_heads)  # 256 / 8 =32
-        self.all_head_size = self.num_attention_heads * self.attention_head_size
+        self.hidden_size = embed_dim          # 256
+        self.attention_head_size = int(embed_dim / self.num_attention_heads)     # 256 / 8 =32,  确保能整除 
+        self.all_head_size = self.num_attention_heads * self.attention_head_size # 256  
 
         self.query = Linear(embed_dim, self.all_head_size) ###
         self.key   = Linear(embed_dim, self.all_head_size) ###
         self.value = Linear(embed_dim, self.all_head_size) ###
         self.out   = Linear(embed_dim, embed_dim)          ###
-
-# model.query_weight.t(), model.key_weight.t(),             model.value_weight.t(), 
-# model.query_bias,       model.key_bias, model.value_bias, model.out_proj_weight.t()
 
         self.softmax = Softmax(dim=-1)
         self.scaling = 1/ math.sqrt(self.attention_head_size) # float(self.attention_head_size) ** -0.5
