@@ -34,7 +34,7 @@
 ## 1 插件实现    
 ### 1.1 插件组成    
 #### 1.1.1 svt overview     
-![svt_flow_1](https://github.com/lix19937/tensorrt-insight/assets/38753233/364d8684-27c0-4573-81b8-a341a775592b)
+![svt_flow_1](https://github.com/lix19937/tensorrt-insight/assets/38753233/2b42b680-d8ad-4199-b6c6-922b0d483a9d)        
 
 #### 1.1.2 decoder pipeline   
 (mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | --> mha --> mha_norm ... )       
