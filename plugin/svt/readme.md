@@ -48,7 +48,7 @@ class ViT_Attention(torch.nn.Module):
     def forward(self, query, key, value):
       return self.forward_vit(query, key, value)
 ```
-![mha](pt_self_atten.png)      
+![mha](pt_self_atten-aligned.png)      
 
 + ffn /mlp
 ```py
