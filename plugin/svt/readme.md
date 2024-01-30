@@ -1,5 +1,5 @@
 
-+ mha
++ mha     
 **注意batch在第几维**         
 ![mha](pt_self_atten.png)     
 
