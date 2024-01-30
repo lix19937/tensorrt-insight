@@ -35,7 +35,7 @@ class ViT_Attention(torch.nn.Module):
         value_layer = self.transpose_for_scores(mixed_value_layer)
 
         attention_scores = torch.matmul(query_layer, key_layer.transpose(-1, -2))
-        attention_scores = attention_scores * self.scaling #1/ math.sqrt(self.attention_head_size)
+        attention_scores = attention_scores * self.scaling  
         attention_probs = self.softmax(attention_scores)
 
         context_layer = torch.matmul(attention_probs, value_layer)
