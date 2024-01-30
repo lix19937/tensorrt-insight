@@ -1,6 +1,6 @@
 
 + mha     
-**注意batch在第几维**
+**注意batch在第几维**   
 https://github.com/lix19937/dnn-cookbook/blob/main/ViT-pytorch/qkv2ctx_v2.py#L140     
 
 ![mha](pt_self_atten.png)      
