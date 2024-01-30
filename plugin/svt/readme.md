@@ -15,7 +15,7 @@ def forward(self, x):
     x = self.fc2(x)
     return x
 ```   
-![ffn](ffn.png)
+![ffn](ffn-use-gelu.png)
 
 + ln    
 ![ln](ln.png)
