@@ -18,7 +18,6 @@ class ViT_Attention(torch.nn.Module):
 
         self.softmax = Softmax(dim=-1)
         self.scaling = 1/ math.sqrt(self.attention_head_size) # float(self.attention_head_size) ** -0.5
-        self.scaling_r = math.sqrt(self.attention_head_size) 
         self.batch_first = batch_first
 
     def transpose_for_scores(self, x): # x shape [512, 1, 256]
@@ -26,7 +25,6 @@ class ViT_Attention(torch.nn.Module):
         x = x.view(*new_x_shape)  # [512, 8, 32]
         return x.permute(1, 0, 2) # [8, 512, 32]
 
-    ## map to vit github repo
     def forward_vit(self, query, key, value):
         mixed_query_layer = self.query(query)
         mixed_key_layer = self.key(key)
