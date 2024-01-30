@@ -23,7 +23,18 @@ def forward(self, x):
 ```   
 ![ffn](ffn-use-gelu.png)
 
-+ ln    
++ ln
+```py
+# alpha, beta来自train 阶段得到的    
+mean = torch.mean(input, dim=(2), keepdim=True)
+
+# 使用有偏估计 ，即进行总体方差计算     
+# var = sum_i(input_i - mean )**2 / n
+
+var = torch.var(input, dim=(2), keepdim=True, unbiased=False)
+ 
+output = alpha * (input - mean) / ((var+1e-5)**0.5) + beta
+```
 ![ln](ln.png)
 
 + ca     
