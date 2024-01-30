@@ -6,7 +6,7 @@
 ```py
 
 def gelu(x):
-    cdf = 0.5 * (1.0 + torch.erf(x / tf.sqrt(2.0)))
+    cdf = 0.5 * (1.0 + torch.erf(x / torch.sqrt(2.0)))
     return x*cdf
 
 def forward(self, x):
