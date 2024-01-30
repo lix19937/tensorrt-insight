@@ -9,6 +9,10 @@ def gelu(x):
     cdf = 0.5 * (1.0 + torch.erf(x / torch.sqrt(2.0)))
     return x*cdf
 
+def relu(x):
+    cdf = torch.max(0, x) 
+    return cdf
+
 def forward(self, x):
     x = self.fc1(x)    # cutlass   gemm + bias 
     x = self.act_fn(x) # use gelu  
