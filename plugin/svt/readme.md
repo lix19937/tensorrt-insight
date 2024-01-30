@@ -12,6 +12,8 @@ def gelu(x):
 def relu(x):
     cdf = torch.max(0, x) 
     return cdf
+# 克服梯度消失的问题
+# 加快训练速度
 
 def forward(self, x):
     x = self.fc1(x)    # cutlass   gemm + bias 
