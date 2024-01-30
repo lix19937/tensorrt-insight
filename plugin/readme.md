@@ -9,6 +9,6 @@
 
 
 ## 示例  
-[transformer decoder plugin](./svt.md)    
+[transformer decoder plugin](./svt/svt.md)    
 
 https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/05-Plugin    
