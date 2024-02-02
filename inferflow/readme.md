@@ -69,7 +69,7 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 
 流的优先级      
 cudaStreamCreateWithPriority vs cudaDeviceProp::streamPrioritiesSupported        
-https://github.com/NVIDIA/cuda-samples/blob/master/Samples/3_CUDA_Features/StreamPriorities/README.md   
+https://github.com/NVIDIA/cuda-samples/blob/master/Samples/3_CUDA_Features/StreamPriorities  
 
 
 简单的比较一下这两种方案：   
