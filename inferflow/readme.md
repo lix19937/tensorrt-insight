@@ -67,6 +67,10 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 
 在几个场景做了验证，测试下来多流的性能提升大概能够接近CUDA Graph的性能，创建了4个context，每个context各一个Stream，且对应一个thread，Stream与Stream间，计算与传输间，都可以比较好的overlap。    
 
+流的优先级      
+cudaStreamCreateWithPriority     
+
+
 简单的比较一下这两种方案：   
 * CUDA Graph作为有硬件支持的方案，将大量kernel launch转换为一次graph launch，可以同时节省host和device开销，在应用得当的前提下应当是最优性能的最佳选择；       
 * Multi Stream主要是通过创建多个Stream的做法增加了kernel执行的并行，从而更好的利用资源，在易用性上远超CUDA Graph。    
