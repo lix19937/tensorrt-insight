@@ -21,7 +21,14 @@ for k in range(0, K):
 强制内核权重具有结构化稀疏性模式可能导致精度损失。为了通过进一步的微调来恢复丢失的精度，需要进行稀疏训练。  https://github.com/NVIDIA/apex/tree/master/apex/contrib/sparsity     
 
 
-实现模型的2：4稀疏剪枝，同时还可以通过开启通道置换算法将绝对值较大的参数进行保留，以求对模型精度的影响最小化。prune_trained_model函数会计算出稀疏mask并将其施加在模型的权重上。
+实现模型的2：4稀疏剪枝，同时还可以通过开启通道置换算法将绝对值较大的参数进行保留，以求对模型精度的影响最小化。prune_trained_model函数会计算出`稀疏mask`并将其施加在模型的权重上。
+
+在使用ASP对一个新的（未经过稀疏的）推理模型启用结构化稀疏时需要同时调用init_model_for_pruning和compute_sparse_masks方法。  
+
+init_model_for_pruning会为模型层添加新的mask buffer，用于保存compute_sparse_masks生成的mask，因此调用了 compute_sparse_masks后的模型的**state_dict会比之前多出一些数据**，这些数据均以_mma_mask结尾的名字进行命名。       
+
+对于已经使用ASP enable了结构化稀疏的模型，在保存后重新加载时，需要先创建一个新的模型，并调用init_model_for_pruning方法为模型添加mask buffer后再load模型的state_dict，否则因为新模型的state_dict和之前保存的state_dict不同而报错。
+
 
 该项目还可以通过开启通道置换算法，来为结构化稀疏后的模型保留最大的精度值。
 通道置换算法，顾名思义，就是通过沿着权重矩阵的通道维度进行置换，并对其周围的模型层进行适当调整。
