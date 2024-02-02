@@ -68,7 +68,7 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 在几个场景做了验证，测试下来多流的性能提升大概能够接近CUDA Graph的性能，创建了4个context，每个context各一个Stream，且对应一个thread，Stream与Stream间，计算与传输间，都可以比较好的overlap。    
 
 流的优先级      
-cudaStreamCreateWithPriority     
+cudaStreamCreateWithPriority vs cudaDeviceProp::streamPrioritiesSupported        
 
 
 简单的比较一下这两种方案：   
