@@ -37,11 +37,11 @@
 ![svt_flow_1](https://github.com/lix19937/tensorrt-insight/assets/38753233/2b42b680-d8ad-4199-b6c6-922b0d483a9d)        
 
 #### 1.1.2 decoder pipeline   
-(mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update |   
- mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update |   
- mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update |   
- mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update |   
---> mha --> mha_norm ... )       
+(mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | -->     
+ mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | -->    
+ mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | -->     
+ mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | -->     
+)       
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/69dc3afa-77e2-4a3f-a157-35300612c8c2)     
 
 #### 1.1.3 svt dummy node in onnx (SvTransformerDecoder: 14 configuration parameter, 160 weight/bias, total 174 attributes)     
