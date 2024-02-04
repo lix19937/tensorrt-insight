@@ -69,8 +69,8 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 
 ##### Stream 的优先级      
 cudaStreamCreateWithPriority vs cudaDeviceProp::streamPrioritiesSupported        
-https://github.com/NVIDIA/cuda-samples/blob/master/Samples/3_CUDA_Features/StreamPriorities  
-
+https://github.com/NVIDIA/cuda-samples/blob/master/Samples/3_CUDA_Features/StreamPriorities    
+https://forums.developer.nvidia.com/t/how-high-priority-stream-preemption/78183/2    
 
 简单的比较一下这两种方案：   
 * CUDA Graph作为有硬件支持的方案，将大量kernel launch转换为一次graph launch，可以同时节省host和device开销，在应用得当的前提下应当是最优性能的最佳选择；       
