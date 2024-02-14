@@ -19,8 +19,8 @@ https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/
   + hist
     + 交叉熵
     + mse
-    + 统计分位数
-https://github.com/lix19937/pytorch-quantization/blob/main/readme_lix.md
+    + 统计分位数   
+详细见 https://github.com/lix19937/pytorch-quantization/blob/main/readme_lix.md
        
 ## 带自定义插件的后量化     
 * onnx 上构建带plugin的层，标记plugin的输出tensor      
