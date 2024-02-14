@@ -72,6 +72,9 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 https://forums.developer.nvidia.com/t/run-multiple-model-engine-with-tensorrt-without-deepstream/120156
 > In order to run multiple model with TensorRT, i will recommend you to either use NVIDIA deepstream or NVIDIA Triton Inference Server.    
 
+https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/developer-guide/index.html#optimize-performance  
+
+
 ##### Stream 的优先级      
 cudaStreamCreateWithPriority vs cudaDeviceProp::streamPrioritiesSupported        
 https://github.com/NVIDIA/cuda-samples/blob/master/Samples/3_CUDA_Features/StreamPriorities    
