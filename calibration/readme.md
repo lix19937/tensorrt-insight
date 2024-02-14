@@ -1,6 +1,7 @@
 ## PTQ     
 * 使用 TensorRT 闭源方法进行 PTQ     
-https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B     
+https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B
+
 https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_int8_calibrator.html
 
 |类型| 说明|  
