@@ -67,6 +67,11 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 
 在几个场景做了验证，测试下来多流的性能提升大概能够接近CUDA Graph的性能，创建了4个context，每个context各一个Stream，且对应一个thread，Stream与Stream间，计算与传输间，都可以比较好的overlap。    
 
+
+
+https://forums.developer.nvidia.com/t/run-multiple-model-engine-with-tensorrt-without-deepstream/120156
+> In order to run multiple model with TensorRT, i will recommend you to either use NVIDIA deepstream or NVIDIA Triton Inference Server.    
+
 ##### Stream 的优先级      
 cudaStreamCreateWithPriority vs cudaDeviceProp::streamPrioritiesSupported        
 https://github.com/NVIDIA/cuda-samples/blob/master/Samples/3_CUDA_Features/StreamPriorities    
