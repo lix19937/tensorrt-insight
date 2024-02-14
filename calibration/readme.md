@@ -2,15 +2,15 @@
 * 使用 TensorRT 闭源方法进行 PTQ     
 https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B
 
-https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_int8_calibrator.html
-
-|类型| 说明|  
-|------------|-------------|   
-|IInt8EntropyCalibrator | Entropy calibrator. This is the Legacy Entropy calibrator. It is less complicated than the legacy calibrator and produces better results.|  
-| IInt8EntropyCalibrator2 | Entropy calibrator 2. This is the preferred calibrator. This is the required calibrator for DLA, as it supports per activation tensor scaling.|
-|IInt8LegacyCalibrator |Legacy calibrator left for backward compatibility with TensorRT 2.0. This calibrator requires user parameterization, and is provided as a fallback option if the other calibrators yield poor results.  |  
-| IInt8MinMaxCalibrator |  It supports per activation tensor scaling. |
-
+  https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_int8_calibrator.html
+  
+  |类型| 说明|  
+  |------------|-------------|   
+  |IInt8EntropyCalibrator | Entropy calibrator. This is the Legacy Entropy calibrator. It is less complicated than the legacy calibrator and produces better results.|  
+  | IInt8EntropyCalibrator2 | Entropy calibrator 2. This is the preferred calibrator. This is the required calibrator for DLA, as it supports per activation tensor scaling.|
+  |IInt8LegacyCalibrator |Legacy calibrator left for backward compatibility with TensorRT 2.0. This calibrator requires user parameterization, and is provided as a fallback option if the other calibrators yield poor results.  |  
+  | IInt8MinMaxCalibrator |  It supports per activation tensor scaling. |
+  
 
 
 * **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**     
