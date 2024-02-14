@@ -72,6 +72,7 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 https://forums.developer.nvidia.com/t/run-multiple-model-engine-with-tensorrt-without-deepstream/120156
 > In order to run multiple model with TensorRT, i will recommend you to either use NVIDIA deepstream or NVIDIA Triton Inference Server.    
 
+##### trt 性能优化参考    
 https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/developer-guide/index.html#optimize-performance  
 
 
