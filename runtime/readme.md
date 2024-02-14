@@ -1,3 +1,4 @@
+**相对于 build or compile 期间**         
 runtime 属性     
 
 https://github.com/NVIDIA/TensorRT/blob/release/8.6/samples/common/sampleOptions.cpp#L2215    
@@ -46,3 +47,25 @@ https://github.com/NVIDIA/TensorRT/blob/release/8.6/samples/common/sampleOptions
           "  --persistentCacheRatio      Set the persistentCacheLimit in ratio, 0.5 represent half of max persistent L2 size "
               
 ```
+
+| 名称  |  说明   |  备注|     
+|---    | ---    | ---- |   
+|setAuxStreams   |   |  |    
+|setBindingDimensions   |   |  |    
+|setDebugSync   |   |  |    
+|setDeviceMemory   |   |  |    
+|setEnqueueEmitsProfile   |   |  |    
+|setErrorRecorder   |   |  |    
+|setInputConsumedEvent   |   |  |    
+|setInputShape   |   |  |    
+|setInputShapeBinding   |   |  |    
+|setInputTensorAddress   |   |  |    
+|setName   |   |  |    
+|setNvtxVerbosity   |   |  |    
+|setOptimizationProfile   |   |  |    
+|setOptimizationProfileAsync   |   |  |    
+|setOutputAllocator   |   |  |    
+|setPersistentCacheLimit   |   |  |    
+|setProfiler   |   |  |    
+|setTemporaryStorageAllocator   |   |  |    
+|setTensorAddress   |   |  |      
