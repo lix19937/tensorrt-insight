@@ -54,7 +54,7 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
 
 * graph 组合    
   
-  |组合类型，如动态batch|具体1,2,4|      
+  |组合类型，如动态batch|具体batch=1,2,4构建graph|      
   |---|----|    
   |1|1|   
   |2|2|   
@@ -63,6 +63,10 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
   |5|1+4|    
   |6|2+4|   
   |7|1+2+4|    
+
+g1: batch=1  分配一段空间   
+g2: batch=2  分配一段空间   
+g4: batch=4  分配一段空间   
 
 #### CUDA Stream            
 MultiStream 基础思路非常简单：一个Stream的device利用率低，就分配多个Stream，并且是把整个GPU子图放到不同Stream上，让请求和请求并行。   
