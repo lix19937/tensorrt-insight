@@ -54,7 +54,7 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
 
 * graph 组合    
   
-  |组合类型，如动态batch|具体batch=1,2,4构建graph。<br> g1: batch=1  分配一段空间 <br> g2: batch=2  分配一段空间 <br> g4: batch=4  分配一段空间|      
+  |组合类型，如动态batch|具体batch=1,2,4构建graph <br><br> g1: batch=1  分配一段空间 <br> g2: batch=2  分配一段空间 <br> g4: batch=4  分配一段空间|      
   |---|----|    
   |1|g1|   
   |2|g2|   
