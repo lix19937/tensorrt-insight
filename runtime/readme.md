@@ -50,7 +50,7 @@ https://github.com/NVIDIA/TensorRT/blob/release/8.6/samples/common/sampleOptions
 
 | 名称  |  说明   |  备注|     
 |---    | ---    | ---- |   
-|setAuxStreams   |   |  |    
+|setAuxStreams   |   | https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_execution_context.html#a9126b0a6f7fdff69546d374cfc9c2aaa |    
 |setBindingDimensions   |   |  |    
 |setDebugSync   |   |  |    
 |setDeviceMemory   |   |  |    
