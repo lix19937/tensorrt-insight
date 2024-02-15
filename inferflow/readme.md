@@ -51,6 +51,17 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
     * 将大量的kernel launch转化为一次graph launch，从而极大的节省了host和device开销；     
     * 多个CUDA Graph的执行是完全独立、可并行的，因此会直接被分配到多个Stream上，这种多Stream的并行也极大的提升了吞吐，很好的增强了单机服务能力。     
     不过这种能够保证CUDA Graph优化效果的用法事实上对工程化提出了不低的要求，需要用户既熟悉模型结构（且能做一定程度的图优化），也熟悉模型流量分布，还要简单了解device arch（至少是不同型号的GPU memory大小）。这些要求稍不满足，便易得出一个效果不佳，提升有限的结论。
+
+* graph 组合    
+|组合类型|具体1,2,4|     
+|1|1|   
+|2|2|   
+|3|1+2|    
+|4|4|   
+|5|1+4|    
+|6|2+4|   
+|7|1+2+4|    
+
 #### CUDA Stream            
 MultiStream 基础思路非常简单：一个Stream的device利用率低，就分配多个Stream，并且是把整个GPU子图放到不同Stream上，让请求和请求并行。   
 ![image](https://github.com/lix19937/tensorrt-cookbook/assets/38753233/36587883-522d-42d4-8d85-74b429e5e929)
@@ -67,14 +78,8 @@ MultiStream 基础思路非常简单：一个Stream的device利用率低，就�
 
 在几个场景做了验证，测试下来多流的性能提升大概能够接近CUDA Graph的性能，创建了4个context，每个context各一个Stream，且对应一个thread，Stream与Stream间，计算与传输间，都可以比较好的overlap。    
 
-
-
 https://forums.developer.nvidia.com/t/run-multiple-model-engine-with-tensorrt-without-deepstream/120156
 > In order to run multiple model with TensorRT, i will recommend you to either use NVIDIA deepstream or NVIDIA Triton Inference Server.    
-
-##### trt 性能优化参考    
-https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/developer-guide/index.html#optimize-performance  
-
 
 ##### Stream 的优先级      
 cudaStreamCreateWithPriority vs cudaDeviceProp::streamPrioritiesSupported        
@@ -84,6 +89,10 @@ https://forums.developer.nvidia.com/t/how-high-priority-stream-preemption/78183/
 简单的比较一下这两种方案：   
 * CUDA Graph作为有硬件支持的方案，将大量kernel launch转换为一次graph launch，可以同时节省host和device开销，在应用得当的前提下应当是最优性能的最佳选择；       
 * Multi Stream主要是通过创建多个Stream的做法增加了kernel执行的并行，从而更好的利用资源，在易用性上远超CUDA Graph。    
+
+#### trt 性能优化参考    
+https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/developer-guide/index.html#optimize-performance   
+
 
 ## ref    
 [01]Multi Stream     
