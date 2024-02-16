@@ -53,7 +53,7 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
     不过这种能够保证CUDA Graph优化效果的用法事实上对工程化提出了不低的要求，需要用户既熟悉模型结构（且能做一定程度的图优化），也熟悉模型流量分布，还要简单了解device arch（至少是不同型号的GPU memory大小）。这些要求稍不满足，便易得出一个效果不佳，提升有限的结论。
 
 * graph 组合    
-  
+  如果显存资源紧张，但又想尽量利用graph加速    
   |组合类型，如动态batch|具体batch=1,2,4构建graph <br><br> (graph1) g1: batch=1  分配一段内存空间 <br> (graph2) g2: batch=2  分配一段内存空间 <br> (graph4) g4: batch=4  分配一段内存空间|      
   |---|----|    
   |1|g1|   
