@@ -10,7 +10,7 @@
    |  -------|  ----           | ---------- | ----------  | ---------------- | ------------ |  ----     |    
    |v-camera | preprocess node | infer node | decode node | postprocess node | display node |  pipeline |     
    | nvmedia |  cuda           | cuda + dla | cuda        |  cpu             |   cpu        |     -     |       
-   |  class  | class (Init, Run, DeInit)    |  class      |  class      |  class           |  class       | -     |      
+   |  class  | class (Init, Run, DeInit)    | class       |  class           |  class       |  class    | -     |      
    |  debug  | stub/fileio/perf   |  stub/fileio/perf |  stub/fileio/perf      |  stub/fileio/perf             |  stub/fileio/perf | -     |   
   
   zero copy + io-free reformat           
@@ -54,7 +54,7 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
 
 * graph 组合    
   
-  |组合类型，如动态batch|具体batch=1,2,4构建graph <br><br> g1: batch=1  分配一段空间 <br> g2: batch=2  分配一段空间 <br> g4: batch=4  分配一段空间|      
+  |组合类型，如动态batch|具体batch=1,2,4构建graph <br><br> (graph1)g1: batch=1  分配一段内存空间 <br> (graph2)g2: batch=2  分配一段内存空间 <br> (graph4)g4: batch=4  分配一段内存空间|      
   |---|----|    
   |1|g1|   
   |2|g2|   
@@ -64,6 +64,8 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
   |6|g2+g4|   
   |7|g1+g2+g4|    
 
+如果 input tensor （经过预处理后）是存储在连续空间s中，则需要copy到 graphX 的 mem 中；   
+如果 input tensor （经过预处理时候，将 graphX的 内存空间作为输出内存 ）
      
 
 #### CUDA Stream            
