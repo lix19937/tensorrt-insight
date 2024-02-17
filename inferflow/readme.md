@@ -97,6 +97,7 @@ https://forums.developer.nvidia.com/t/how-high-priority-stream-preemption/78183/
 * Multi Stream主要是通过创建多个Stream的做法增加了kernel执行的并行，从而更好的利用资源，在易用性上远超CUDA Graph。    
 
 #### trt 性能优化参考    
+TBD   
 https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/developer-guide/index.html#optimize-performance   
 
 
