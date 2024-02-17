@@ -102,16 +102,16 @@ https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/developer-gu
 
 
 ## Ref    
-[01]Multi Stream     
+[1] Multi Stream     
 https://github.com/tensorflow/tensorflow/pull/59843     
 
-[02] CUDA Graph     
+[2] CUDA Graph     
 https://www.nvidia.com/en-us/on-demand/session/gtcspring21-s31312/     
 https://github.com/NVIDIA/TensorRT/blob/release/8.6/samples/common/sampleDevice.h#L161    
 
-[03] Introduce multiple streams execution in TensorFlow.          
+[3] Introduce multiple streams execution in TensorFlow.          
 https://github.com/tensorflow/tensorflow/pull/59843
 
-[04] Nvidia MPS       
+[4] Nvidia MPS       
 https://docs.nvidia.com/deploy/mps/       
 
