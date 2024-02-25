@@ -53,15 +53,15 @@ Decoder block数据流:
 ```
 | mha --> mha_norm --> svca --> svca_norm --> ffn --> ffn_norm --> reg --> update | [loop] |--> cls    
 ```    
-在各功能单元中可进行拆解然后融合，如使用
-svexp::invokeGeneralAddBiasResidualPreLayerNorm与invokeGeneralAddBiasResidualPreLayerNorm进行了跨阶段操作的合并工作，具体如下:   
+在各功能单元中进行拆解然后融合，如使用
+svexp::invokeGeneralAddBiasResidualPreLayerNorm与invokeGeneralAddBiasResidualPreLayerNorm进行了**跨阶段操作**的合并工作，具体如下:   
 ```
 mha_norm_in = mha_out_without_bias + residual + bias + query_pos
 svca_norm_in = svca_out_without_bias + residual + bias + svca_pos_feat
 ffn_norm_in = ffn_out_without_bias + svca_norm_out_buf + bias   
 ```
 
-如shape型op与elementwise合并:
+如shape型op 与elementwise合并:
 ```py
 import torch 
 import numpy as np
@@ -106,7 +106,7 @@ logger.info('{}'.format(torch.equal(mask, mask_v2)))
  svca.position_encoder(@stream2)
 ```
 
-即分两个流:一个流用来计算svca.output_proj操作，另一个流计算svca.position_encoder 操作，最后在主流（@stream1）中同步。   
+即分为两个流:一个流用来计算svca.output_proj操作，另一个流计算svca.position_encoder 操作，最后在主流（@stream1）中同步。   
 
 #### 1.2.3 访存: 减少内存移动      
 如采用向量类型数据half2:   
