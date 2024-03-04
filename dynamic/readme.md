@@ -1,4 +1,12 @@
 
+https://developer.nvidia.com/blog/constructing-cuda-graphs-with-dynamic-parameters/   
+
+The new approach is shown in detail in the hummingtree/cuda-graph-with-dynamic-parameters standalone code example. cudaStreamGetCaptureInfo_v2 and cudaStreamUpdateCaptureDependencies are new CUDA runtime APIs introduced in CUDA 11.3.
+
+
+https://zhuanlan.zhihu.com/p/661451140
+
+
 动态shape infer 需要在 enqueue 或 execute 之前 进行实时绑定 (动态**输入**绑定即可)      
 ```cpp
  // Set the input size for the preprocessor
