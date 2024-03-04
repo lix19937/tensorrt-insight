@@ -30,3 +30,5 @@ https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/api/c_api/cl
 |-1 x C x H x W <br> 1 x P x Q  | -1 x M x N <br> 1 x R |   
 |-1 x C x H x W <br> 1 x P x Q <br> -1 x K x K| -1 x M x N <br> 1 x R  <br>  -1 x K|   
  
+如果有其他线程在执行同步，就会打断 graph capture    
+ 在 stream capturing 时，最好保证其他线程/进程都没有任何 CUDA API 调用      
