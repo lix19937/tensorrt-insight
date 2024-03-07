@@ -1,6 +1,8 @@
 apex/apex/contrib/sparsity     
 https://github.com/NVIDIA/apex/tree/master/apex/contrib/sparsity   
+base https://github.com/NVIDIA/apex/commit/b496d85fb88a801d8e680872a12822de310951fd  版本    
 
+-------------------------------
 
 可以在量化完之后 进行 稀疏，反之则不行      
 Sparse-QAT  
