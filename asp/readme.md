@@ -15,7 +15,7 @@ hasSparseWeights = True
 for k in range(0, K):
     for r in range(0, R):  # height  
         for s in range(0, S): # width  
-            for c_packed in range(0, C // 4):
+            for c_packed in range(0, C // 4): # 通道整除4  
                 // 如果非零数目大于2 了 ，那就不能稀疏  
                 if numpy.count_nonzero(weights[k, c_packed*4:(c_packed+1)*4, r, s]) > 2 :
                     hasSparseWeights = False
