@@ -3,7 +3,8 @@
 ## 稀疏原理    
 
 NVIDIA Ampere Architecture GPUs support Structured Sparsity. To make use of this feature to achieve higher inference performance, the `convolution kernel weights` and the `fully connected weights` must meet the following requirements:     
-For each output channel and for each spatial pixel in the kernel weights, every four input channels must have at least two zeros. In other words, assuming that the kernel weights have the shape [K, C, R, S] and C % 4 == 0, then the requirement is verified using the following algorithm:
+For each output channel and for each spatial pixel in the kernel weights, every four input channels must have at least two zeros. In other words, assuming that the kernel weights have the shape [K, C, R, S] and C % 4 == 0, then the requirement is verified using the following algorithm:     
+
 每四个输入通道必须至少有两个零。   
 
 ![kcrs](https://github.com/lix19937/tensorrt-insight/assets/38753233/ec85a73c-c704-4f30-ae78-6122a90c7991)
