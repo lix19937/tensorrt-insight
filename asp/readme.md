@@ -45,3 +45,4 @@ init_model_for_pruning会为模型层添加新的mask buffer，用于保存compu
 apex   
 https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#structured-sparsity    
 https://blog.csdn.net/weixin_43669978/article/details/132298127   
+https://docs.nvidia.com/deeplearning/performance/dl-performance-convolutional/index.html   
