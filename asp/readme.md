@@ -1,4 +1,6 @@
 apex/apex/contrib/sparsity     
+https://github.com/NVIDIA/apex/tree/master/apex/contrib/sparsity   
+
 
 可以在量化完之后 进行 稀疏，反之则不行      
 Sparse-QAT  
