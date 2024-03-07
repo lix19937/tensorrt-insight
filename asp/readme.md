@@ -8,8 +8,8 @@ For each output channel and for each spatial pixel in the kernel weights, every 
 
 ![kcrs](https://github.com/lix19937/tensorrt-insight/assets/38753233/ec85a73c-c704-4f30-ae78-6122a90c7991)
 
-weight 的布局 kcrs   
-k 输出通道 ， c输入(tensor)通道   
+### weight 的布局 kcrs   
+k 输出通道 ， c输入(tensor)通道， r 高度， s 宽度        
 ```py
 hasSparseWeights = True
 for k in range(0, K):
