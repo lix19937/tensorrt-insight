@@ -12,7 +12,7 @@ def fill(x):
 """ reshape matrix into m-dimensional vectors: (h,w) -> (hw/m, m) """
 def reshape_1d(matrix, m):
     # If not a nice multiple of m, fill with zeroes.
-    if matrix.shape[1] % m > 0:
+    if matrix.shape[1] % m > 0: # 不能整除  
         mat = torch.cuda.FloatTensor(matrix.shape[0], matrix.shape[1] + (m-matrix.shape[1]%m)).fill_(0)
         mat[:, :matrix.shape[1]] = matrix
         shape = mat.shape
@@ -27,9 +27,13 @@ def compute_valid_1d_patterns(m,n):
     global valid_m4n2_1d_patterns
 
     if m==4  and n==2 and valid_m4n2_1d_patterns  is not None: return valid_m4n2_1d_patterns
+        
+    # 构建 valid_patterns    
     patterns = torch.zeros(m)
     patterns[:n] = 1
+    
     valid_patterns = torch.tensor(list(set(permutations(patterns.tolist()))))
+    
     if m == 4 and n == 2: valid_m4n2_1d_patterns = valid_patterns
     return valid_patterns
 
@@ -42,6 +46,7 @@ def mn_1d_best(matrix, m, n):
     mask = torch.cuda.IntTensor(matrix.shape).fill_(1).view(-1,m)
     mat,shape = reshape_1d(matrix,m)
     pmax = torch.argmax(torch.matmul(mat.abs(),patterns.t()), dim=1)
+    
     mask[:] = patterns[pmax[:]]
     mask = mask.view(matrix.shape)
     return mask
