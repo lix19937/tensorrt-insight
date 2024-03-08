@@ -283,6 +283,7 @@ class ASP:
         total,sp100,sp50 = 0,0,0
         for module_name, module, p_name, p, mask, pruned in cls.__sparse_parameters:
             total += 1
+            # sum 统计的是 true ?  
             mask_sum = mask.sum()
             mask_numel = mask.numel()
             if mask_sum == mask_numel:
