@@ -38,7 +38,9 @@ class ASP:
     __permutation_output_dir = ''
 
     @classmethod
-    def init_model_for_pruning(cls, model, mask_calculator="m4n2_1d",
+    def init_model_for_pruning(cls, 
+               model, 
+               mask_calculator="m4n2_1d",
              verbosity=3,
              whitelist=[torch.nn.Linear, torch.nn.Conv1d, torch.nn.Conv2d, torch.nn.Conv3d, torch.nn.MultiheadAttention], 
              allowed_layer_names=None, disallowed_layer_names=[],
