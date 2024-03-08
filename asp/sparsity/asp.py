@@ -15,7 +15,7 @@ import os
 import string
 import time
 
-# 找到能用的模块
+# 找到适合的模块
 def eligible_modules(model, whitelist_layer_types, allowed_layer_names, disallowed_layer_names):
     eligible_modules_list = []
     for name, mod in model.named_modules():
