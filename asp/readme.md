@@ -46,7 +46,7 @@ init_model_for_pruning会为模型层添加新的mask buffer，用于保存compu
 
 
  
-
+简单实现 https://blog.csdn.net/qq_40672115/article/details/130035270?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-130035270-blog-132298127.235%5Ev43%5Epc_blog_bottom_relevance_base6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-130035270-blog-132298127.235%5Ev43%5Epc_blog_bottom_relevance_base6&utm_relevant_index=3
 
 ## Ref   
 apex   
