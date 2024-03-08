@@ -48,6 +48,7 @@ def node_name_matches(node_name, module_name):
 
     # process: remove all punctuation, everything to lower case
     def process(name):
+        # string.punctuation 所有标点符号
         return ''.join(c for c in name if c not in string.punctuation).lower()
 
     processed_node_name = process(node_name)
