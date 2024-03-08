@@ -23,6 +23,7 @@ def get_node_parent_children(fx_node):
     # get node parent list, and convert node name to module name
     node_parent_name_converted = []
     if len(fx_node.all_input_nodes) > 0:
+        # 当前节点的输入 认为是当前节点的 父节点 
         node_parent = fx_node.all_input_nodes
         for item in node_parent:
             converted_item = convert_fx_node_name(item.name)
