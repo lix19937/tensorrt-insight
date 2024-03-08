@@ -4,7 +4,7 @@ import numpy as np
 import collections
 from itertools import permutations
 
-
+# 稠密度  
 """ compute density (helper fn to compute % NNZs in a tensor) """
 def fill(x):
     return float(x.nonzero().size(0))/torch.numel(x)
