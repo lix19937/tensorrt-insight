@@ -53,7 +53,7 @@ class ASP:
         model = ...
         ASP.init_model_for_pruning(model, mask_calculator, ...)
         if (training) ASP.init_optimizer_for_pruning(optimizer)
-        ASP.compute_sparse_masks() // sparsity is off by default, call when youy want to enable it.
+        ASP.compute_sparse_masks() // sparsity is off by default, call when you want to enable it.
 
         If you are starting from a checkpoint:
 
