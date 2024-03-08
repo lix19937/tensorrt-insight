@@ -127,7 +127,8 @@ class ASP:
                     
                     if cls.__verbosity >= 3:
                         print("[ASP] Sparsifying %s::%s of size=%s and type=%s for sparsity" % (module_name, p_name, str(p.size()), str(p.dtype)))
-                    
+
+                    # bool  
                     mask = torch.ones_like(p).bool()
                     buffname = p_name.split(".")[-1] # buffer names cannot contain "."
                     module.register_buffer('__%s_mma_mask' % buffname, mask)
@@ -136,6 +137,7 @@ class ASP:
                         module.register_buffer('__%s_mma_pruned_p' % buffname, pruned)
                     else:
                         pruned = None
+                        
                     cls.__sparse_parameters.append((module_name, module, p_name, p, mask, pruned))
                 else:
                     if cls.__verbosity >= 3:
@@ -198,15 +200,20 @@ class ASP:
             # prune gradients before step method
             with torch.no_grad():
                 for module_name, module, p_name, p, mask, pruned in cls.__sparse_parameters:
+                    # 梯度乘 mask
                     if p.grad is not None: #thx pjudd
                         p.grad.mul_(mask)
+                        
             # call original optimizer step method
             rval = opt_self.__step(*args, **kwargs)
+            
             # prune parameters after step method
             with torch.no_grad():
+                # 超参数乘 mask  
                 for module_name, module, p_name, p, mask, pruned in cls.__sparse_parameters:
                     p.mul_(mask)
             return rval
+            
         cls.__optimizer.step = types.MethodType(__step, cls.__optimizer)
 
     @classmethod
