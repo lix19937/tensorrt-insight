@@ -66,6 +66,8 @@ CUDA Graph通过预先create或者capture一个graph（希望这尽可能是一�
 
 如果 input tensor （经过预处理后）是存储在连续空间s中，则需要copy到 graphX 的 mem 中；   
 如果 input tensor （经过预处理时候，将 graphX的 内存空间作为输出内存 ），则无需再copy    
+
+
 更多内容see https://github.com/lix19937/history/blob/main/cuda/cudagraph.md        
 
 #### CUDA Stream            
