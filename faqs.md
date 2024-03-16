@@ -1,3 +1,23 @@
+## 模型导出fp32的trt engine没有明显精度损失，导出fp16损失很明显，可能的原因有哪些？   
+比较突出的几个可能性就是：   
+对一些敏感层进行了量化导致掉精度比较严重，或者权重的分布没有集中导致量化的dynamic range的选择让很多有数值的权重都归0了。    
+另外，minmax, entropy, percentile这些计算scale的选择没有根据op进行针对性的选择也会出现掉点。  
+
+## onnx模型推理结果正确，但tensorRT量化后的推理结果不正确，大概原因有哪些？
+可能原因有：   
+a. calibrator的算法选择不对；   
+b. calibration过程使用的数据不够；    
+c. 对网络敏感层进行了量化；   
+d. 对某些算子选择了不适合OP特性的scale计算。  
+
+## 采用tensorRT PTQ量化时，若用不同batchsize校正出来模型精度不一致，这个现象是否正常？    
+正常的    
+因为calibration（校正）是以tensor为单位计算的。对于每次计算，如果histogram的最大值需要更新，那么PTQ会把histogram的range进行翻倍。不考虑内存不足的问题，推荐使用更大的batch_size，这样每个batch中包含样本更加丰富，校准后的精度会更好。但具体设置多大，需要通过实验确定（从大的batch size开始测试。一点一点往下减）。需要注意的是batch_size越大，校准时间越长。
+
+## 模型量化到INT8后，推理时间反而比FP16慢，这正常吗？   
+正常的     
+这可能是tensorrt中内核auto tuning机制作怪（会把所有的优化策略都运行一遍，结果发现量化后涉及一堆其他的操作，反而效率不高，索性使用cuda core，而非tensorrt core）。当网络参数和模型架构设计不合理时，trt会添加额外的处理，导致INT8推理时间比FP16长。我们可以通过trt-engine explorer工具可视化engine模型看到。
+
 ## 问：如何创建针对多种不同批次大小进行优化的引擎？   
 虽然 TensorRT 允许针对给定批量大小优化的引擎以任何较小的大小运行，但这些较小大小的性能无法得到很好的优化。要针对多个不同的批量大小进行优化，请在分配给OptProfilerSelector::kOPT的维度上创建优化配置文件。
 
