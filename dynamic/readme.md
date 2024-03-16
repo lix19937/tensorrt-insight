@@ -1,3 +1,4 @@
+## 非数据依赖型的动态shape   
 
 https://developer.nvidia.com/blog/constructing-cuda-graphs-with-dynamic-parameters/   
 
@@ -32,3 +33,9 @@ https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/api/c_api/cl
  
 如果有其他线程在执行同步，就会打断 graph capture    
  在 stream capturing 时，最好保证其他线程/进程都没有任何 CUDA API 调用      
+
+
+ ## 数据依赖型的动态shape     
+ https://github.com/NVIDIA/TensorRT/issues/862    
+ 使用  enqueueV3   
+ 
