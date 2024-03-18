@@ -18,10 +18,6 @@
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
 |[faqs](./faqs.md)                  |快速问答|      |           
 
-
-https://docs.nvidia.com/deeplearning/tensorrt/     
-![trt-overview.png](trt-overview.png)   
-
 --------------------------------------     
 ## Ref    
 https://docs.nvidia.com/deeplearning/tensorrt/archives/   
