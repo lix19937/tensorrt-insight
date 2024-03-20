@@ -1,0 +1,407 @@
+diff --git a/mps/mps_client.cpp b/mps/mps_client.cpp
+index 36d7db4..b2f23d4 100644
+--- a/mps/mps_client.cpp
++++ b/mps/mps_client.cpp
+@@ -26,6 +26,8 @@
+ #include <cuda.h>
+ #include <customTask.h>
+ #include <iostream>
++#include <mps_utils.h>
++#include <sharedCtx.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <sys/types.h>
+@@ -168,6 +170,7 @@ bool print_help()
+     printf(" '--DLA_0=trtDLA0.engine,trtDLA1.engine' Load dla-trt-engines to DLA0, split by `,` \n");
+     printf(" '--DLA_1=trtDLA1.engine,trtDLA2.engine' Load dla-trt-engines to DLA1, split by `,` \n");
+     printf(" '--custom=cudaKernelTask,customTask1' Start user defined custom tasks, split by `,`\n");
++    printf(" '--mps' : enable mps, otherwise will use multi-cuda-context  \n");
+     printf(
+         "# belows are the sync options, If you do not care about the evaluate the impact of synchronization behavior, "
+         "Just do not set it\n");
+@@ -203,6 +206,7 @@ int main(int argc, char **argv)
+         return 0;
+     }
+     SyncType syncType   = parse_synctype(cmdLine);
++    bool     use_mps    = cmdLine.GetFlag("mps");
+     pid_t    process_id = process_id = getpid();
+     //! parse sync type
+     SyncType                 synctype = parse_synctype(cmdLine);
+@@ -223,6 +227,8 @@ int main(int argc, char **argv)
+     socket.connect("tcp://0.0.0.0:9999");
+ 
+     // Create cuda contexts
++    if (!use_mps)
++    { // no mps
+         // call a cudaruntime api, Create cuda context
+         cudaSetDevice(0);
+         unsigned int flags;
+@@ -231,6 +237,12 @@ int main(int argc, char **argv)
+         checkCudaErrors(cudaGetDeviceFlags(&flags));
+         printf("cuda Device flags: %d\n", flags);
+ 
++    }
++    else
++    { // mps
++        std::cout << "mps was enabled...." << std::endl;
++        init_mps_client(socket);
++    }
+     /*
+         start sub-threads run GPU,DLA0,DLA1 tasks,
+         first, init TrtBenchTask objects with the flag which provided by the user
+diff --git a/mps/mps_server.cpp b/mps/mps_server.cpp
+index d8d8b53..bcaa692 100644
+--- a/mps/mps_server.cpp
++++ b/mps/mps_server.cpp
+@@ -30,6 +30,8 @@
+ #include <cuda.h>
+ #include <iostream>
+ #include <map>
++#include <mps_utils.h>
++#include <sharedCtx.h>
+ #include <string>
+ #include <zmq_u.hpp>
+ 
+@@ -70,6 +72,7 @@ bool print_help()
+         "--------------------------------------------------------------------------------------------------------\n");
+     printf("---------------------------- multi_process_server ---------------------------------------------\n");
+     printf(" '--help': print help information \n");
++    printf(" '--mps' : enable mps, otherwise will use multi-cuda-context  \n");
+     return true;
+ }
+ 
+@@ -88,6 +91,7 @@ int main(int argc, char **argv)
+         print_help();
+         return 0;
+     }
++    bool use_mps = cmdLine.GetFlag("mps");
+ 
+     std::cout << "multi process server" << std::endl;
+     zmq::context_t context;
+@@ -98,11 +102,24 @@ int main(int argc, char **argv)
+     CUdevice cuDevice;
+     cuDeviceGet(&cuDevice, 0);
+ 
++    MPS_resource mps_resource;
+     CUcontext    cuda_context;
+ 
+     // Create cuda-contexts
++    if (!use_mps)
++    { // no mps
+         // Create contexts
+         checkCudaErrorsDRV(cuCtxCreate(&cuda_context, 0, cuDevice));
++    }
++    else
++    { // mps
++        std::cout << "mps was enabled...." << std::endl;
++        if (!init_mps_server(cuda_context, mps_resource))
++        {
++            printf("init mps server failed!");
++            return -1;
++        }
++    }
+ 
+     pid_and_perf              pf;
+     std::vector<pid_and_perf> pid_perf_v;
+@@ -118,6 +135,20 @@ int main(int argc, char **argv)
+         zmq::message_t request_message;
+         socket.recv(&request_message);
+ 
++        // judge if the message is the device_key
++        if (request_message.size() == sizeof(CUetblSharedCtx_deviceKey))
++        { // recive mps device key
++            // if not use mps, but recive this message, we must
++            if (!use_mps)
++            {
++                zmq::message_t reply_message("server mps disabled!", 20);
++                socket.send(reply_message);
++                continue;
++            }
++            // send shareKey to client to help client start sub-context
++            send_shareKey(socket, request_message, mps_resource, cuda_context);
++            continue;
++        }
+         memcpy(&pf, (void *)request_message.data(), sizeof(pid_and_perf));
+         zmq::message_t reply_message("message from server!", 20);
+         socket.send(reply_message);
+diff --git a/mps/mps_utils.h b/mps/mps_utils.h
+new file mode 100644
+index 0000000..8679a91
+--- /dev/null
++++ b/mps/mps_utils.h
+@@ -0,0 +1,104 @@
++/*
++ * SPDX-FileCopyrightText: Copyright (c) 2022 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
++ * SPDX-License-Identifier: MIT
++ *
++ * Permission is hereby granted, free of charge, to any person obtaining a
++ * copy of this software and associated documentation files (the "Software"),
++ * to deal in the Software without restriction, including without limitation
++ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
++ * and/or sell copies of the Software, and to permit persons to whom the
++ * Software is furnished to do so, subject to the following conditions:
++ *
++ * The above copyright notice and this permission notice shall be included in
++ * all copies or substantial portions of the Software.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
++ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++ * DEALINGS IN THE SOFTWARE.
++ */
++
++#include <iostream>
++#include <sharedCtx.h>
++#include <sys/types.h>
++#include <tools.h>
++#include <unistd.h>
++#include <zmq_u.hpp>
++
++#define ACTIVETHREADPERCENTAGE 100.0f
++struct MPS_resource
++{
++    CUetblSharedCtx *                    etblSharedCtxFunc = NULL;
++    CU_ETBL_SHARED_CONTEXT_CREATE_PARAMS createParams      = {0};
++    CUetblSharedCtx_deviceKey            deviceKey;
++    CUetblSharedCtx_shareKey             shareKey;
++};
++
++bool init_mps_server(CUcontext &cuda_context, MPS_resource &mps_resource)
++{
++
++    if (CUDA_SUCCESS != cuGetExportTable((const void **)&(mps_resource.etblSharedCtxFunc), &CU_ETID_SHARED_CONTEXT))
++    {
++        printf("Shared context ETBL not found\n");
++        return false;
++    }
++    if (CUDA_ERROR_SYSTEM_DRIVER_MISMATCH ==
++        mps_resource.etblSharedCtxFunc->etiDeviceGetKey(&(mps_resource.deviceKey), 0))
++    {
++        printf("Incompatible cuCompat layer\n");
++        return false;
++    }
++    mps_resource.createParams.activeThreadsPercentage = ACTIVETHREADPERCENTAGE;
++    mps_resource.createParams.flags = CU_CTX_SCHED_BLOCKING_SYNC;
++    checkCudaErrorsDRV(
++        mps_resource.etblSharedCtxFunc->etiSharedCtxCreate(&cuda_context, 0, &(mps_resource.createParams)));
++    return true;
++}
++
++bool init_mps_client(zmq::socket_t &socket)
++{
++    // mps variables
++    checkCudaErrorsDRV(cuInit(0));
++    CUetblSharedCtx *                    etblSharedCtxFunc = NULL;
++    CUetblSharedCtx_deviceKey            deviceKey;
++    CUetblSharedCtx_shareKey             shareKey;
++
++    checkCudaErrorsDRV(cuGetExportTable((const void **)&etblSharedCtxFunc, &CU_ETID_SHARED_CONTEXT));
++    checkCudaErrorsDRV(etblSharedCtxFunc->etiDeviceGetKey(&deviceKey, 0));
++
++    zmq::message_t client_deviceKey_message(&deviceKey, sizeof(CUetblSharedCtx_deviceKey));
++    socket.send(client_deviceKey_message);
++    zmq::message_t reply_sharedKey_message_from_server;
++    socket.recv(&reply_sharedKey_message_from_server);
++    if (reply_sharedKey_message_from_server.size() == 20)
++    { // that means server reply error str to client
++        printf("client recieve error message from server: %s\n", reply_sharedKey_message_from_server.data());
++        exit(-1);
++    }
++    memcpy(&shareKey, (void *)reply_sharedKey_message_from_server.data(), sizeof(CUetblSharedCtx_shareKey));
++
++    printf(" creating a mps sub-context \n");
++    checkCudaErrorsDRV(etblSharedCtxFunc->etiEnableSharedPrimaryCtx(&shareKey, 0));
++    // call a cuda api, will create primary context
++    checkCudaErrors(cudaSetDeviceFlags(cudaDeviceScheduleBlockingSync));
++    // verify if SetFlag is success
++    unsigned int flags;
++    checkCudaErrors(cudaGetDeviceFlags(&flags));
++    printf("cuda Device flags: %d\n", flags);
++    return true;
++}
++
++bool send_shareKey(zmq::socket_t &socket, zmq::message_t &request_message, MPS_resource &mps_resource,
++                   CUcontext &cuda_context)
++{
++    // create a shared key
++    memcpy(&(mps_resource.deviceKey), (void *)request_message.data(), sizeof(CUetblSharedCtx_deviceKey));
++    checkCudaErrorsDRV(mps_resource.etblSharedCtxFunc->etiSharedCtxKeyCreate(&(mps_resource.shareKey),
++                                                                             mps_resource.deviceKey, cuda_context));
++    zmq::message_t reply_message(&(mps_resource.shareKey), sizeof(CUetblSharedCtx_shareKey));
++    socket.send(reply_message);
++    return true;
++}
+diff --git a/mps/sharedCtx.h b/mps/sharedCtx.h
+new file mode 100644
+index 0000000..87c3fc5
+--- /dev/null
++++ b/mps/sharedCtx.h
+@@ -0,0 +1,165 @@
++/*
++ * Copyright 2023 by NVIDIA Corporation.  All rights reserved.  All
++ * information contained herein is proprietary and confidential to NVIDIA
++ * Corporation.  Any use, reproduction, or disclosure without the written
++ * permission of NVIDIA Corporation is prohibited.
++ */
++
++#ifndef __cuda_etbl_shared_ctx_h__
++#define __cuda_etbl_shared_ctx_h__
++
++#include "cuda.h"
++
++#ifdef __cplusplus
++extern "C" {
++#endif // __cplusplus
++
++//------------------------------------------------------------------
++// Backdoor driver API for Shared Contexts
++//------------------------------------------------------------------
++// This etbl contains functions to create shared contexts on Tegra platforms
++// which share the underlying compute engine.
++
++CUuuid CU_ETID_SHARED_CONTEXT = {
++    {0xd9, 0xbc, 0x88, 0x52, 0xd0, 0xcb, 0xcc, 0x4e, 0x8e, 0x63, 0xe4, 0x30, 0x69, 0x9a, 0x46, 0xb6}};
++
++/* A Device Key which is unique across processes */
++typedef unsigned long long int CUetblSharedCtx_deviceKey;
++
++/* A Share Key used to create a shared context */
++typedef struct CUetblSharedCtx_shareKey_st
++{
++    unsigned char key[16];
++} CUetblSharedCtx_shareKey;
++
++/* CUDA Shared Context create parameters */
++typedef struct CU_ETBL_SHARED_CONTEXT_CREATE_PARAMS_st
++{
++    // Share Context Key
++    CUetblSharedCtx_shareKey *shareKey;
++
++    // Percentage of available threads on the device
++    float activeThreadsPercentage;
++
++    // Same as context creation flags
++    unsigned int flags;
++} CU_ETBL_SHARED_CONTEXT_CREATE_PARAMS;
++
++typedef struct CUetblSharedCtx_st
++{
++    size_t struct_size;
++
++    /** @brief Returns a unique key associated with the device.
++     *
++     * The device key can be used to generate a share token for \p dev.
++     *
++     * \param deviceKey[out] Returned device key.
++     * \param dev[in] Device handle.
++     *
++     * \return
++     * ::CUDA_SUCCESS,
++     * ::CUDA_ERROR_DEINITIALIZED,
++     * ::CUDA_ERROR_NOT_INITIALIZED,
++     * ::CUDA_ERROR_INVALID_DEVICE,
++     * ::CUDA_ERROR_INVALID_VALUE,
++     * ::CUDA_ERROR_UNKNOWN
++     */
++    CUresult (*etiDeviceGetKey)(CUetblSharedCtx_deviceKey *deviceKey, CUdevice dev);
++
++    /** @brief Returns a shared key to share a context.
++     *
++     * Create a shared key to share \p ctx across processes with device
++     * associated with \p deviceKey.
++     * \p shareKey can be used to create one shared context. To create
++     * multiple shared contexts, multiple shared keys must be created.
++     *
++     * \param shareKey[out] Returned share key.
++     * \param deviceKey[in] Unique device key.
++     * \param ctx[in] CUDA context that must be shared.
++     *
++     * \return
++     * ::CUDA_SUCCESS,
++     * ::CUDA_ERROR_DEINITIALIZED,
++     * ::CUDA_ERROR_NOT_INITIALIZED,
++     * ::CUDA_ERROR_INVALID_DEVICE,
++     * ::CUDA_ERROR_INVALID_VALUE,
++     * ::CUDA_ERROR_UNKNOWN
++     */
++    CUresult (*etiSharedCtxKeyCreate)(CUetblSharedCtx_shareKey *shareKey, CUetblSharedCtx_deviceKey deviceKey,
++                                      CUcontext ctx);
++
++    /** @brief Creates a shared context.
++     *
++     * If value of \p pParams->shareKey is NULL, then the API creates a
++     * context similar to ::cuCtxCreate. If the value of \p pParams->shareKey
++     * is non-NULL then the API creates a shared context associated with
++     * \p pParams->shareKey.
++     * Kernels running on a shared context share the compute engine parallely
++     * with other context/contexts (associated with the share key).
++     * The CUcontext handle returned can be passed to all APIs that accept
++     * context handle.
++     *
++     * To destroy the context call ::cuCtxDestroy().
++     *
++     * Only a limited number of shared contexts (max 64) can be created that
++     * share the HW concurrently. ::CUDA_ERROR_UNKNOWN is returned if the
++     * context creation fails because of unavailability of resources.
++     *
++     * ::CUDA_DEVICE_MAX_CONNECTIONS can be used to configure the number of
++     * connections in a shared context.
++     * When the current context is a shared context, then the device
++     * attribute ::CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT returns the number
++     * of enabled SMs set using \p pParams->activeThreadsPercentage.
++     *
++     * \param pCtx[out] Returned shared context handle.
++     * \param device[in] The device on which shared context must be created.
++     * \param pParams[in] A pointer to shared context create parameters.
++     *
++     * \return
++     * ::CUDA_SUCCESS,
++     * ::CUDA_ERROR_DEINITIALIZED,
++     * ::CUDA_ERROR_NOT_INITIALIZED,
++     * ::CUDA_ERROR_INVALID_CONTEXT,
++     * ::CUDA_ERROR_INVALID_DEVICE,
++     * ::CUDA_ERROR_INVALID_VALUE,
++     * ::CUDA_ERROR_OUT_OF_MEMORY,
++     * ::CUDA_ERROR_UNKNOWN
++     */
++    CUresult (*etiSharedCtxCreate)(CUcontext *pCtx, CUdevice device, CU_ETBL_SHARED_CONTEXT_CREATE_PARAMS *pParams);
++    /** @brief Enables primary context to be a shared context.
++     *
++     * Enables primary context to be a shared context on \p device.
++     * \p shareKey should be used to enable sharing the primary context
++     * with an already created primary context in another process or thread.
++     * If \p shareKey is NULL, CUDA_ERROR_INVALID_VALUE is returned.
++     *
++     * If the API is invoked with an initialized primary context,
++     * CUDA_ERROR_PRIMARY_CONTEXT_ACTIVE is returned.
++     *
++     * The API does not create or initialize a primary context.
++     *
++     * Note that, a shared primary context follows the same properties
++     * and constraints as that of a primary context.
++     *
++     * \param shareKey[in] The share key that should be used to share
++     * the primary context with.
++     * context is created.
++     * \param device[in] The device on which shared primary context must
++     * be created.
++     *
++     * \return
++     * ::CUDA_SUCCESS,
++     * ::CUDA_ERROR_INVALID_DEVICE,
++     * ::CUDA_ERROR_INVALID_VALUE,
++     * ::CUDA_ERROR_PRIMARY_CONTEXT_ACTIVE
++     */
++    CUresult (*etiEnableSharedPrimaryCtx)(
++        CUetblSharedCtx_shareKey *shareKey,
++        CUdevice device);
++} CUetblSharedCtx;
++
++#ifdef __cplusplus
++}
++#endif // __cplusplus
++
++#endif // __cuda_etbl_shared_ctx_h__

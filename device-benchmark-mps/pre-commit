@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Run clang-format on all C++ and C source files
+files=$(git diff --cached --name-only --diff-filter=ACM "*.cpp" "*.hpp" "*.c" "*.h" "*.cu" "*.cuh")
+[ -z "$files" ] && exit 0
+
+# Format the files
+clang-format -i $files
+
+# Add the formatted files to the index
+git add $files
+
+# Continue with the commit
+exit 0
+
