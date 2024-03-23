@@ -30,8 +30,6 @@ NVIDIA TensorRT的中文版开发手册。
 16. [TensorRT的数据格式定义详解](16.TensorRT的数据格式定义详解/TensorRT的数据格式定义详解.md)
 17. [TensorRT的命令行程序](17.TensorRT的命令行程序/TensorRT的命令行程序.md)
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
+[加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
 
 
