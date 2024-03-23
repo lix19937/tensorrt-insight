@@ -1,10 +1,5 @@
 # TensorRT的命令行程序
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
-
 ## A.3.1. trtexec
 
 示例目录中包含一个名为`trtexec`的命令行包装工具。 `trtexec`是一种无需开发自己的应用程序即可快速使用 TensorRT 的工具。
