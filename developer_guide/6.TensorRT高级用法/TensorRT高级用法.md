@@ -1,8 +1,5 @@
 # 6.TensorRT 进阶用法
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
 ## 6.1. The Timing Cache
 
 为了减少构建器时间，TensorRT 创建了一个层时序缓存，以在构建器阶段保存层分析信息。它包含的信息特定于目标构建器设备、CUDA 和 TensorRT 版本，以及可以更改层实现的 `BuilderConfig` 参数，例如`BuilderFlag::kTF32或BuilderFlag::kREFIT` 。
