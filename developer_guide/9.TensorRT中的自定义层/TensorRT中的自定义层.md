@@ -1,9 +1,5 @@
 # TensorRT中的自定义层
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
 NVIDIA TensorRT 支持多种类型的层，其功能不断扩展；但是，在某些情况下，支持的层不能满足模型的特定需求。
 
 您可以通过实现自定义层（通常称为插件）来扩展 TensorRT。
