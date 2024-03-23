@@ -1,9 +1,5 @@
 # TensorRT之条件控制
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
 NVIDIA TensorRT 支持条件 if-then-else 流控制。 TensorRT 条件用于实现网络子图的条件执行。
 
 ## 11.1. Defining A Conditional
