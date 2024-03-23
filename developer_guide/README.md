@@ -32,4 +32,6 @@ NVIDIA TensorRT的中文版开发手册。
 
 [加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
 
+另外，本文档参考了 nv 何琨老师解读。    
+
 
