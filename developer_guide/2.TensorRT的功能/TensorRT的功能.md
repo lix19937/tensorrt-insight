@@ -1,5 +1,4 @@
 # 2.TensorRT的功能
-![](rdp.jpg)
 
 本章概述了您可以使用 TensorRT 做什么。它旨在对所有 TensorRT 用户有用。
 
