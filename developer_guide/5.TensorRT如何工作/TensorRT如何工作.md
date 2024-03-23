@@ -1,7 +1,5 @@
 # TensorRT如何工作
 
-![](rdp.jpg)
-
 本章提供了有关 TensorRT 工作原理的更多详细信息。
 
 ## 5.1. Object Lifetimes
