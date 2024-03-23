@@ -1,12 +1,5 @@
 # 在TensorRT中使用动态形状(Dynamic Shapes)
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
-
-
-
 **动态形状(Dynamic Shapes)** 是延迟指定部分或全部张量维度直到运行时的能力。动态形状可以通过 C++ 和 Python 接口使用。
 以下部分提供了更详细的信息；但是，这里概述了构建具有动态形状的引擎的步骤：
 
