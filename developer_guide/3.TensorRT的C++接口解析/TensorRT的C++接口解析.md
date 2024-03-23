@@ -1,7 +1,5 @@
 # 3.TensorRT的C++接口解析
 
-[点此链接加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
 本章说明 C++ API 的基本用法，假设您从 ONNX 模型开始。 [sampleOnnxMNIST](https://github.com/NVIDIA/TensorRT/tree/main/samples/sampleOnnxMNIST)更详细地说明了这个用例。
 
 C++ API 可以通过头文件`NvInfer.h`访问，并且位于`nvinfer1`命名空间中。例如，一个简单的应用程序可能以：
