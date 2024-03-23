@@ -1,10 +1,5 @@
 # TensorRT和DLA(Deep Learning Accelerator)
 
-
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
 NVIDIA DLA（Deep Learning Accelerator--深度学习加速器）是一款针对深度学习操作的固定功能加速器引擎。 DLA 旨在对卷积神经网络进行全硬件加速。 DLA支持卷积、反卷积、全连接、激活、池化、批量归一化等各种层，DLA不支持Explicit Quantization 。
 
 有关 TensorRT 层中 DLA 支持的更多信息，请参阅[DLA 支持的层](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#dla_layers)。 `trtexec`工具具有在 DLA 上运行网络的附加参数，请参阅[trtexec](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#trtexec) 。
