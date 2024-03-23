@@ -1,10 +1,5 @@
 # TensorRT的最佳性能实践
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
-
 ## 13.1. Measuring Performance
 
 在开始使用 TensorRT 进行任何优化工作之前，必须确定应该测量什么。没有衡量标准，就不可能取得可靠的进展或衡量是否取得了成功
