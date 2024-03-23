@@ -1,9 +1,5 @@
 # TensorRT的Python接口解析
 
-![](rdp.jpg)
-
-[点此链接加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
 本章说明 Python API 的基本用法，假设您从 ONNX 模型开始。 [onnx_resnet50.py](https://github.com/NVIDIA/TensorRT/blob/main/samples/python/introductory_parser_samples/onnx_resnet50.py)示例更详细地说明了这个用例。
 
 Python API 可以通过tensorrt模块访问：
