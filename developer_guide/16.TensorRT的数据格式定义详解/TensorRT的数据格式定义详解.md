@@ -1,8 +1,5 @@
 # TensorRT的数据格式定义详解
 
-![](rdp.jpg)
-
-[点击此处加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
 
 TensorRT 支持不同的数据格式。有两个方面需要考虑：数据类型和布局。
 
