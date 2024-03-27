@@ -1,10 +1,4 @@
-
-## onnx模型推理结果正确，但tensorRT量化后的推理结果不正确，大概原因有哪些？
-可能原因有：   
-a. calibrator的算法选择不对；   
-b. calibration过程使用的数据不够；    
-c. 对网络敏感层进行了量化；   
-d. 对某些算子选择了不适合OP特性的scale计算。  
+https://forums.developer.nvidia.com/c/ai-data-science/deep-learning/tensorrt/92    
 
 ## 采用tensorRT PTQ量化时，若用不同batchsize校正出来模型精度不一致，这个现象是否正常？    
 正常的    
