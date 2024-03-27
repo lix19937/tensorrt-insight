@@ -1,25 +1,5 @@
 https://forums.developer.nvidia.com/c/ai-data-science/deep-learning/tensorrt/92    
 
-## 采用tensorRT PTQ量化时，若用不同batchsize校正出来模型精度不一致，这个现象是否正常？    
-正常的    
-因为calibration（校正）是以tensor为单位计算的。对于每次计算，如果histogram的最大值需要更新，那么PTQ会把histogram的range进行翻倍。不考虑内存不足的问题，推荐使用更大的batch_size，这样每个batch中包含样本更加丰富，校准后的精度会更好。但具体设置多大，需要通过实验确定（从大的batch size开始测试。一点一点往下减）。需要注意的是batch_size越大，校准时间越长。
-
-## 模型量化到INT8后，推理时间反而比FP16慢，这正常吗？   
-正常的     
-这可能是tensorrt中内核auto tuning机制作怪（会把所有的优化策略都运行一遍，结果发现量化后涉及一堆其他的操作，反而效率不高，索性使用cuda core，而非tensorrt core）。当网络参数和模型架构设计不合理时，trt会添加额外的处理，导致INT8推理时间比FP16长。我们可以通过trt-engine explorer工具可视化engine模型看到。
-
-## 如何创建针对多种不同批次大小进行优化的引擎？   
-虽然 TensorRT 允许针对给定批量大小优化的引擎以任何较小的大小运行，但这些较小大小的性能无法得到很好的优化。要针对多个不同的批量大小进行优化，请在分配给OptProfilerSelector::kOPT的维度上创建优化配置文件。
-
-## 引擎和校准表是否可以跨TensorRT版本移植？   
-不会。内部实现和格式会不断优化，并且可以在版本之间更改。因此，不保证引擎和校准表与不同版本的TensorRT二进制兼容。使用新版本的TensorRT时，应用程序必须构建新引擎和 INT8 校准表。
-
-## 如何选择最佳的工作空间大小？     
-一些 TensorRT 算法需要 GPU 上的额外工作空间。方法IBuilderConfig::setMemoryPoolLimit()控制可以分配的最大工作空间量，并防止构建器考虑需要更多工作空间的算法。在运行时，创建IExecutionContext时会自动分配空间。即使在IBuilderConfig::setMemoryPoolLimit()中设置的数量要高得多，分配的数量也不会超过所需数量。因此，应用程序应该允许 TensorRT 构建器尽可能多的工作空间；在运行时，TensorRT 分配的数量不超过这个，通常更少。
-
-## 如何在多个 GPU 上使用TensorRT ？    
-每个ICudaEngine对象在实例化时都绑定到特定的 GPU，无论是由构建器还是在反序列化时。要选择 GPU，请在调用构建器或反序列化引擎之前使用cudaSetDevice() 。每个IExecutionContext都绑定到与创建它的引擎相同的 GPU。调用execute()或enqueue()时，如有必要，请通过调用cudaSetDevice()确保线程与正确的设备相关联。
-
 ## 如何从库文件中获取TensorRT的版本？     
 符号表中有一个名为tensorrt_version_#_#_#_#的符号，其中包含TensorRT版本号。在 Linux 上读取此符号的一种可能方法是使用nm命令，如下例所示：
 ```
