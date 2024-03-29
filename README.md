@@ -7,7 +7,7 @@
 |[overview](./overview.md)       |概述  |   |            
 |[layout](./layout/readme.md)    |内存布局|      |            
 |[compute_graph_optimize](./compute_graph_optimize/readme.md)    |计算图优化|   |             
-|[dynamic shape](./dynamic_shape/readme.md)  |动态shape |     |         
+|[dynamic_shape](./dynamic_shape/readme.md)  |动态shape |     |         
 |[plugin](./plugin/readme.md)    |插件  |      |           
 |[calibration](./calibration/readme.md)  |标定 |    |                
 |[asp](./asp/readme.md)          |稀疏 |        |         
