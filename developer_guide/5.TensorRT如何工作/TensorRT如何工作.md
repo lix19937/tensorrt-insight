@@ -49,7 +49,8 @@ TensorRT 使用大量设备内存，即 GPU 可直接访问的内存，而不是
 默认情况下，TensorRT 直接从 CUDA 分配设备内存。但是，您可以将 TensorRT 的`IGpuAllocator` （ [C++](https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_gpu_allocator.html) 、 [Python](https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/infer/Core/GpuAllocator.html) ）接口的实现附加到构建器或运行时，并自行管理设备内存。如果您的应用程序希望控制所有 GPU 内存并子分配给 TensorRT，而不是让 TensorRT 直接从 CUDA 分配，这将非常有用。
 
 TensorRT 的依赖项（ [cuDNN](https://developer.nvidia.com/cudnn)和[cuBLAS](https://developer.nvidia.com/cublas) ）会占用大量设备内存。 TensorRT 允许您通过构建器配置中的`TacticSources` （ [C++](https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/namespacenvinfer1.html#a999ab7be02c9acfec0b2c9cc3673abb4) 、 [Python](https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/infer/Core/BuilderConfig.html?highlight=tactic_sources#tensorrt.IBuilderConfig.set_tactic_sources) ）属性控制这些库是否用于推理。请注意，某些层实现需要这些库，因此当它们被排除时，网络可能无法编译。
-
+> The cudnnContext and cublasContext handles are passed to the plugins using IPluginV2Ext::attachToContext() if the appropriate tactic sources are set.    
+ 
 CUDA 基础设施和 TensorRT 的设备代码也会消耗设备内存。内存量因平台、设备和 TensorRT 版本而异。您可以使用`cudaGetMemInfo`来确定正在使用的设备内存总量。
 
 **注意：由于 CUDA 无法控制统一内存设备上的内存，因此`cudaGetMemInfo`返回的结果在这些平台上可能不准确。**
