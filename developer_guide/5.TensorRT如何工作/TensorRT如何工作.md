@@ -21,7 +21,8 @@ TensorRT 的 API 是基于类的，其中一些类充当其他类的工厂。对
 TensorRT 使用大量设备内存，即 GPU 可直接访问的内存，而不是连接到 CPU 的主机内存。由于设备内存通常是一种受限资源，因此了解 TensorRT 如何使用它很重要。
 
 ### 5.3.1. The Build Phase
-在构建期间，TensorRT 为时序层实现分配设备内存。一些实现可能会消耗大量临时内存，尤其是在使用大张量的情况下。您可以通过构建器的`maxWorkspace`属性控制最大临时内存量。这默认为设备全局内存的完整大小，但可以在必要时进行限制。如果构建器发现由于工作空间不足而无法运行的适用内核，它将发出一条日志消息来指示这一点。
+在构建期间，TensorRT 为时序层实现分配设备内存。一些实现可能会消耗大量临时内存，尤其是在使用大张量的情况下。您可以通过构建器的`maxWorkspace`属性控制最大临时内存量。这默认为设备全局内存的完整大小，但可以在必要时进行限制。如果构建器发现由于工作空间不足而无法运行的适用内核，它将发出一条日志消息来指示这一点。   
+> You can control the maximum amount of temporary memory through the `memory pool limits` of the `builder config`. `The workspace size defaults to the full size of device global memory` but can be restricted when necessary.   
 
 然而，即使工作空间相对较小，计时也需要为输入、输出和权重创建缓冲区。 TensorRT 对操作系统因此类分配而返回内存不足是稳健的，但在某些平台上，操作系统可能会成功提供内存，随后内存不足killer进程观察到系统内存不足，并终止 TensorRT .如果发生这种情况，请在重试之前尽可能多地释放系统内存。
 
