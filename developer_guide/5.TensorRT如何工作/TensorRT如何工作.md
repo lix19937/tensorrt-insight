@@ -55,8 +55,13 @@ CUDA 基础设施和 TensorRT 的设备代码也会消耗设备内存。内存�
 
 **注意：由于 CUDA 无法控制统一内存设备上的内存，因此`cudaGetMemInfo`返回的结果在这些平台上可能不准确。**
 
-### CUDA Lazy Loading    
+### 5.3.3. CUDA Lazy Loading     
 CUDA延迟加载是一种CUDA功能，可以显著减少TensorRT的峰值GPU和主机内存使用，并加快TensorRT初始化，而性能影响可以忽略不计（<1%）。内存使用和初始化时间的节省取决于模型、软件堆栈、GPU平台等。它通过设置环境变量`CUDA_MODULE_LOADING=LAZY`来启用。有关更多信息，请参阅NVIDIA CUDA文档。      
+
+### 5.3.4. 二级持久缓存管理   
+NVIDIA Ampere和更高版本的体系结构支持二级缓存持久性，该功能允许在选择一条缓存线进行逐出时对二级缓存线进行优先级排序以进行保留。 
+TensorRT可以使用它在缓存中保留激活，减少DRAM流量和功耗。    
+缓存分配是按执行上下文进行的，使用上下文的`setPersistentCacheLimit`方法启用。所有上下文（和使用此功能的其他组件）之间的总持久缓存不应超过`cudaDeviceProp::persistengL2CacheMaxSize`。有关更多信息，请参阅NVIDIA CUDA最佳实践指南。
 
 ## 5.4. Threading
 一般来说，TensorRT 对象不是线程安全的。预期的运行时并发模型是不同的线程将在不同的执行上下文上操作。上下文包含执行期间的网络状态（激活值等），因此在不同线程中同时使用上下文会导致未定义的行为。
