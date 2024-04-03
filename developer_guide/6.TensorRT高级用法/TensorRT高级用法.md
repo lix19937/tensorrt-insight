@@ -1,5 +1,15 @@
 # 6.TensorRT 进阶用法
 
+## 6.1.  版本兼容性  
+
+### 6.1.1. 手动加载运行时  
+
+### 6.1.2. 从存储加载    
+
+### 6.1.3. 与onnx parser 关联的版本兼容性    
+
+## 6.2. 硬件兼容性    
+
 ## 6.1. The Timing Cache
 
 为了减少构建器时间，TensorRT 创建了一个层时序缓存，以在构建器阶段保存层分析信息。它包含的信息特定于目标构建器设备、CUDA 和 TensorRT 版本，以及可以更改层实现的 `BuilderConfig` 参数，例如`BuilderFlag::kTF32或BuilderFlag::kREFIT` 。
