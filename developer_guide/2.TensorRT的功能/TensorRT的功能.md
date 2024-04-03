@@ -103,7 +103,7 @@ TensorRT 支持 NVIDIA 的深度学习加速器 (DLA)，这是许多 NVIDIA SoC 
 
 请参阅[Refitting An Engine](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#refitting-engine-c) 部分。
 
-## 2.10. trtexec
+## 2.10. trtexec tool   
 示例目录中包含一个名为`trtexec`的命令行包装工具。 `trtexec`是一种无需开发自己的应用程序即可快速使用 TensorRT 的工具。 trtexec工具有三个主要用途：
 * 在随机或用户提供的输入数据上对网络进行基准测试。
 * 从模型生成序列化引擎。
@@ -111,8 +111,7 @@ TensorRT 支持 NVIDIA 的深度学习加速器 (DLA)，这是许多 NVIDIA SoC 
 
 请参阅[trtexec](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#trtexec)部分。
 
-2.11. Polygraphy
-
+## 2.11. Polygraphy     
 Polygraphy 是一个工具包，旨在帮助在 TensorRT 和其他框架中运行和调试深度学习模型。它包括一个Python API和一个使用此 API 构建的命令行界面 (CLI) 。
 
 除此之外，使用 Polygraphy，您可以：
