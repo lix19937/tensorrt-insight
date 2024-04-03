@@ -53,7 +53,7 @@
 
         attention_weights = self.attention_weights(query).view(bs, 1, num_query, self.num_cams, self.num_points, self.num_levels)
 
-        # reference_points_3d 与 reference_points 关系   
+        # reference_points_3d 与 reference_points 关系  ？  其实是一样的    
         reference_points_3d, output, mask = feature_sampling_onnx(value, reference_points, self.pc_range, kwargs['img_shape'], kwargs['lidar2img'])
 
         attention_weights = attention_weights.sigmoid() * mask
