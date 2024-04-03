@@ -18,8 +18,8 @@
         """Forward Function of SVDetCrossAtten.
         Args:
             query (Tensor): Query of Transformer with shape        `(num_query, bs, embed_dims)`.
-            key (Tensor): The key tensor with shape                `(num_key, bs, embed_dims)`.
-            value (Tensor): The value tensor with shape            `(num_key, bs, embed_dims)`. (B, N, C, H, W)
+            key (Tensor): The key tensor with shape                `(num_key,   bs, embed_dims)`.
+            value (Tensor): The value tensor with shape            `(num_value, bs, embed_dims)`. (B, N, C, H, W)
             residual (Tensor): The tensor used for addition, with the same shape as `x`. Default None. If None, `x` will be used.
             query_pos (Tensor): The positional encoding for `query`.    Default: None.
             key_pos (Tensor): The positional encoding for `key`.        Default: None.
