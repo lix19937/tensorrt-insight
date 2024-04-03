@@ -88,7 +88,19 @@ TensorRT提供了多个运行库来满足各种用例。运行TensorRT引擎的C
 + 调度运行时（libnvinfer_dispatch.so/.dll）是一个小型填充程序库，可以加载`精简运行时`，并将调用重定向到该库。调度运行时能够加载`精简运行时`的旧版本，并与构建器的适当配置一起，可用于提供新版本的TensorRT和旧plan文件之间的兼容性。使用 `调度运行时` 与手动加载 `精简运行时` 几乎相同，但它检查API是否由加载的`精简运行时`实现，并在可能的情况下执行一些参数映射以支持API更改。    
 
 `精简运行时`包含的运算符实现比`默认运行时`更少。由于TensorRT在构建时选择运算符实现，因此需要通过启用版本兼容性来指定应为精简运行时构建引擎。它可能比`默认运行时`构建的引擎稍慢。     
-精简运行时包含调度运行时的所有功能，默认运行时包含精简运行时的全部功能。
+精简运行时包含调度运行时的所有功能，默认运行时包含精简运行时的全部功能。  
+
+TensorRT provides Python packages corresponding to each of the above libraries:
+### tensorrt     
+A Python package. It is the Python interface for the default runtime.  
+
+### tensorrt_lean   
+A Python package. It is the Python interface for the lean runtime. 
+
+### tensorrt_dispatch   
+A Python package. It is the Python interface for the dispatch runtime.   
+
+Python applications that run TensorRT engines should import one of the above packages to load the appropriate library for their use case.
 
 ## 5.7. 兼容性        
 默认情况下，只有在与用于序列化引擎的相同OS、CPU架构、GPU模型和TensorRT版本一起使用时，才能保证序列化引擎正常工作。请参阅版本兼容性和硬件兼容性部分，了解如何放宽对TensorRT版本和GPU型号的限制。   
