@@ -8,7 +8,10 @@ TensorRT 的 API 具有 C++ 和 Python 的语言绑定，具有几乎相同的�
 **注意： Python API 并非适用于所有平台。有关详细信息，请参阅[NVIDIA TensorRT 支持矩阵](https://docs.nvidia.com/deeplearning/sdk/tensorrt-support-matrix/index.html)。**
 
 
-## 2.2. The Programming Model
+## 2.2. The Programming Model   
+TensorRT分两个阶段运作。在通常离线执行的第一阶段，您向TensorRT提供模型定义，然后TensorRT针对目标GPU对其进行优化。在第二阶段，您将使用优化的模型来运行推理。   
+
+### 2.2.1. The Build Phase   
 TensorRT 构建阶段的最高级别接口是Builder （ C++ 、 Python ）。构建器负责优化模型并生成Engine 。
 
 为了构建引擎，您需要：
