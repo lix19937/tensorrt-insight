@@ -38,8 +38,6 @@ A2. [TensorRT的命令行程序](A2.TensorRT的命令行程序/TensorRT的命令
 A3. [TensorRT中的术语](A3.TensorRT中的术语/TensorRT中的术语.md)     
 A4. [致谢](A4.致谢/致谢.md)    
 
-[加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program)
-
-另外，本文档参考了 nv 何琨老师解读。    
+[加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program) 
 
 
