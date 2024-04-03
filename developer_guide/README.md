@@ -19,8 +19,8 @@ NVIDIA TensorRT的中文版开发手册。
 
 1. [简介](1.简介/1.简介.md)
 2. [TensorRT的功能](2.TensorRT的功能/TensorRT的功能.md)
-3. [TensorRT的C++接口解析](3.TensorRT的C++接口解析/TensorRT的C++接口解析.md)
-4. [TensorRT的Python接口解析](4.TensorRT的Python接口解析/TensorRT的Python接口解析.md)
+3. [TensorRT的C++接口](3.TensorRT的C++接口/TensorRT的C++接口.md)
+4. [TensorRT的Python接口](4.TensorRT的Python接口/TensorRT的Python接口.md)
 5. [TensorRT如何工作](5.TensorRT如何工作/TensorRT如何工作.md)
 6. [TensorRT高级用法](6.TensorRT高级用法/TensorRT高级用法.md)
 7. [TensorRT中的INT8](7.TensorRT中的INT8/TensorRT中的INT8.md)
