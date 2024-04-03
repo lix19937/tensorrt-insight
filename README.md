@@ -1,7 +1,4 @@
 
-[Developer Guide lix19937个人中文版本](./developer_guide/README.md)   
-
-
 |**topic**                       | **主题**| **备注**   |      
 |    ---                         | --- |     --- |          
 |[overview](./overview.md)       |概述  |   |            
@@ -17,7 +14,7 @@
 |[inferflow](./inferflow/readme.md) |模型调度|      |         
 |[mps](./device-benchmark-mps/readme.md)| MPS|  |    
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
-|[faqs](./faqs.md)                  |快速问答|      |           
+|[developer_guid](./developer_guide/README.md)                  |开发者指导|      |           
 
     
 ## Ref    
