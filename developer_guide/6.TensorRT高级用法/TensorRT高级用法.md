@@ -10,6 +10,8 @@
 
 ## 6.2. 硬件兼容性    
 
+## 6.3. 兼容性检查  
+
 ## 6.1. The Timing Cache
 
 为了减少构建器时间，TensorRT 创建了一个层时序缓存，以在构建器阶段保存层分析信息。它包含的信息特定于目标构建器设备、CUDA 和 TensorRT 版本，以及可以更改层实现的 `BuilderConfig` 参数，例如`BuilderFlag::kTF32或BuilderFlag::kREFIT` 。
@@ -38,7 +40,7 @@ IHostMemory* serializedCache = cache->serialize();
 
 缓存与算法选择不兼容（请参阅[算法选择和可重现构建部分](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#algorithm-select)）。可以通过设置`BuilderFlag`来禁用它。
 
-## 6.2. Refitting An Engine
+## 6.4. Refitting An Engine
 
 TensorRT 可以用新的权重改装引擎而无需重建它，但是，在构建时必须指定这样做的选项：
 
@@ -108,7 +110,7 @@ delete refitter;
 
 要查看引擎中的所有可改装权重，请使用`refitter->getAll(...)`或`refitter->getAllWeights(...)` ；类似于上面使用`getMissing`和`getMissingWeights`的方式。
 
-## 6.3. Algorithm Selection and Reproducible Builds
+## 6.5. Algorithm Selection and Reproducible Builds
 
 TensorRT 优化器的默认行为是选择全局最小化引擎执行时间的算法。它通过定时每个实现来做到这一点，有时，当实现具有相似的时间时，系统噪声可能会决定在构建器的任何特定运行中将选择哪个。不同的实现通常会使用不同的浮点值累加顺序，两种实现可能使用不同的算法，甚至以不同的精度运行。因此，构建器的不同调用通常不会导致引擎返回位相同的结果。
 
@@ -133,13 +135,13 @@ TensorRT 优化器的默认行为是选择全局最小化引擎执行时间的�
 
 * `reportAlgorithms`不提供提供给`selectAlgorithms`的`IAlgorithm`的时间和工作空间信息。
 
-## 6.4. Creating A Network Definition From Scratch
+## 6.6. Creating A Network Definition From Scratch
 
 除了使用解析器，您还可以通过网络定义 API 将网络直接定义到 TensorRT。此场景假设每层权重已在主机内存中准备好在网络创建期间传递给 TensorRT。
 
 以下示例创建了一个简单的网络，其中包含 `Input`、`Convolution`、`Pooling`、 `MatrixMultiply`、`Shuffle` 、`Activation` 和 `Softmax` 层。
 
-## 6.4.1. C++
+## 6.6.1. C++
 
 本节对应的代码可以在`sampleMNISTAPI`中找到。在此示例中，权重被加载到以下代码中使用的`weightMap`数据结构中。
 
@@ -212,8 +214,7 @@ network->markOutput(*prob->getOutput(0));
 ```
 代表 MNIST 模型的网络现已完全构建。请参阅[构建引擎](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#build_engine_c)和[反序列化文件](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#perform_inference_c)部分，了解如何构建引擎并使用此网络运行推理。
 
-
-### 6.4.2. Python
+### 6.6.2. Python
 此部分对应的代码可以在[network_api_pytorch_mnist](https://github.com/NVIDIA/TensorRT/tree/main/samples/python/network_api_pytorch_mnist)中找到。
 
 这个例子使用一个帮助类来保存一些关于模型的元数据：
@@ -302,9 +303,9 @@ bias_add = net.add_elementwise(mm.get_output(0), bias_const.get_output(0), trt.E
 代表 MNIST 模型的网络现已完全构建。请参阅[构建引擎](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#build_engine_python)和[执行推理](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#perform_inference_python)部分，了解如何构建引擎并使用此网络运行推理。
 
 
-## 6.5. Reduced Precision
+## 6.7. Reduced Precision
 
-### 6.5.1. Network-level Control of Precision
+### 6.7.1. Network-level Control of Precision
 
 默认情况下，TensorRT 以 32 位精度工作，但也可以使用 16 位浮点和 8 位量化浮点执行操作。使用较低的精度需要更少的内存并实现更快的计算。
 
@@ -338,7 +339,7 @@ config.set_flag(trt.BuilderFlag.FP16)
 
 虽然使用 `FP16` 和 `TF32` 精度相对简单，但使用 `INT8` 时会有额外的复杂性。有关详细信息，请参阅[使用 INT8](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#working-with-int8)章节。
 
-### 6.5.2. Layer-level Control of Precision
+### 6.7.2. Layer-level Control of Precision
 `builder-flags` 提供了允许的、粗粒度的控制。然而，有时网络的一部分需要更高的动态范围或对数值精度敏感。您可以限制每层的输入和输出类型：
 **C++**
 ```C++
@@ -366,7 +367,6 @@ layer.set_output_type(out_tensor_index, trt.fp16)
 设置精度约束向 TensorRT 提示它应该选择一个输入和输出与首选类型匹配的层实现，如果前一层的输出和下一层的输入与请求的类型不匹配，则插入重新格式化操作。请注意，只有通过构建器配置中的标志启用了这些类型，TensorRT 才能选择具有这些类型的实现。
 
 默认情况下，TensorRT 只有在产生更高性能的网络时才会选择这样的实现。如果另一个实现更快，TensorRT 会使用它并发出警告。您可以通过首选构建器配置中的类型约束来覆盖此行为。
-
 
 *C++*
 ```c++
@@ -397,13 +397,12 @@ config.set_flag(trt.BuilderFlag.OBEY_PRECISION_CONSTRAINTS);
 
 `layer->getOutput(i)->setType()`和`layer->setOutputType()`之间存在区别——前者是一种可选类型，它限制了 TensorRT 将为层选择的实现。后者是强制性的（默认为 FP32）并指定网络输出的类型。如果它们不同，TensorRT 将插入一个强制转换以确保两个规范都得到尊重。因此，如果您为产生网络输出的层调用`setOutputType()` ，通常还应该将相应的网络输出配置为具有相同的类型。
 
-### 6.5.3. Enabling TF32 Inference Using C++
+### 6.7.3. Enabling TF32 Inference Using C++
 TensorRT 默认允许使用 TF32 Tensor Cores。在计算内积时，例如在卷积或矩阵乘法期间，TF32 执行执行以下操作：
 
 * 将 FP32 被乘数舍入到 FP16 精度，但保持 FP32 动态范围。
 * 计算四舍五入的被乘数的精确乘积。
 * 将乘积累加到 FP32 总和中。
-
 
 TF32 Tensor Cores 可以使用 FP32 加速网络，通常不会损失准确性。对于需要高动态范围的权重或激活的模型，它比 FP16 更强大。
 
@@ -423,14 +422,13 @@ TF32 Tensor Cores 可以使用 FP32 加速网络，通常不会损失准确性�
 
 #### 注意：除非您的应用程序需要 TF32 提供的更高动态范围，否则 `FP16` 将是更好的解决方案，因为它几乎总能产生更快的性能。
 
-## 6.6. I/O Formats
+## 6.8. I/O Formats
 TensorRT 使用许多不同的数据格式优化网络。为了允许在 TensorRT 和客户端应用程序之间有效传递数据，这些底层数据格式在网络 I/O 边界处公开，即用于标记为网络输入或输出的张量，以及在将数据传入和传出插件时。对于其他张量，TensorRT 选择导致最快整体执行的格式，并可能插入重新格式化以提高性能。
 
 您可以通过分析可用的 I/O 格式以及对 TensorRT 之前和之后的操作最有效的格式来组装最佳数据管道。
 
 要指定 I/O 格式，请以位掩码的形式指定一种或多种格式。
 以下示例将输入张量格式设置为`TensorFormat::kHWC8` 。请注意，此格式仅适用于`DataType::kHALF` ，因此必须相应地设置数据类型。
-
 
 **C++**
 ```C++
@@ -586,7 +584,7 @@ TensorRT 还会检查以下属性，如果它们不匹配，则会发出警告�
 在大型设备上构建小型模型时，TensorRT 可能会选择效率较低但可在可用资源上更好地扩展的内核。因此，如果优化单个TensorRT 引擎以在同一架构中的多个设备上使用，最好的方法是在最小的设备上运行构建器。或者，您可以在计算资源有限的大型设备上构建引擎（请参阅[限制计算资源](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#limit-compute-resources)部分）。
 
 
-## 6.8. Explicit vs Implicit Batch
+## 6.9. Explicit vs Implicit Batch
 TensorRT 支持两种指定网络的模式：显式批处理和隐式批处理。
 
 在隐式批处理模式下，每个张量都有一个隐式批处理维度，所有其他维度必须具有恒定长度。此模式由 TensoRT 的早期版本使用，现在已弃用，但继续支持以实现向后兼容性。
@@ -619,7 +617,7 @@ builder.create_network(1 << int(trt.NetworkDefinitionCreationFlag.EXPLICIT_BATCH
 ```
 对于隐式批处理，省略参数或传递 0。
 
-## 6.9. Sparsity
+## 6.10. Sparsity
 NVIDIA 安培架构 GPU 支持结构化稀疏性。为了利用该特性获得更高的推理性能，卷积核权重和全连接权重必须满足以下要求：
 
 对于每个输出通道和内核权重中的每个空间像素，每 4 个输入通道必须至少有 2 个零。换句话说，假设内核权重的形状为[K, C, R, S]和C % 4 == 0 ，那么要求是：
@@ -653,7 +651,7 @@ for k in K:
 要使用`trtexec`测量结构化稀疏性的推理性能，请参阅[trtexec](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#trtexec)部分。
 
 
-## 6.10. Empty Tensors
+## 6.11. Empty Tensors
 
 TensorRT 支持空张量。如果张量具有一个或多个长度为零的维度，则它是一个空张量。零长度尺寸通常不会得到特殊处理。如果一条规则适用于长度为 L 的任意正值 L 的维度，它通常也适用于 L=0。
 
@@ -665,7 +663,7 @@ TensorRT 支持空张量。如果张量具有一个或多个长度为零的维�
 
 有关空张量的任何每层特殊处理，请参阅[TensorRT 层](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#layers)。
 
-## 6.11. Reusing Input Buffers
+## 6.12. Reusing Input Buffers
 TensorRT 还包括一个可选的 CUDA 事件作为`enqueue`方法的参数，一旦输入缓冲区可以重用，就会发出信号。这允许应用程序在完成当前推理的同时立即开始重新填充输入缓冲区以进行下一次推理。例如：
 
 **C++**
@@ -676,7 +674,7 @@ TensorRT 还包括一个可选的 CUDA 事件作为`enqueue`方法的参数，�
 
 **context.execute_async_v2(buffers, stream_ptr, inputReady)**
 
-## 6.12. Engine Inspector
+## 6.13. Engine Inspector
 
 TensorRT 提供`IEngineInspector` API 来检查 TensorRT 引擎内部的信息。从反序列化的引擎中调用`createEngineInspector()`创建引擎`inspector`，然后调用`getLayerInformation()`或`getEngineInformation() inspector` API分别获取引擎中特定层或整个引擎的信息。可以打印出给定引擎的第一层信息，以及引擎的整体信息，如下：
 
@@ -751,7 +749,7 @@ trtexec工具提供了`--profilingVerbosity` 、 `--dumpLayerInfo`和`--exportLa
 
 目前，引擎信息中只包含绑定信息和层信息，包括中间张量的维度、精度、格式、策略指标、层类型和层参数。在未来的 TensorRT 版本中，更多信息可能会作为输出 JSON 对象中的新键添加到引擎检查器输出中。还将提供有关检查器输出中的键和字段的更多规范。
 
-
+## 6.14. 预览特性   
 
 
 
