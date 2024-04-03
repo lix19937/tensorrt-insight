@@ -14,7 +14,7 @@
 |[inferflow](./inferflow/readme.md) |模型调度|      |         
 |[mps](./device-benchmark-mps/readme.md)| MPS|  |    
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
-|[developer_guid](./developer_guide/README.md)                  |开发者指导|      |           
+|[developer_guide](./developer_guide/README.md)                  |开发者指导|      |           
 
     
 ## Ref    
