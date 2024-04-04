@@ -27,7 +27,7 @@ NVIDIA TensorRT的中文版开发手册。
 8. [TensorRT中的动态形状](8.TensorRT中的动态形状/TensorRT中的动态形状.md)
 9. [TensorRT中的自定义层](9.TensorRT中的自定义层/TensorRT中的自定义层.md)
 10. [TensorRT中的循环](10_TensorRT中的循环/TensorRT中的循环.md)    
-11. [TensorRT之条件控制](11.TensorRT之使用条件/TensorRT之条件控制.md)    
+11. [TensorRT之条件控制](11.TensorRT之条件控制/TensorRT之条件控制.md)    
 12. [TensorRT和DLA(Deep Learning Accelerator)](12.TensorRT和DLA(Deep_Learning_Accelerator)/TensorRT和DLA(Deep_Learning_Accelerator).md)
 13. [TensorRT的最佳性能实践](13.TensorRT的最佳性能实践/TensorRT的最佳性能实践.md)      
 14. [TensorRT中的常见问题](14.TensorRT中的常见问题/TensorRT中的常见问题.md)     
