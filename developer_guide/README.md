@@ -31,13 +31,15 @@ NVIDIA TensorRT的中文版开发手册。
 12. [TensorRT和DLA(Deep Learning Accelerator)](12.TensorRT和DLA(Deep_Learning_Accelerator)/TensorRT和DLA(Deep_Learning_Accelerator).md)
 13. [TensorRT的最佳性能实践](13.TensorRT的最佳性能实践/TensorRT的最佳性能实践.md)      
 14. [TensorRT中的常见问题](14.TensorRT中的常见问题/TensorRT中的常见问题.md)     
-15. [TensorRT网络层详解](15.TensorRT网络层详解/15.TensorRT网络层详解.md)
+15. [TensorRT网络层](15.TensorRT网络层/TensorRT网络层.md)
 
-A1. [TensorRT的数据格式定义详解](A1.TensorRT的数据格式定义详解/TensorRT的数据格式定义详解.md)     
+A1. [TensorRT的数据格式定义](A1.TensorRT的数据格式定义/TensorRT的数据格式定义.md)     
 A2. [TensorRT的命令行程序](A2.TensorRT的命令行程序/TensorRT的命令行程序.md)     
 A3. [TensorRT中的术语](A3.TensorRT中的术语/TensorRT中的术语.md)     
 A4. [致谢](A4.致谢/致谢.md)    
 
+
+[论坛](https://forums.developer.nvidia.com/c/ai-data-science/deep-learning/tensorrt/92)     
 [加入NVIDIA开发者计划](https://developer.nvidia.com/zh-cn/developer-program) 
 
 
