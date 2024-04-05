@@ -2,6 +2,8 @@
 
 ![workflow](./workflow.png)      
 ![sv_block_dataflow](./sv_block_dataflow.png)      
+query_pos `num_query, bs, embed_dims`    
+query     `num_query, bs, embed_dims`    
 feat1 `6, 256, h, w`      
 feat2 `6, 256, h//2, w//2`    
 feat3 `6, 256, h//4, w//4`     
