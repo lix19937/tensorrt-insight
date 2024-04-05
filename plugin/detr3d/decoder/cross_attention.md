@@ -1,7 +1,7 @@
 ## 完整的decoder 结构图     
 
-![workflow](./workflow-full.png)      
-![sv_cc](./sv_cc.png)      
+![workflow](./workflow.png)      
+![sv_block_dataflow](./sv_block_dataflow.png)      
 
 ```py
     def forward(self,
