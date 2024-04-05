@@ -88,6 +88,7 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
     reference_points = reference_points.clone()
     reference_points_3d = reference_points.clone()################
 
+    # pc_range=[-51.2, -51.2, -5.0, 51.2, 51.2, 3]
     reference_points[..., 0:1] = reference_points[..., 0:1]*(pc_range[3] - pc_range[0]) + pc_range[0]
     reference_points[..., 1:2] = reference_points[..., 1:2]*(pc_range[4] - pc_range[1]) + pc_range[1]
     reference_points[..., 2:3] = reference_points[..., 2:3]*(pc_range[5] - pc_range[2]) + pc_range[2]
