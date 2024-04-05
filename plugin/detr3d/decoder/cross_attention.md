@@ -79,7 +79,7 @@ feat4 `6, 256, h//8, w//8`
 
 ```py
 # mlvl_feats (1, 6, 256, H, W), (1, 6, 256, H//2, W//2), (1, 6, 256, H//4, W//4), (1, 6, 256, H//8, W//8)
-# reference_points (1, seq_len, 3)
+# reference_points (1, seq_len, 3)  一开始会初始化 参考点   
 # pc_range (1, 6)
 # img_shape ()
 # lidar2img (6, 4, 4)
