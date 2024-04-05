@@ -76,6 +76,12 @@ feat4 `6, 256, h//8, w//8`
 ```
 
 ```py
+# mlvl_feats (1, 6, 256, H, W), (1, 6, 256, H//2, W//2), (1, 6, 256, H//4, W//4), (1, 6, 256, H//8, W//8)
+# reference_points (1, seq_len, 3)
+# pc_range (1, 6)
+# img_shape ()
+# lidar2img (6, 4, 4)
+
 def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lidar2img):
     lidar2img = lidar2img.type_as(mlvl_feats[0])
     # lidar2img = reference_points.new_tensor(lidar2img) # (B, N, 4, 4)
@@ -84,8 +90,9 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
     reference_points[..., 0:1] = reference_points[..., 0:1]*(pc_range[3] - pc_range[0]) + pc_range[0]
     reference_points[..., 1:2] = reference_points[..., 1:2]*(pc_range[4] - pc_range[1]) + pc_range[1]
     reference_points[..., 2:3] = reference_points[..., 2:3]*(pc_range[5] - pc_range[2]) + pc_range[2]
-    # reference_points (B, num_queries, 4)
+    # after follow cat, reference_points (B, num_queries, 4)
     reference_points = torch.cat((reference_points, torch.ones_like(reference_points[..., :1])), -1)
+
     B, num_query = reference_points.size()[:2]
     num_cam = lidar2img.size(1)
     reference_points = reference_points.view(B, 1, num_query, 4).repeat(1, num_cam, 1, 1).unsqueeze(-1)
@@ -108,7 +115,8 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
                                                 reference_points_cam[..., 0:2]/torch.clamp(reference_points_cam[..., 2:3],min=0.01),
                                                 mask.new_tensor(torch.ones_like(reference_points_cam[..., 0:2]))*(-1.)
                                                 ),
-                                            min=-1., max=2.)
+                                            min=-1.,
+                                            max=2.)
 
     reference_points_cam = (reference_points_cam - 0.5) * 2
     mask = (mask & (reference_points_cam[..., 0:1] > -1.0) 
