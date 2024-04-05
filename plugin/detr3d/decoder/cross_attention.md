@@ -39,7 +39,7 @@ feat4 `6, 256, h//8, w//8`
              Tensor: forwarded results with shape [num_query, bs, embed_dims].
         """
 
-        if key is None: # 这里 key 为空  
+        if key is None: # 这里 key 为空， 在ca 中没有用到    
             key = query
         if value is None: # 这里 value 有内容， 是fpn的特征图   
             value = key
