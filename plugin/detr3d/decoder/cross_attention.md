@@ -44,7 +44,7 @@ feat4 `6, 256, h//8, w//8`
         if value is None: # 这里 value 有内容， 是fpn的特征图   
             value = key
 
-        if residual is None:
+        if residual is None: # 这里 residual 为空
             inp_residual = query
 
         if query_pos is not None: # 这里 query_pos 有内容
