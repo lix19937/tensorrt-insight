@@ -86,10 +86,12 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
     lidar2img = lidar2img.type_as(mlvl_feats[0])
     # lidar2img = reference_points.new_tensor(lidar2img) # (B, N, 4, 4)
     reference_points = reference_points.clone()
-    reference_points_3d = reference_points.clone()
+    reference_points_3d = reference_points.clone()################
+
     reference_points[..., 0:1] = reference_points[..., 0:1]*(pc_range[3] - pc_range[0]) + pc_range[0]
     reference_points[..., 1:2] = reference_points[..., 1:2]*(pc_range[4] - pc_range[1]) + pc_range[1]
     reference_points[..., 2:3] = reference_points[..., 2:3]*(pc_range[5] - pc_range[2]) + pc_range[2]
+
     # after follow cat, reference_points (B, num_queries, 4)
     reference_points = torch.cat((reference_points, torch.ones_like(reference_points[..., :1])), -1)
 
