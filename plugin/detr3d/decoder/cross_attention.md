@@ -47,7 +47,7 @@ feat4 `6, 256, h//8, w//8`
         if residual is None:
             inp_residual = query
 
-        if query_pos is not None:
+        if query_pos is not None: # 这里 query_pos 有内容
             query = query + query_pos
 
         # change to (bs, num_query, embed_dims)
