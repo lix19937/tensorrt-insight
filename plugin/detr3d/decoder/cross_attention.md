@@ -5,6 +5,7 @@
 feat1 `6, 256, h, w`      
 feat2 `6, 256, h//2, w//2`    
 feat3 `6, 256, h//4, w//4`     
+feat4 `6, 256, h//8, w//8`   
 
 ```py
     def forward(self,
