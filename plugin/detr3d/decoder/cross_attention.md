@@ -2,6 +2,9 @@
 
 ![workflow](./workflow.png)      
 ![sv_block_dataflow](./sv_block_dataflow.png)      
+feat1 `6, 256, h, w`      
+feat2 `6, 256, h//2, w//2`    
+feat3 `6, 256, h//4, w//4`     
 
 ```py
     def forward(self,
