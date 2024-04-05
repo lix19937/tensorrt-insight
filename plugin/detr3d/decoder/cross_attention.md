@@ -114,6 +114,7 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
     # whr version
     img_shapes = lidar2img.new_tensor([img_shape[0][1], img_shape[0][0], 1, 1])[None, None, None, :].repeat(B, num_cam, 1, 1)
     reference_points_cam = torch.matmul(lidar2img, reference_points).squeeze(-1) / img_shapes
+
     mask = reference_points_cam[..., 2:3] > 1e-2
     reference_points_cam = torch.clamp(
         torch.where(
