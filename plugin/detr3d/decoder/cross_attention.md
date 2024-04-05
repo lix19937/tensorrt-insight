@@ -117,8 +117,8 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
                                                 reference_points_cam[..., 0:2]/torch.clamp(reference_points_cam[..., 2:3],min=0.01),
                                                 mask.new_tensor(torch.ones_like(reference_points_cam[..., 0:2]))*(-1.)
                                                 ),
-                                            min=-1.,
-                                            max=2.)
+                                         min=-1.,
+                                         max=2.)
 
     reference_points_cam = (reference_points_cam - 0.5) * 2
     mask = (mask & (reference_points_cam[..., 0:1] > -1.0) 
