@@ -124,8 +124,10 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
                 ),
          min=-1.,
          max=2.)
-
+    ######################################################################################################
+    
     reference_points_cam = (reference_points_cam - 0.5) * 2
+
     mask = (mask & (reference_points_cam[..., 0:1] > -1.0) 
                  & (reference_points_cam[..., 0:1] < 1.0) 
                  & (reference_points_cam[..., 1:2] > -1.0) 
@@ -139,6 +141,7 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
         reference_points_cam_lvl = reference_points_cam.view(B*N, num_query, 1, 2)
         # sampled_feat = F.grid_sample(feat, reference_points_cam_lvl)
         sampled_feat = bilinear_grid_sample(feat, reference_points_cam_lvl)
+
         sampled_feat = sampled_feat.view(B, N, C, num_query, 1).permute(0, 2, 3, 1, 4)
         sampled_feats.append(sampled_feat)
     sampled_feats = torch.stack(sampled_feats, -1)
