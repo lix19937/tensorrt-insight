@@ -23,7 +23,7 @@ feat4 `6, 256, h//8, w//8`
         Args:
             query (Tensor): Query of Transformer with shape        `(num_query, bs, embed_dims)`.
             key (Tensor): The key tensor with shape                `(num_key,   bs, embed_dims)`.
-            value (Tensor): The value tensor with shape            `(num_value, bs, embed_dims)`. (B, N, C, H, W)
+            value (Tensor): The value tensor with shape            ` !!! `. (B, N, C, H, W)
             residual (Tensor): The tensor used for addition, with the same shape as `x`. Default None. If None, `x` will be used.
             query_pos (Tensor): The positional encoding for `query`.    Default: None.
             key_pos (Tensor): The positional encoding for `key`.        Default: None.
@@ -39,9 +39,9 @@ feat4 `6, 256, h//8, w//8`
              Tensor: forwarded results with shape [num_query, bs, embed_dims].
         """
 
-        if key is None:
+        if key is None: # 这里 key 为空  
             key = query
-        if value is None:
+        if value is None: # 这里 value 有内容， 是fpn的特征图   
             value = key
 
         if residual is None:
