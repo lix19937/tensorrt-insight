@@ -57,7 +57,8 @@ feat4 `6, 256, h//8, w//8`
 
         bs, num_query, _ = query.size()
 
-        attention_weights = self.attention_weights(query).view(bs, 1, num_query, self.num_cams, self.num_points, self.num_levels)
+        attention_weights = self.attention_weights(query).view(
+            bs, 1, num_query, self.num_cams, self.num_points, self.num_levels)
 
         # reference_points_3d 与 reference_points 关系 ？  其实是一样的
         # reference_points (bs, seq_len, 3)
