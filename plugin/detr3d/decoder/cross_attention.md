@@ -46,6 +46,12 @@ feat4 `6, 256, h//8, w//8`
         if value is None: # 这里 value 有内容， 是fpn的特征图   
             value = key
 
+        ###################################################
+        # reference_points_3d 与 reference_points 关系？  其实是一样的
+        # reference_points (bs, seq_len, 3) 预设 seq_len 个 3d 参考点 （每一个bbox的中心点）
+        reference_points_3d, output, mask = feature_sampling_onnx(value, reference_points, self.pc_range, kwargs['img_shape'], kwargs['lidar2img'])
+
+        ###################################################
         if residual is None: # 这里 residual 为空
             inp_residual = query
 
@@ -57,13 +63,10 @@ feat4 `6, 256, h//8, w//8`
 
         bs, num_query, _ = query.size()
 
+        # 经过一次全连接    
         attention_weights = self.attention_weights(query).view(
             bs, 1, num_query, self.num_cams, self.num_points, self.num_levels)
-
-        # reference_points_3d 与 reference_points 关系 ？  其实是一样的
-        # reference_points (bs, seq_len, 3)
-        reference_points_3d, output, mask = feature_sampling_onnx(value, reference_points, self.pc_range, kwargs['img_shape'], kwargs['lidar2img'])
-
+        # 
         attention_weights = attention_weights.sigmoid() * mask
 
         output = output * attention_weights
