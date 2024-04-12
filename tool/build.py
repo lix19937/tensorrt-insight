@@ -41,6 +41,7 @@ def build_engine(onnx_file_path, engine_file_path, layerinfo_json):
     config.profiling_verbosity = trt.ProfilingVerbosity.DETAILED
 
     engine = builder.build_engine(network, config)
+    
     print("engine.__len__() = %d" % len(engine))
     print("engine.__sizeof__() = %d" % engine.__sizeof__())
     print("engine.__str__() = %s" % engine.__str__())
