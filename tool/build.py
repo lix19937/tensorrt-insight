@@ -41,12 +41,17 @@ def build_engine(onnx_file_path, engine_file_path, layerinfo_json):
     config.profiling_verbosity = trt.ProfilingVerbosity.DETAILED
 
     engine = builder.build_engine(network, config)
+    print("engine.__len__() = %d" % len(engine))
+    print("engine.__sizeof__() = %d" % engine.__sizeof__())
+    print("engine.__str__() = %s" % engine.__str__())
+
     with open(engine_file_path, "wb") as f:
         f.write(engine.serialize())
     print("Serialized Engine Saved at: ", engine_file_path)
     
     # runtime = trt.Runtime(trt_logger)
     # engine = runtime.deserialize_cuda_engine(serialized_engine)    
+    
     inspector = engine.create_engine_inspector()
     layer_json = json.loads(inspector.get_engine_information(trt.LayerInformationFormat.JSON))
     with open(layerinfo_json, "w") as fj:
