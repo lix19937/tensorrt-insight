@@ -7,6 +7,7 @@ The new approach is shown in detail in the hummingtree/cuda-graph-with-dynamic-p
 
 https://zhuanlan.zhihu.com/p/661451140
 
+> Set the dynamic dimensions of an input binding.
 
 动态shape infer 需要在 enqueue 或 execute 之前 进行实时绑定 (动态**输入**绑定即可)      
 ```cpp
@@ -21,7 +22,7 @@ https://zhuanlan.zhihu.com/p/661451140
 ```
 
 https://docs.nvidia.com/deeplearning/tensorrt/archives/tensorrt-861/api/c_api/classnvinfer1_1_1_i_execution_context.html#a5815b590a2936a3d4066b54f89861a8b  
-
+https://docs.nvidia.com/deeplearning/tensorrt/api/python_api/infer/Core/ExecutionContext.html     
 如**动态batch**        
 
 |输入      |输出|  
