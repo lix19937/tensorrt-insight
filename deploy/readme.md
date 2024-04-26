@@ -2,6 +2,8 @@
 # onnx optimize   
 python -m onnxsim src.onnx  model_sim.onnx
 
+# check two onnx output  
+
 # onnx2plan
 trtexec --onnx=model_sim.onnx --fp16 --verbose --saveEngine=model_sim.plan --useCudaGraph  --dumpProfile --dumpLayerInfo --separateProfileRun | tee log
 
