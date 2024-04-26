@@ -10,4 +10,6 @@ trtexec --onnx=model_sim.onnx --fp16 --verbose --saveEngine=model_sim.plan --use
 # onnx vs plan   result align     
 polygraphy run model_sim.onnx --trt --onnxrt   
 
+polygraphy run model_sim.onnx --trt --onnxrt --atol 1e-4  --fp16
+
 ```
