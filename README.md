@@ -13,6 +13,7 @@
 |[runtime](./runtime/readme.md)     |运行时|        
 |[inferflow](./inferflow/readme.md) |模型调度|      |         
 |[mps](./device-benchmark-mps/readme.md)| MPS|  |    
+|[deploy](./)|方法 | |   
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
 |[developer_guide](./developer_guide/README.md)                  |开发者指导|      |           
 
