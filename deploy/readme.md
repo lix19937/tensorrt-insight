@@ -1,4 +1,5 @@
-```
+## 无自定义node 的onnx    
+```shell  
 # onnx optimize   
 python -m onnxsim src.onnx  model_sim.onnx
 
@@ -24,6 +25,8 @@ polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
 
 ```
 
+## 带自定义node的 onnx    
+`带自定义node的onnx 是否可以跳过指定layer ?`  或者手动实现 ort op   
 
 
 
