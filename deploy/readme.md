@@ -16,10 +16,11 @@ polygraphy run model_sim.onnx --trt --onnxrt
 ## fp16
 polygraphy run model_sim.onnx --trt --onnxrt --atol 1e-4  --fp16
 
+## fp16 dynamic batch    
 polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
-        --trt-min-shapes x:[1,2,28,28]  y:[1,1,28] \
-        --trt-opt-shapes x:[4,2,28,28]  y:[4,1,28] \
-        --trt-max-shapes x:[8,2,28,28]  y:[8,1,28]  
+        --trt-min-shapes x:[1,3,224,224]  y:[1,1,1,224] \
+        --trt-opt-shapes x:[4,3,224,224]  y:[4,1,1,224] \
+        --trt-max-shapes x:[8,3,224,224]  y:[8,1,1,224]  
 
 ```
 
