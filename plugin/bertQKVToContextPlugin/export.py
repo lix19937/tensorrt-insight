@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn 
 
 # https://github.com/NVIDIA/TensorRT/issues/2655  
+# https://forums.developer.nvidia.com/t/bugs-for-customqkvtocontextplugindynamic-plugin/242071
 
 # https://github.com/NVIDIA/TensorRT/tree/release/8.5/plugin/bertQKVToContextPlugin
 # The yaml file says that version 3 is not supported yet.
