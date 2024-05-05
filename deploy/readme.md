@@ -32,7 +32,7 @@ polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
 
 
 
-## 复杂网络导出onnx   
+## 复杂网络导出onnx 方法      
 
 + 问题定位  
 逐步逼近（提前返回）方法      
