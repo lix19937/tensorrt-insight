@@ -40,3 +40,5 @@ polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
 ## ref  
 https://zhuanlan.zhihu.com/p/535021438   
 https://zhuanlan.zhihu.com/p/436017991   
+
+https://github.com/pytorch/pytorch/issues/61277    
