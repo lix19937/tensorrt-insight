@@ -4,3 +4,5 @@ input_mask 来自  It's mask input preprocessed and outputted by plugin embLayer
 https://github.com/lix19937/dnn-cookbook/blob/main/ViT-pytorch/generate_mha.py
 
 https://zhuanlan.zhihu.com/p/517782166
+
+https://github.com/lix19937/history/tree/main/zz/python/trt-plugin/bertqkvtocontextplugin     
