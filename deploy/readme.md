@@ -31,6 +31,20 @@ polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
 `带自定义node的onnx 是否可以跳过指定layer ?`  或者手动实现 ort op    
 
 
+```shell 
+
+trtexec --onnx=bevf-640-1600-200-200_poly.onnx --verbose \
+--fp16 \
+--dumpProfile \
+--separateProfileRun \
+--loadEngine=bevf-640-1600-200-200_poly.plan \
+--plugins=./libplugin_custom.so \
+--dumpLayerInfo --profilingVerbosity=detailed  \
+--useCudaGraph --exportLayerInfo=bevf-640-1600-200-200_poly.json \
+--loadInputs='input_ids':id.bin,'input_mask':mask.bin,'segment_ids':segment.bin \
+2>&1 |tee bevf-640-1600-200-200_poly-infer.log  
+```
+
 
 ## 复杂网络导出 onnx 方法      
 
