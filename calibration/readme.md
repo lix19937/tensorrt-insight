@@ -34,6 +34,7 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 插入 Q/DQ 在插件层的前后       
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/99191e22-7c9f-4774-ade8-665575e5f155)       
 
+![ptq](https://github.com/lix19937/tensorrt-insight/assets/38753233/0a81fc7c-9351-4e63-b5b0-07eecdd37fa6)    
 
 ## fuse  
 * PTQ calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差      
