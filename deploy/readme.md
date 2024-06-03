@@ -55,6 +55,9 @@ trtexec --verbose \
 逐步逼近（提前返回）方法--逐渐导出完整onnx 来进行转换        
 
 
+## 精度问题   
+https://github.com/NVIDIA/TensorRT/blob/main/tools/Polygraphy/how-to/debug_accuracy.md    
+
 ## ref  
 https://zhuanlan.zhihu.com/p/535021438   
 https://zhuanlan.zhihu.com/p/436017991   
