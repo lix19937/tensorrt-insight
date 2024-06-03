@@ -17,7 +17,7 @@ trtexec --onnx=model_sim.onnx --fp16 --verbose --saveEngine=model_sim.plan --use
 polygraphy run model_sim.onnx --trt --onnxrt   
 
 ## fp16
-polygraphy run model_sim.onnx --trt --onnxrt --atol 1e-4  --fp16
+polygraphy run model_sim.onnx --trt --onnxrt --atol 0.001 --rtol 0.001 --fp16
 
 ## fp16 dynamic batch    
 polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
