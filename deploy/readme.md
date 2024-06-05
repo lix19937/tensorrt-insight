@@ -58,6 +58,14 @@ trtexec --verbose \
 ## 精度问题   
 https://github.com/NVIDIA/TensorRT/blob/main/tools/Polygraphy/how-to/debug_accuracy.md    
 
+## torch 网络每一层输入输出范围  
+
+## torch 网络每一层权重范围    
+
+## onnx 模型每一层输入输出范围   
+
+## onnx 模型每一层权重范围     
+
 ## ref  
 https://zhuanlan.zhihu.com/p/535021438   
 https://zhuanlan.zhihu.com/p/436017991   
