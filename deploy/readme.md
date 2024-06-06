@@ -66,6 +66,14 @@ https://github.com/NVIDIA/TensorRT/blob/main/tools/Polygraphy/how-to/debug_accur
 
 ## onnx 模型每一层权重范围     
 
+##  从build log 中截取roi 信息  
+```
+(torch113) lix@SHJS-PF4ZKYLL:/mnt/d/workspace/BEVFormer-master-infer-phm/200x200_r50$ awk '/mem_span/{print NR}'  bevf-640-1600-200-200-1_poly-error.log
+213141
+(torch113) lix@SHJS-PF4ZKYLL:/mnt/d/workspace/BEVFormer-master-infer-phm/200x200_r50$ grep -n "mem_span"  bevf-640-1600-200-200-1_poly-error.log
+213141:operand.cpp:61: DCHECK(mem_span <= data_->size()) failed. mem_span: 2559986, data_->size()320000
+```
+
 ## ref  
 https://zhuanlan.zhihu.com/p/535021438   
 https://zhuanlan.zhihu.com/p/436017991   
