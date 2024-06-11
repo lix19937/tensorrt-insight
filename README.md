@@ -17,6 +17,8 @@
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
 |[developer_guide](./developer_guide/README.md)                  |开发者指导|      |           
 
+迁移说明   
+https://docs.nvidia.com/deeplearning/tensorrt/migration-guide/index.html     
     
 ## Ref    
 https://docs.nvidia.com/deeplearning/tensorrt/archives/   
