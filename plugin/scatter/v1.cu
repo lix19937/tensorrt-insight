@@ -73,12 +73,13 @@ int test_b1() {
   float *query, *reference_points_cam;
   cudaMalloc(&query, bs * query_num * embed_dims * sizeof(float));
   cudaMalloc(&reference_points_cam, bs * num_cams * query_num * D * 2 * sizeof(float));
+
   std::vector<float> h_query(bs * query_num * embed_dims);
   for (int i = 0; i < h_query.size(); ++i)
     h_query[i] = i;
   cudaMemcpy(query, h_query.data(), h_query.size() * sizeof(float), cudaMemcpyHostToDevice);
 
-  std::vector<float> h_reference_points_cam(bs * num_cams * max_len * D * 2);
+  std::vector<float> h_reference_points_cam(bs * num_cams * query_num * D * 2);
   for (int i = 0; i < h_reference_points_cam.size(); ++i)
     h_reference_points_cam[i] = i;
   cudaMemcpy(
@@ -114,7 +115,7 @@ int test_b1() {
   for (int i = 0; i < h_last_out_1.size(); ++i) {
     if (i % embed_dims == 0)
       printf("\n");
-    printf("%-3.0f ", h_last_out_1[i]);
+    printf("%-3.0f", h_last_out_1[i]);
   }
   printf("\n");
 
