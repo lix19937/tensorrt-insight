@@ -55,21 +55,24 @@ class NonZero {
 void NonZero::nonzero(
     const char4* d_in, const int32_t N, const uint32_t requ_num_nonzero, uint32_t* d_out, cudaStream_t stream) {
   using T = char4;
+///  get d_num_nonzero_
   cub::TransformInputIterator<bool, NonZeroOp, const T*> itr(d_in, NonZeroOp());
   temp_storage_bytes_ = 0;
   printf("#0 temp_storage_bytes_ = %lu\n", temp_storage_bytes_);
 
   cub::DeviceReduce::Sum(nullptr, temp_storage_bytes_, itr, d_num_nonzero_, N, stream);
-
+  cudaStreamSynchronize(stream); // !!!
   printf("#1 temp_storage_bytes_ = %lu\n", temp_storage_bytes_);
 
   cub::DeviceReduce::Sum(d_temp_storage_, temp_storage_bytes_, itr, d_num_nonzero_, N, stream);
+  cudaStreamSynchronize(stream); // !!!
 
   uint32_t num_nonzero;
   cudaMemcpyAsync(&num_nonzero, d_num_nonzero_, sizeof(uint32_t), cudaMemcpyDeviceToHost, stream);
-
+  cudaStreamSynchronize(stream); // !!!
   printf("#2 temp_storage_bytes_ = %lu\n", temp_storage_bytes_);
 
+/// get num_nonzeros_output (d_out_temp_)   
   // -------------------------------------------------------------------------
   cub::CountingInputIterator<uint32_t> counting_itr(0);
 
@@ -82,6 +85,7 @@ void NonZero::nonzero(
       d_temp_storage_, temp_storage_bytes_, counting_itr, itr, d_out_temp_, d_num_nonzero_, N, stream);
   printf("#4 temp_storage_bytes_ = %lu\n", temp_storage_bytes_);
 
+/// assign to sparse d_out 
   num_nonzero = std::min(requ_num_nonzero, num_nonzero);
 
   int nthreads = 512;
