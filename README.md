@@ -13,7 +13,8 @@
 |[runtime](./runtime/readme.md)     |运行时|        
 |[inferflow](./inferflow/readme.md) |模型调度|      |         
 |[mps](./device-benchmark-mps/readme.md)| MPS|  |    
-|[deploy](./deploy/readme.md)       |基于onnx部署流程， trt 工具使用 | |   
+|[deploy](./deploy/readme.md)       |基于onnx部署流程， trt 工具使用 | |    
+|[py-tensorrt]| python tensorrt封装  | 解析 tensorrt `__init__` |        
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |         
 |[developer_guide](./developer_guide/README.md)                  |开发者指导|      |           
 
