@@ -66,9 +66,6 @@ As sample inputs, random images from MNIST dataset are selected and scaled to be
 **NonZero**
 - [ONNX: NonZero](https://onnx.ai/onnx/operators/onnx__NonZero.html)
 
-**TensorRT plugins**
-- [Extending TensorRT with Custom Layers](https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/index.html#extending)
-
 **Other documentation**
 - [Introduction To NVIDIA’s TensorRT Samples](https://docs.nvidia.com/deeplearning/sdk/tensorrt-sample-support-guide/index.html#samples)
 - [Working With TensorRT Using The C++ API](https://docs.nvidia.com/deeplearning/sdk/tensorrt-developer-guide/index.html#c_topics)
