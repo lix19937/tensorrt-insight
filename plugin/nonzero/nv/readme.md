@@ -23,8 +23,6 @@ In this case, the first output of the plugin will have shape $2 \times K$, and t
 
 As sample inputs, random images from MNIST dataset are selected and scaled to between `[0,1]`. The network will output both the non-zero indices, as well as the non-zero count.
 
-
-## Running the sample    
 	```
 	...
 	[I] Input:
