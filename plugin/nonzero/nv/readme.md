@@ -1,7 +1,5 @@
 # NonZero 
 
-## Description
-
 Implements a plugin for the NonZero operation, customizable to output the non-zero indices in
 either a row order (each set of indices in the same row) or column order format (each set of indices in the same column).
 
