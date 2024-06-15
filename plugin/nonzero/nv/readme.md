@@ -5,7 +5,7 @@
 Implements a plugin for the NonZero operation, customizable to output the non-zero indices in
 either a row order (each set of indices in the same row) or column order format (each set of indices in the same column).
 
-NonZero is an operation where the non-zero indices of the input tensor is found. 
+NonZero is an operation **where the non-zero indices of the input tensor is found**. 
 
 ## How does this sample work?
 
