@@ -17,6 +17,8 @@
 
 #include "nonZeroKernel.h"
 
+typedef unsigned char uchar;
+
 inline __device__ int32_t isZero(float const& a)
 {
     return a == 0.F;
