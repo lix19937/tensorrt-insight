@@ -40,19 +40,19 @@ __global__ void findNonZeroIndicesKernel(
     // Check if the column index is within bounds
     if (col < C)
     {
-        for (int32_t row = 0; row < R; ++row)
+        for (int32_t row = 0; row < R; ++row) // if X shape is [40000, 4] , 40000 loop here   
         {
             if (!isZero(X[row * C + col]))
             {
                 int32_t index = atomicAdd(count, 1); // Increment count atomically and get the previous value
                 if (indices)
                 {
-                    if(rowOrder == 0)
+                    if(rowOrder == 0) // col-order 
                     {
                         indices[index] = row;
                         indices[index + *K] = col;
                     }
-                    else
+                    else // row-order 
                     {
                         indices[2 * index] = row;
                         indices[2 * index + 1] = col;
@@ -64,6 +64,7 @@ __global__ void findNonZeroIndicesKernel(
 }
 
 template <typename T>
+//            X, indices, count, k all are device ptr   
 void nonZeroIndicesImpl(T const* X, int32_t* indices, int32_t* count, int32_t const* K, int32_t R, int32_t C,
     bool rowOrder, cudaStream_t stream)
 {
