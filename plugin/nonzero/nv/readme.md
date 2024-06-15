@@ -9,7 +9,7 @@ NonZero is an operation **where the non-zero indices of the input tensor is foun
 non-zero indices are required in a row ordering (each set of indices in its own row). Then the output shape would be $K \times 2$.
 
 ```
-outputs[0].d[1] = exprBuilder.constant(2);
+outputs[0].d[1] = 2;
 outputs[0].d[0] = numNonZeroSizeTensor; // K 
 ```
 
