@@ -24,7 +24,6 @@ In this case, the first output of the plugin will have shape $2 \times K$, and t
 As sample inputs, random images from MNIST dataset are selected and scaled to between `[0,1]`. The network will output both the non-zero indices, as well as the non-zero count.
 
 	```
-	...
 	[I] Input:
 	[I] 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,   0,   0,  0,    0,    0,   0
 	[I] 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,   0,   0,  0,    0,    0,   0
@@ -64,7 +63,7 @@ As sample inputs, random images from MNIST dataset are selected and scaled to be
 	[I] 15 10
 	[I] 15 13
 	[I] 16 13
-	```
+	```     
 
 **NonZero**
 - [ONNX: NonZero](https://onnx.ai/onnx/operators/onnx__NonZero.html)
