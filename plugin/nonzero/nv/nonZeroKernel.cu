@@ -80,3 +80,5 @@ void nonZeroIndicesImpl(T const* X, int32_t* indices, int32_t* count, int32_t co
 
 NONZERO_SPECIALIZED_IMPL(float)
 NONZERO_SPECIALIZED_IMPL(half)
+NONZERO_SPECIALIZED_IMPL(uchar)
+
