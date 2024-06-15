@@ -12,7 +12,7 @@ non-zero indices are required in a row ordering (each set of indices in its own 
 
 ```
 outputs[0].d[1] = exprBuilder.constant(2);
-outputs[0].d[0] = numNonZeroSizeTensor; // $K$
+outputs[0].d[0] = numNonZeroSizeTensor; // K 
 ```
 
 The `NonZeroPlugin` can also be configured to emit the non-zero indices in a column-order fashion through the `rowOrder` plugin attribute, by setting it to `0`.
