@@ -7,20 +7,12 @@ either a row order (each set of indices in the same row) or column order format 
 
 NonZero is an operation **where the non-zero indices of the input tensor is found**. 
 
-## How does this sample work?
-
-This sample creates and runs a TensorRT engine built from a network containing a single NonZeroPlugin node. It demonstrates how
-custom layers with data-dependent output shapes can be implemented and added to a TensorRT network.
-
-### Implementing a NonZero plugin using IPluginV3 interface
-
 `NonZeroPlugin` in this sample is written to handle 2-D input tensors of shape $R \times C$. Assume that the tensor contains $K$ non-zero elements and that the
 non-zero indices are required in a row ordering (each set of indices in its own row). Then the output shape would be $K \times 2$.
 
-
 ```
 outputs[0].d[1] = exprBuilder.constant(2);
-outputs[0].d[0] = numNonZeroSizeTensor;
+outputs[0].d[0] = numNonZeroSizeTensor; // $K$
 ```
 
 The `NonZeroPlugin` can also be configured to emit the non-zero indices in a column-order fashion through the `rowOrder` plugin attribute, by setting it to `0`.
