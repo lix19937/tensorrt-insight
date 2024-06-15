@@ -10,6 +10,10 @@
 # auto qat    
 https://github.com/lix19937/auto_qat    
 
+https://github.com/NVIDIA/TensorRT/issues/3205
+
+
+
 ## 示例  
 * yolox
 
