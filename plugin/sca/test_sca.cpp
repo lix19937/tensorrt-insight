@@ -58,7 +58,7 @@ int test() {
   /// #in from msda 
   T* d_queries;  
   cudaMalloc((void **)&d_queries,       bs * num_cams * max_len * embed_dims * sizeof(T));
-  std::vector<T> h_queries(         bs * num_cams * max_len * embed_dims);
+  std::vector<T> h_queries(             bs * num_cams * max_len * embed_dims);
   for (int i = 0; i < h_queries.size(); ++i) h_queries[i] = i*0.1f; /// 
   cudaMemcpy(d_queries, h_queries.data(), h_queries.size() * sizeof(T), cudaMemcpyHostToDevice);
 
@@ -66,18 +66,18 @@ int test() {
   T *d_queries_rebatch, *d_reference_points_rebatch;
   cudaMalloc((void **)&d_queries_rebatch,            bs * num_cams * max_len * embed_dims * sizeof(T));
   cudaMalloc((void **)&d_reference_points_rebatch,   bs * num_cams * max_len * D * 2 * sizeof(T));
-  cudaMemset(d_queries_rebatch,                   0, bs * num_cams * max_len * embed_dims * sizeof(T)); /// need set 
-  cudaMemset(d_reference_points_rebatch,          0, bs * num_cams * max_len * D * 2 * sizeof(T)); /// need set
+  cudaMemset(d_queries_rebatch,                   0, bs * num_cams * max_len * embed_dims * sizeof(T)); /// must set 
+  cudaMemset(d_reference_points_rebatch,          0, bs * num_cams * max_len * D * 2 * sizeof(T)); /// must set
 
   /// out of step1
   int* d_indexs;
   cudaMalloc((void**)&d_indexs, threshold * num_cams * sizeof(int));
-  cudaMemset(d_indexs, -1,      threshold * num_cams * sizeof(int)); ///
+  // cudaMemset(d_indexs, -1,      threshold * num_cams * sizeof(int)); /// need not 
 
   /// out of step1
   uchar* d_count;
   cudaMalloc((void**)&d_count, num_query * (num_cams + pad) * sizeof(uchar));
-  cudaMemset(d_count, 0,       num_query * (num_cams + pad) * sizeof(uchar)); /// just for debug, need not memset 
+  // cudaMemset(d_count, 0,       num_query * (num_cams + pad) * sizeof(uchar)); /// just for debug, need not memset 
 
   /// out of step3
   T* d_count_norm;
