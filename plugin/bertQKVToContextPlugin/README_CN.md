@@ -8,3 +8,4 @@ https://zhuanlan.zhihu.com/p/517782166
 https://github.com/lix19937/history/tree/main/zz/python/trt-plugin/bertqkvtocontextplugin     
 
 https://github.com/NVIDIA/TensorRT/issues/3831#issuecomment-2089430724    
+https://github.com/NVIDIA/TensorRT/issues/2601   
