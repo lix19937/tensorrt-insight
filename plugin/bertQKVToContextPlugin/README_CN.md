@@ -6,3 +6,5 @@ https://github.com/lix19937/dnn-cookbook/blob/main/ViT-pytorch/generate_mha.py
 https://zhuanlan.zhihu.com/p/517782166
 
 https://github.com/lix19937/history/tree/main/zz/python/trt-plugin/bertqkvtocontextplugin     
+
+https://github.com/NVIDIA/TensorRT/issues/3831#issuecomment-2089430724    
