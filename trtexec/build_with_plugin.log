@@ -1,1 +1,451 @@
+&&&& RUNNING TensorRT.trtexec [TensorRT v8510] # trtexec --onnx=./identity.onnx --plugins=./libplugin_custom.so --verbose
+[06/22/2024-20:51:36] [I] === Model Options ===
+[06/22/2024-20:51:36] [I] Format: ONNX
+[06/22/2024-20:51:36] [I] Model: ./identity.onnx
+[06/22/2024-20:51:36] [I] Output:
+[06/22/2024-20:51:36] [I] === Build Options ===
+[06/22/2024-20:51:36] [I] Max batch: explicit batch
+[06/22/2024-20:51:36] [I] Memory Pools: workspace: default, dlaSRAM: default, dlaLocalDRAM: default, dlaGlobalDRAM: default
+[06/22/2024-20:51:36] [I] minTiming: 1
+[06/22/2024-20:51:36] [I] avgTiming: 8
+[06/22/2024-20:51:36] [I] Precision: FP32
+[06/22/2024-20:51:36] [I] LayerPrecisions: 
+[06/22/2024-20:51:36] [I] Layer Device Types: 
+[06/22/2024-20:51:36] [I] Calibration: 
+[06/22/2024-20:51:36] [I] Refit: Disabled
+[06/22/2024-20:51:36] [I] Sparsity: Disabled
+[06/22/2024-20:51:36] [I] Safe mode: Disabled
+[06/22/2024-20:51:36] [I] DirectIO mode: Disabled
+[06/22/2024-20:51:36] [I] Restricted mode: Disabled
+[06/22/2024-20:51:36] [I] Build only: Disabled
+[06/22/2024-20:51:36] [I] Save engine: 
+[06/22/2024-20:51:36] [I] Load engine: 
+[06/22/2024-20:51:36] [I] Profiling verbosity: 0
+[06/22/2024-20:51:36] [I] Tactic sources: Using default tactic sources
+[06/22/2024-20:51:36] [I] timingCacheMode: local
+[06/22/2024-20:51:36] [I] timingCacheFile: 
+[06/22/2024-20:51:36] [I] Heuristic: Disabled
+[06/22/2024-20:51:36] [I] Preview Features: Use default preview flags.
+[06/22/2024-20:51:36] [I] Input(s)s format: fp32:CHW
+[06/22/2024-20:51:36] [I] Output(s)s format: fp32:CHW
+[06/22/2024-20:51:36] [I] Input build shapes: model
+[06/22/2024-20:51:36] [I] Input calibration shapes: model
+[06/22/2024-20:51:36] [I] === System Options ===
+[06/22/2024-20:51:36] [I] Device: 0
+[06/22/2024-20:51:36] [I] DLACore: 
+[06/22/2024-20:51:36] [I] Plugins: ./libplugin_custom.so
+[06/22/2024-20:51:36] [I] === Inference Options ===
+[06/22/2024-20:51:36] [I] Batch: Explicit
+[06/22/2024-20:51:36] [I] Input inference shapes: model
+[06/22/2024-20:51:36] [I] Iterations: 10
+[06/22/2024-20:51:36] [I] Duration: 3s (+ 200ms warm up)
+[06/22/2024-20:51:36] [I] Sleep time: 0ms
+[06/22/2024-20:51:36] [I] Idle time: 0ms
+[06/22/2024-20:51:36] [I] Streams: 1
+[06/22/2024-20:51:36] [I] ExposeDMA: Disabled
+[06/22/2024-20:51:36] [I] Data transfers: Enabled
+[06/22/2024-20:51:36] [I] Spin-wait: Disabled
+[06/22/2024-20:51:36] [I] Multithreading: Disabled
+[06/22/2024-20:51:36] [I] CUDA Graph: Disabled
+[06/22/2024-20:51:36] [I] Separate profiling: Disabled
+[06/22/2024-20:51:36] [I] Time Deserialize: Disabled
+[06/22/2024-20:51:36] [I] Time Refit: Disabled
+[06/22/2024-20:51:36] [I] NVTX verbosity: 0
+[06/22/2024-20:51:36] [I] Persistent Cache Ratio: 0
+[06/22/2024-20:51:36] [I] Inputs:
+[06/22/2024-20:51:36] [I] === Reporting Options ===
+[06/22/2024-20:51:36] [I] Verbose: Enabled
+[06/22/2024-20:51:36] [I] Averages: 10 inferences
+[06/22/2024-20:51:36] [I] Percentiles: 90,95,99
+[06/22/2024-20:51:36] [I] Dump refittable layers:Disabled
+[06/22/2024-20:51:36] [I] Dump output: Disabled
+[06/22/2024-20:51:36] [I] Profile: Disabled
+[06/22/2024-20:51:36] [I] Export timing to JSON file: 
+[06/22/2024-20:51:36] [I] Export output to JSON file: 
+[06/22/2024-20:51:36] [I] Export profile to JSON file: 
+[06/22/2024-20:51:36] [I] 
+[06/22/2024-20:51:38] [I] === Device Information ===
+[06/22/2024-20:51:38] [I] Selected Device: NVIDIA RTX 2000 Ada Generation Laptop GPU
+[06/22/2024-20:51:38] [I] Compute Capability: 8.9
+[06/22/2024-20:51:38] [I] SMs: 24
+[06/22/2024-20:51:38] [I] Compute Clock Rate: 2.115 GHz
+[06/22/2024-20:51:38] [I] Device Global Memory: 8187 MiB
+[06/22/2024-20:51:38] [I] Shared Memory per SM: 100 KiB
+[06/22/2024-20:51:38] [I] Memory Bus Width: 128 bits (ECC disabled)
+[06/22/2024-20:51:38] [I] Memory Clock Rate: 8.001 GHz
+[06/22/2024-20:51:38] [I] 
+[06/22/2024-20:51:38] [I] TensorRT version: 8.5.10
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::BatchedNMSDynamic_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::BatchedNMS_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::BatchTilePlugin_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::Clip_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::CoordConvAC version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::CropAndResizeDynamic version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::CropAndResize version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::DecodeBbox3DPlugin version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::DetectionLayer_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::EfficientNMS_Explicit_TF_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::EfficientNMS_Implicit_TF_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::EfficientNMS_ONNX_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::EfficientNMS_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::FlattenConcat_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::GenerateDetection_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::GridAnchor_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::GridAnchorRect_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::InstanceNormalization_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::InstanceNormalization_TRT version 2
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::LReLU_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::MultilevelCropAndResize_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::MultilevelProposeROI_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::MultiscaleDeformableAttnPlugin_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::NMSDynamic_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::NMS_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::Normalize_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::PillarScatterPlugin version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::PriorBox_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::ProposalDynamic version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::ProposalLayer_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::Proposal version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::PyramidROIAlign_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::Region_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::Reorg_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::ResizeNearest_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::ROIAlign_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::RPROI_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::ScatterND version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::SpecialSlice_TRT version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::Split version 1
+[06/22/2024-20:51:38] [V] [TRT] Registered plugin creator - ::VoxelGeneratorPlugin version 1
+[06/22/2024-20:51:38] [I] Loading supplied plugin library: ./libplugin_custom.so
+2024-06-22 20:51:38.566468: T identity.cpp:294] IdentityPluginDynamicCreator 
+2024-06-22 20:51:38.566505: T identity.cpp:303] getPluginName 
+2024-06-22 20:51:38.566512: T identity.cpp:303] getPluginName 
+2024-06-22 20:51:38.566515: T identity.cpp:369] getPluginNamespace 
+2024-06-22 20:51:38.566517: T identity.cpp:309] getPluginVersion 
+[06/22/2024-20:51:55] [I] [TRT] [MemUsageChange] Init CUDA: CPU +653, GPU +0, now: CPU 667, GPU 1216 (MiB)
+[06/22/2024-20:51:56] [V] [TRT] Trying to load shared library libnvinfer_builder_resource.so.8.5.10
+[06/22/2024-20:51:56] [V] [TRT] Loaded shared library libnvinfer_builder_resource.so.8.5.10
+[06/22/2024-20:52:14] [I] [TRT] [MemUsageChange] Init builder kernel library: CPU +476, GPU +116, now: CPU 1170, GPU 1332 (MiB)
+[06/22/2024-20:52:14] [I] Start parsing network model
+[06/22/2024-20:52:14] [I] [TRT] ----------------------------------------------------------------
+[06/22/2024-20:52:14] [I] [TRT] Input filename:   ./identity.onnx
+[06/22/2024-20:52:14] [I] [TRT] ONNX IR version:  0.0.7
+[06/22/2024-20:52:14] [I] [TRT] Opset version:    13
+[06/22/2024-20:52:14] [I] [TRT] Producer name:    pytorch
+[06/22/2024-20:52:14] [I] [TRT] Producer version: 1.13.1
+[06/22/2024-20:52:14] [I] [TRT] Domain:           
+[06/22/2024-20:52:14] [I] [TRT] Model version:    0
+[06/22/2024-20:52:14] [I] [TRT] Doc string:       
+[06/22/2024-20:52:14] [I] [TRT] ----------------------------------------------------------------
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::BatchedNMSDynamic_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::BatchedNMS_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::BatchTilePlugin_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::Clip_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::CoordConvAC version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::CropAndResizeDynamic version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::CropAndResize version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::DecodeBbox3DPlugin version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::DetectionLayer_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::EfficientNMS_Explicit_TF_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::EfficientNMS_Implicit_TF_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::EfficientNMS_ONNX_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::EfficientNMS_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::FlattenConcat_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::GenerateDetection_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::GridAnchor_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::GridAnchorRect_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::InstanceNormalization_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::InstanceNormalization_TRT version 2
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::LReLU_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::MultilevelCropAndResize_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::MultilevelProposeROI_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::MultiscaleDeformableAttnPlugin_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::NMSDynamic_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::NMS_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::Normalize_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::PillarScatterPlugin version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::PriorBox_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::ProposalDynamic version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::ProposalLayer_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::Proposal version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::PyramidROIAlign_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::Region_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::Reorg_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::ResizeNearest_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::ROIAlign_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::RPROI_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::ScatterND version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::SpecialSlice_TRT version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::Split version 1
+[06/22/2024-20:52:14] [V] [TRT] Plugin creator already registered - ::VoxelGeneratorPlugin version 1
+[06/22/2024-20:52:14] [V] [TRT] Adding network input: TRT::Identity_TRT_0 with dtype: float32, dimensions: (1, 40000, 256)
+[06/22/2024-20:52:14] [V] [TRT] Registering tensor: TRT::Identity_TRT_0 for ONNX tensor: TRT::Identity_TRT_0
+[06/22/2024-20:52:14] [V] [TRT] Parsing node: /Identity_TRT [Identity_TRT]
+[06/22/2024-20:52:14] [V] [TRT] Searching for input: TRT::Identity_TRT_0
+[06/22/2024-20:52:14] [V] [TRT] /Identity_TRT [Identity_TRT] inputs: [TRT::Identity_TRT_0 -> (1, 40000, 256)[FLOAT]], 
+[06/22/2024-20:52:14] [I] [TRT] No importer registered for op: Identity_TRT. Attempting to import as plugin.
+[06/22/2024-20:52:14] [I] [TRT] Searching for plugin: Identity_TRT, plugin_version: 1, plugin_namespace: 
+2024-06-22 20:52:14.362073: T identity.cpp:309] getPluginVersion 
+2024-06-22 20:52:14.362124: T identity.cpp:369] getPluginNamespace 
+2024-06-22 20:52:14.362128: T identity.cpp:369] getPluginNamespace 
+2024-06-22 20:52:14.362134: T identity.cpp:315] getFieldNames 
+2024-06-22 20:52:14.362136: T identity.cpp:321] createPlugin 
+2024-06-22 20:52:14.362237: T identity.cpp:36] IdentityPluginDynamic 
+2024-06-22 20:52:14.362239: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:14.362243: T identity.cpp:246] initialize 
+[06/22/2024-20:52:14] [I] [TRT] Successfully created plugin: Identity_TRT
+2024-06-22 20:52:14.362262: T identity.cpp:240] getNbOutputs 
+2024-06-22 20:52:14.374342: T identity.cpp:222] getOutputDataType 
+2024-06-22 20:52:14.374386: T identity.cpp:240] getNbOutputs 
+2024-06-22 20:52:14.374390: T identity.cpp:55] clone 
+2024-06-22 20:52:14.374392: T identity.cpp:36] IdentityPluginDynamic 
+2024-06-22 20:52:14.374396: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:14.374398: T identity.cpp:246] initialize 
+2024-06-22 20:52:14.374400: T identity.cpp:228] getPluginType 
+[06/22/2024-20:52:14] [V] [TRT] Registering layer: /Identity_TRT for ONNX node: /Identity_TRT
+2024-06-22 20:52:14.408128: T identity.cpp:270] destroy 
+2024-06-22 20:52:14.408177: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:14.408183: T identity.cpp:252] terminate 
+2024-06-22 20:52:14.408199: T identity.cpp:222] getOutputDataType 
+2024-06-22 20:52:14.440520: T identity.cpp:85] getOutputDimensions 
+[06/22/2024-20:52:14] [V] [TRT] Registering tensor: 1_0 for ONNX tensor: 1
+[06/22/2024-20:52:14] [V] [TRT] /Identity_TRT [Identity_TRT] outputs: [1 -> (1, 40000, 256)[FLOAT]], 
+[06/22/2024-20:52:14] [V] [TRT] Marking 1_0 as output: 1
+[06/22/2024-20:52:14] [I] Finish parsing network model
+2024-06-22 20:52:14.464285: T identity.cpp:85] getOutputDimensions 
+2024-06-22 20:52:14.548180: T identity.cpp:55] clone 
+2024-06-22 20:52:14.548240: T identity.cpp:36] IdentityPluginDynamic 
+2024-06-22 20:52:14.548244: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:14.548246: T identity.cpp:246] initialize 
+2024-06-22 20:52:14.589797: T identity.cpp:85] getOutputDimensions 
+[06/22/2024-20:52:14] [V] [TRT] Original: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After dead-layer removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] Applying generic optimizations to the graph for inference.
+2024-06-22 20:52:14.652755: T identity.cpp:228] getPluginType 
+[06/22/2024-20:52:14] [V] [TRT] After Myelin optimization: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] Applying ScaleNodes fusions.
+[06/22/2024-20:52:14] [V] [TRT] After scale fusion: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After dupe layer removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After final dead-layer removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After tensor merging: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After vertical fusions: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After dupe layer removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After final dead-layer removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After tensor merging: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After slice removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] After concat removal: 1 layers
+[06/22/2024-20:52:14] [V] [TRT] Trying to split Reshape and strided tensor
+[06/22/2024-20:52:14] [V] [TRT] Graph construction and optimization completed in 0.155263 seconds.
+[06/22/2024-20:52:14] [V] [TRT] Trying to load shared library libcublas.so.11
+[06/22/2024-20:52:14] [V] [TRT] Loaded shared library libcublas.so.11
+[06/22/2024-20:52:38] [V] [TRT] Using cublas as plugin tactic source
+[06/22/2024-20:52:38] [V] [TRT] Trying to load shared library libcublasLt.so.11
+[06/22/2024-20:52:38] [V] [TRT] Loaded shared library libcublasLt.so.11
+[06/22/2024-20:52:38] [V] [TRT] Using cublasLt as core library tactic source
+[06/22/2024-20:52:38] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +1225, GPU +340, now: CPU 2397, GPU 1672 (MiB)
+[06/22/2024-20:52:38] [V] [TRT] Trying to load shared library libcudnn.so.8
+[06/22/2024-20:52:38] [V] [TRT] Loaded shared library libcudnn.so.8
+[06/22/2024-20:52:38] [V] [TRT] Using cuDNN as plugin tactic source
+[06/22/2024-20:52:40] [V] [TRT] Using cuDNN as core library tactic source
+[06/22/2024-20:52:40] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +233, GPU +50, now: CPU 2630, GPU 1722 (MiB)
+[06/22/2024-20:52:40] [I] [TRT] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[06/22/2024-20:52:40] [V] [TRT] Constructing optimization profile number 0 [1/1].
+2024-06-22 20:52:40.979152: T identity.cpp:55] clone 
+2024-06-22 20:52:40.979198: T identity.cpp:36] IdentityPluginDynamic 
+2024-06-22 20:52:40.979201: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:40.979202: T identity.cpp:246] initialize 
+2024-06-22 20:52:40.994919: T identity.cpp:107] supportsFormatCombination 
+2024-06-22 20:52:40.994962: T identity.cpp:107] supportsFormatCombination 
+2024-06-22 20:52:40.994969: T identity.cpp:107] supportsFormatCombination 
+2024-06-22 20:52:40.994971: T identity.cpp:107] supportsFormatCombination 
+[06/22/2024-20:52:40] [V] [TRT] Reserving memory for host IO tensors. Host: 0 bytes
+[06/22/2024-20:52:40] [V] [TRT] =============== Computing costs for 
+[06/22/2024-20:52:40] [V] [TRT] *************** Autotuning format combination: Float(10240000,256,1) -> Float(10240000,256,1) ***************
+[06/22/2024-20:52:40] [V] [TRT] Formats and tactics selection completed in 0.0319045 seconds.
+[06/22/2024-20:52:40] [V] [TRT] After reformat layers: 1 layers
+[06/22/2024-20:52:40] [V] [TRT] Total number of blocks in pre-optimized block assignment: 1
+[06/22/2024-20:52:40] [I] [TRT] Total Activation Memory: 8585216000
+[06/22/2024-20:52:40] [I] [TRT] Detected 1 inputs and 1 output network tensors.
+2024-06-22 20:52:41.019169: T identity.cpp:55] clone 
+2024-06-22 20:52:41.019197: T identity.cpp:36] IdentityPluginDynamic 
+2024-06-22 20:52:41.019201: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:41.019203: T identity.cpp:246] initialize 
+2024-06-22 20:52:41.019213: T identity.cpp:133] configurePlugin 
+2024-06-22 20:52:41.034917: T identity.cpp:140] getWorkspaceSize 
+2024-06-22 20:52:41.034966: T identity.cpp:140] getWorkspaceSize 
+2024-06-22 20:52:41.034971: T identity.cpp:140] getWorkspaceSize 
+2024-06-22 20:52:41.034974: T identity.cpp:140] getWorkspaceSize 
+[06/22/2024-20:52:41] [V] [TRT] Layer: /Identity_TRT Host Persistent: 112 Device Persistent: 0 Scratch Memory: 0
+[06/22/2024-20:52:41] [V] [TRT] Skipped printing memory information for 0 layers with 0 memory size i.e. Host Persistent + Device Persistent + Scratch Memory == 0.
+[06/22/2024-20:52:41] [I] [TRT] Total Host Persistent Memory: 112
+[06/22/2024-20:52:41] [I] [TRT] Total Device Persistent Memory: 0
+[06/22/2024-20:52:41] [I] [TRT] Total Scratch Memory: 0
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageStats] Peak memory usage of TRT CPU/GPU memory allocators: CPU 0 MiB, GPU 0 MiB
+[06/22/2024-20:52:41] [V] [TRT] Total number of blocks in optimized block assignment: 0
+[06/22/2024-20:52:41] [I] [TRT] Total Activation Memory: 0
+2024-06-22 20:52:41.035020: T identity.cpp:270] destroy 
+2024-06-22 20:52:41.035022: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:41.035024: T identity.cpp:252] terminate 
+[06/22/2024-20:52:41] [V] [TRT] Total number of generated kernels selected for the engine: 0
+[06/22/2024-20:52:41] [V] [TRT] Disabling unused tactic source: EDGE_MASK_CONVOLUTIONS
+[06/22/2024-20:52:41] [V] [TRT] Disabling unused tactic source: JIT_CONVOLUTIONS
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcublas.so.11
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcublas.so.11
+[06/22/2024-20:52:41] [V] [TRT] Using cublas as plugin tactic source
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcublasLt.so.11
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcublasLt.so.11
+[06/22/2024-20:52:41] [V] [TRT] Using cublasLt as core library tactic source
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 2630, GPU 1730 (MiB)
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcudnn.so.8
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcudnn.so.8
+[06/22/2024-20:52:41] [V] [TRT] Using cuDNN as plugin tactic source
+[06/22/2024-20:52:41] [V] [TRT] Using cuDNN as core library tactic source
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +1, GPU +10, now: CPU 2631, GPU 1740 (MiB)
+2024-06-22 20:52:41.038202: T identity.cpp:246] initialize 
+[06/22/2024-20:52:41] [V] [TRT] Engine generation completed in 26.3494 seconds.
+[06/22/2024-20:52:41] [V] [TRT] Engine Layer Information:
+Layer(PluginV2): /Identity_TRT, Tactic: 0x0000000000000000, TRT::Identity_TRT_0 (Float[1,40000,256]) -> 1 (Float[1,40000,256])
+2024-06-22 20:52:41.045771: T identity.cpp:270] destroy 
+2024-06-22 20:52:41.045777: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:41.045779: T identity.cpp:252] terminate 
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in building engine: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
+2024-06-22 20:52:41.045809: T identity.cpp:228] getPluginType 
+2024-06-22 20:52:41.045811: T identity.cpp:234] getPluginVersion 
+2024-06-22 20:52:41.045812: T identity.cpp:286] getPluginNamespace 
+2024-06-22 20:52:41.045814: T identity.cpp:256] getSerializationSize 
+2024-06-22 20:52:41.045815: T identity.cpp:262] serialize 
+2024-06-22 20:52:41.045817: T identity.cpp:256] getSerializationSize 
+2024-06-22 20:52:41.045838: T identity.cpp:228] getPluginType 
+2024-06-22 20:52:41.045840: T identity.cpp:234] getPluginVersion 
+2024-06-22 20:52:41.045841: T identity.cpp:286] getPluginNamespace 
+2024-06-22 20:52:41.045843: T identity.cpp:256] getSerializationSize 
+2024-06-22 20:52:41.045844: T identity.cpp:262] serialize 
+2024-06-22 20:52:41.045845: T identity.cpp:256] getSerializationSize 
+2024-06-22 20:52:41.045851: T identity.cpp:252] terminate 
+2024-06-22 20:52:41.045853: T identity.cpp:270] destroy 
+2024-06-22 20:52:41.045854: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:41.045855: T identity.cpp:252] terminate 
+[06/22/2024-20:52:41] [I] Engine built in 62.4793 sec.
+2024-06-22 20:52:41.045949: T identity.cpp:270] destroy 
+2024-06-22 20:52:41.045952: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:41.045954: T identity.cpp:252] terminate 
+[06/22/2024-20:52:41] [I] [TRT] Loaded engine size: 0 MiB
+2024-06-22 20:52:41.107521: T identity.cpp:309] getPluginVersion 
+2024-06-22 20:52:41.107528: T identity.cpp:369] getPluginNamespace 
+2024-06-22 20:52:41.107530: T identity.cpp:369] getPluginNamespace 
+2024-06-22 20:52:41.107532: T identity.cpp:340] deserializePlugin 
+2024-06-22 20:52:41.107536: T identity.cpp:41] IdentityPluginDynamic 
+2024-06-22 20:52:41.107538: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:41.107539: T identity.cpp:246] initialize 
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcublas.so.11
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcublas.so.11
+[06/22/2024-20:52:41] [V] [TRT] Using cublas as plugin tactic source
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcublasLt.so.11
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcublasLt.so.11
+[06/22/2024-20:52:41] [V] [TRT] Using cublasLt as core library tactic source
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +10, now: CPU 2170, GPU 1616 (MiB)
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcudnn.so.8
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcudnn.so.8
+[06/22/2024-20:52:41] [V] [TRT] Using cuDNN as plugin tactic source
+[06/22/2024-20:52:41] [V] [TRT] Using cuDNN as core library tactic source
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 2170, GPU 1624 (MiB)
+2024-06-22 20:52:41.121434: T identity.cpp:246] initialize 
+[06/22/2024-20:52:41] [V] [TRT] Deserialization required 15846 microseconds.
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in engine deserialization: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
+[06/22/2024-20:52:41] [I] Engine deserialized in 0.0160677 sec.
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcublas.so.11
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcublas.so.11
+[06/22/2024-20:52:41] [V] [TRT] Using cublas as plugin tactic source
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcublasLt.so.11
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcublasLt.so.11
+[06/22/2024-20:52:41] [V] [TRT] Using cublasLt as core library tactic source
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +10, now: CPU 2170, GPU 1616 (MiB)
+[06/22/2024-20:52:41] [V] [TRT] Trying to load shared library libcudnn.so.8
+[06/22/2024-20:52:41] [V] [TRT] Loaded shared library libcudnn.so.8
+[06/22/2024-20:52:41] [V] [TRT] Using cuDNN as plugin tactic source
+[06/22/2024-20:52:41] [V] [TRT] Using cuDNN as core library tactic source
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +0, GPU +8, now: CPU 2170, GPU 1624 (MiB)
+2024-06-22 20:52:41.126984: T identity.cpp:55] clone 
+2024-06-22 20:52:41.126989: T identity.cpp:36] IdentityPluginDynamic 
+2024-06-22 20:52:41.126991: T identity.cpp:276] setPluginNamespace 
+2024-06-22 20:52:41.126992: T identity.cpp:246] initialize 
+[06/22/2024-20:52:41] [V] [TRT] Total per-runner device persistent memory is 0
+[06/22/2024-20:52:41] [V] [TRT] Total per-runner host persistent memory is 112
+2024-06-22 20:52:41.132775: T identity.cpp:76] attachToContext 
+[06/22/2024-20:52:41] [V] [TRT] Allocated activation device memory of size 0
+[06/22/2024-20:52:41] [I] [TRT] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +0, now: CPU 0, GPU 0 (MiB)
+[06/22/2024-20:52:41] [I] Setting persistentCacheLimit to 0 bytes.
+[06/22/2024-20:52:41] [V] Using enqueueV3.
+[06/22/2024-20:52:41] [I] Using random values for input TRT::Identity_TRT_0
+[06/22/2024-20:52:41] [I] Created input binding for TRT::Identity_TRT_0 with dimensions 1x40000x256
+[06/22/2024-20:52:41] [I] Using random values for output 1
+[06/22/2024-20:52:41] [I] Created output binding for 1 with dimensions 1x40000x256
+[06/22/2024-20:52:41] [I] Starting inference
+2024-06-22 20:52:41.518472: T identity.cpp:133] configurePlugin 
+2024-06-22 20:52:41.518492: T identity.cpp:152] enqueue 
+2024-06-22 20:52:41.518511: I identity.cpp:161] enqueue hello enter branch ... kFLOAT kLINEAR 1.000000
+[06/22/2024-20:52:44] [I] Warmup completed 4 queries over 200 ms
+[06/22/2024-20:52:44] [I] Timing trace has 225 queries over 3.00693 s
+[06/22/2024-20:52:44] [I] 
+[06/22/2024-20:52:44] [I] === Trace details ===
+[06/22/2024-20:52:44] [I] Trace averages of 10 runs:
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472678 ms - Host latency: 12.9237 ms (enqueue 0.0724304 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472675 ms - Host latency: 12.9169 ms (enqueue 0.117117 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.473187 ms - Host latency: 12.9181 ms (enqueue 0.0575287 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.4729 ms - Host latency: 12.9136 ms (enqueue 0.0793091 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.47309 ms - Host latency: 12.9277 ms (enqueue 0.0512085 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472986 ms - Host latency: 12.9074 ms (enqueue 0.0509155 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472998 ms - Host latency: 12.9076 ms (enqueue 0.0827148 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472791 ms - Host latency: 12.9353 ms (enqueue 0.127136 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472986 ms - Host latency: 12.9204 ms (enqueue 0.0891602 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.472876 ms - Host latency: 12.9308 ms (enqueue 0.066333 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.468286 ms - Host latency: 12.9312 ms (enqueue 0.109558 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.439612 ms - Host latency: 12.9083 ms (enqueue 0.0665283 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.437256 ms - Host latency: 12.8825 ms (enqueue 0.0993286 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.44082 ms - Host latency: 12.8824 ms (enqueue 0.0524048 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.447632 ms - Host latency: 12.9013 ms (enqueue 0.0604248 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.447705 ms - Host latency: 12.8997 ms (enqueue 0.0882324 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.448315 ms - Host latency: 12.8906 ms (enqueue 0.075 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.450757 ms - Host latency: 12.9035 ms (enqueue 0.090918 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.448901 ms - Host latency: 12.8936 ms (enqueue 0.0871094 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.44751 ms - Host latency: 12.897 ms (enqueue 0.0952637 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.447021 ms - Host latency: 12.8909 ms (enqueue 0.08479 ms)
+[06/22/2024-20:52:44] [I] Average on 10 runs - GPU latency: 0.445801 ms - Host latency: 12.8993 ms (enqueue 0.129663 ms)
+[06/22/2024-20:52:44] [I] 
+[06/22/2024-20:52:44] [I] === Performance summary ===
+[06/22/2024-20:52:44] [I] Throughput: 74.8273 qps
+[06/22/2024-20:52:44] [I] Latency: min = 12.8588 ms, max = 12.9963 ms, mean = 12.9076 ms, median = 12.908 ms, percentile(90%) = 12.9387 ms, percentile(95%) = 12.9518 ms, percentile(99%) = 12.9889 ms
+[06/22/2024-20:52:44] [I] Enqueue Time: min = 0.0297241 ms, max = 0.497314 ms, mean = 0.0838908 ms, median = 0.060791 ms, percentile(90%) = 0.118408 ms, percentile(95%) = 0.253174 ms, percentile(99%) = 0.427612 ms
+[06/22/2024-20:52:44] [I] H2D Latency: min = 6.20386 ms, max = 6.30634 ms, mean = 6.22974 ms, median = 6.22552 ms, percentile(90%) = 6.25354 ms, percentile(95%) = 6.26904 ms, percentile(99%) = 6.29822 ms
+[06/22/2024-20:52:44] [I] GPU Compute Time: min = 0.435181 ms, max = 0.476135 ms, mean = 0.458685 ms, median = 0.453613 ms, percentile(90%) = 0.473145 ms, percentile(95%) = 0.474121 ms, percentile(99%) = 0.474121 ms
+[06/22/2024-20:52:44] [I] D2H Latency: min = 6.21265 ms, max = 6.25146 ms, mean = 6.21916 ms, median = 6.21509 ms, percentile(90%) = 6.23511 ms, percentile(95%) = 6.24438 ms, percentile(99%) = 6.24841 ms
+[06/22/2024-20:52:44] [I] Total Host Walltime: 3.00693 s
+[06/22/2024-20:52:44] [I] Total GPU Compute Time: 0.103204 s
+[06/22/2024-20:52:44] [W] * Throughput may be bound by host-to-device transfers for the inputs rather than GPU Compute and the GPU may be under-utilized.
+[06/22/2024-20:52:44] [W]   Add --noDataTransfers flag to disable data transfers.
+[06/22/2024-20:52:44] [W] * Throughput may be bound by device-to-host transfers for the outputs rather than GPU Compute and the GPU may be under-utilized.
+[06/22/2024-20:52:44] [W]   Add --noDataTransfers flag to disable data transfers.
+[06/22/2024-20:52:44] [W] * GPU compute time is unstable, with coefficient of variance = 3.08398%.
+[06/22/2024-20:52:44] [W]   If not already in use, locking GPU clock frequency or adding --useSpinWait may improve the stability.
+[06/22/2024-20:52:44] [I] Explanations of the performance metrics are printed in the verbose logs.
+[06/22/2024-20:52:44] [V] 
+[06/22/2024-20:52:44] [V] === Explanations of the performance metrics ===
+[06/22/2024-20:52:44] [V] Total Host Walltime: the host walltime from when the first query (after warmups) is enqueued to when the last query is completed.
+[06/22/2024-20:52:44] [V] GPU Compute Time: the GPU latency to execute the kernels for a query.
+[06/22/2024-20:52:44] [V] Total GPU Compute Time: the summation of the GPU Compute Time of all the queries. If this is significantly shorter than Total Host Walltime, the GPU may be under-utilized because of host-side overheads or data transfers.
+[06/22/2024-20:52:44] [V] Throughput: the observed throughput computed by dividing the number of queries by the Total Host Walltime. If this is significantly lower than the reciprocal of GPU Compute Time, the GPU may be under-utilized because of host-side overheads or data transfers.
+[06/22/2024-20:52:44] [V] Enqueue Time: the host latency to enqueue a query. If this is longer than GPU Compute Time, the GPU may be under-utilized.
+[06/22/2024-20:52:44] [V] H2D Latency: the latency for host-to-device data transfers for input tensors of a single query.
+[06/22/2024-20:52:44] [V] D2H Latency: the latency for device-to-host data transfers for output tensors of a single query.
+[06/22/2024-20:52:44] [V] Latency: the summation of H2D Latency, GPU Compute Time, and D2H Latency. This is the latency to infer a single query.
+[06/22/2024-20:52:44] [I] 
+&&&& PASSED TensorRT.trtexec [TensorRT v8510] # trtexec --onnx=./identity.onnx --plugins=./libplugin_custom.so --verbose
+2024-06-22 20:52:44.771995: T identity.cpp:80] detachFromContext 
+2024-06-22 20:52:44.773603: T identity.cpp:270] destroy 
+2024-06-22 20:52:44.773643: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:44.773649: T identity.cpp:252] terminate 
+2024-06-22 20:52:44.773657: T identity.cpp:252] terminate 
+2024-06-22 20:52:44.773660: T identity.cpp:270] destroy 
+2024-06-22 20:52:44.773662: T identity.cpp:49] ~IdentityPluginDynamic 
+2024-06-22 20:52:44.773664: T identity.cpp:252] terminate 
 
