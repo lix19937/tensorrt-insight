@@ -1,0 +1,28 @@
+pytorch1.13.1:û
+
+í	
+TRT::Identity_TRT_01/Identity_TRT"Identity_TRT2°	./identity.py(35): forward
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/nn/modules/module.py(1182): _slow_forward
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/nn/modules/module.py(1194): _call_impl
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/jit/_trace.py(118): wrapper
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/jit/_trace.py(127): forward
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/nn/modules/module.py(1194): _call_impl
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/jit/_trace.py(1184): _get_trace_graph
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/onnx/utils.py(891): _trace_and_get_graph_from_model
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/onnx/utils.py(987): _create_jit_graph
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/onnx/utils.py(1111): _model_to_graph
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/onnx/utils.py(1529): _export
+/home/lix/anaconda3/envs/torch113/lib/python3.8/site-packages/torch/onnx/utils.py(504): export
+./identity.py(50): <module>
+:TRT	torch_jitZ,
+TRT::Identity_TRT_0
+
+
+À¸
+€bP
+1K
+IE
+Identity_TRT1_dim_0
+Identity_TRT1_dim_1
+Identity_TRT1_dim_2BB
+TRT
