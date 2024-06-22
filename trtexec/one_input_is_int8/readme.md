@@ -11,7 +11,15 @@ build.sh
 --------   
 
 测试发现  --fp16 或 fp32下， onnx 带有 **int8 或 uint8 或bool** 的不能进行build convert。  
-int32的输入是可以进行转换。       
+int32的输入是可以进行转换。        
+https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_plugin_v2.html#af502120d140358f8d8139ade5005b9f5  
+
+>  ## supportsFormat()
+>
+> ## Warning
+> for the format field, the values PluginFormat::kCHW4, PluginFormat::kCHW16, and PluginFormat::kCHW32 will not be passed in, this is to keep backward
+> compatibility with TensorRT 5.x series. Use PluginV2IOExt or PluginV2DynamicExt for other PluginFormats.
+> DataType:kBOOL and DataType::kUINT8 are not supported.     
 
 ```
 [06/22/2024-21:01:52] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +1225, GPU +338, now: CPU 2397, GPU 1674 (MiB)
