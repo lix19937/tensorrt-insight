@@ -10,7 +10,7 @@ build.sh
 
 --------   
 
-测试发现  --fp16 或 fp32下， onnx 带有 **int8 或 uint8 或bool** 的不能进行build convert。  
+测试发现  --fp16 或 fp32下， onnx 带有 **int8 或 uint8 或 bool** 的不能进行build convert。  
 int32的输入是可以进行转换。        
 https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_plugin_v2.html#af502120d140358f8d8139ade5005b9f5  
 
