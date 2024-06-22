@@ -10,7 +10,14 @@ build.sh
 
 --------   
 
-测试发现  --fp16 或 fp32下， onnx 带有 **int8 或 uint8 或 bool** 的不能进行build convert。  
+测试发现  --fp16 或 fp32下，  
+```sh
+trtexec --onnx=./sca.onnx --plugins=./libplugin_custom.so --verbose --inputIOFormats=fp32:chw,fp32:chw,int8:chw --outputIOFormats=int32:chw,int32:chw,fp32:chw,fp32:chw,fp32:chw
+
+trtexec --onnx=./sca.onnx --plugins=./libplugin_custom.so --verbose --inputIOFormats=fp16:chw,fp16:chw,int8:chw --outputIOFormats=int32:chw,int32:chw,fp16:chw,fp16:chw,fp16:chw --fp16    
+
+```
+onnx 带有 **int8 或 uint8 或 bool** 的不能进行build convert。  
 int32的输入是可以进行转换。        
 https://docs.nvidia.com/deeplearning/tensorrt/api/c_api/classnvinfer1_1_1_i_plugin_v2.html#af502120d140358f8d8139ade5005b9f5  
 
