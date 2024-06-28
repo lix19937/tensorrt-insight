@@ -31,7 +31,7 @@ enqueue batch 0
 
 **Throughput**
 
-观察到的吞吐量是通过将 number of inferences / `Total Host Walltime` 来计算的。如果这显着低于 GPU 计算时间的倒数，则 GPU 可能由于主机端开销或数据传输而未被充分利用。使用 CUDA graph（使用`--useCudaGraph` ）或禁用 H2D/D2H 传输（使用`--noDataTransfer` ）可以提高 GPU 利用率。**当`trtexec`检测到 GPU 未充分利用时，输出日志提供了有关使用哪个标志的指导**。
+观察到的吞吐量是通过将 number of inferences / `Total Host Walltime` 来计算的。如果这显着低于 1/`GPU Compute Time`，则 GPU 可能由于主机端开销或数据传输而未被充分利用。使用 CUDA graph（使用`--useCudaGraph` ）或禁用 H2D/D2H 传输（使用`--noDataTransfer` ）可以提高 GPU 利用率。**当`trtexec`检测到 GPU 未充分利用时，输出日志提供了有关使用哪个标志的指导**。
 
 **Host Latency**
 
