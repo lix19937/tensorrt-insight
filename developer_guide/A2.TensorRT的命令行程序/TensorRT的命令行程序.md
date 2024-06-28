@@ -25,7 +25,7 @@ enqueue batch 0
 -> enqueue batch 4 
 -> ...
 ```
-如果使用多流（ `--streams=N`标志），则`trtexec`在每个流上分别遵循此模式。
+如果使用多流（ `--infStreams=N`标志），则`trtexec`在每个流上分别遵循此模式。
 
 `trtexec`工具打印以下性能指标。下图显示了`trtexec`运行的示例 `Nsight` 系统配置文件，其中标记显示了每个性能指标的含义。
 
