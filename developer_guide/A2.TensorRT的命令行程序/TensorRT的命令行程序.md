@@ -31,7 +31,7 @@ enqueue batch 0
 
 **Throughput**
 
-观察到的吞吐量是通过将执行数除以 `Total Host Walltime` 来计算的。如果这显着低于 GPU 计算时间的倒数，则 GPU 可能由于主机端开销或数据传输而未被充分利用。使用 CUDA graph（使用`--useCudaGraph` ）或禁用 H2D/D2H 传输（使用`--noDataTransfer` ）可以提高 GPU 利用率。**当`trtexec`检测到 GPU 未充分利用时，输出日志提供了有关使用哪个标志的指导**。
+观察到的吞吐量是通过将 number of inferences / `Total Host Walltime` 来计算的。如果这显着低于 GPU 计算时间的倒数，则 GPU 可能由于主机端开销或数据传输而未被充分利用。使用 CUDA graph（使用`--useCudaGraph` ）或禁用 H2D/D2H 传输（使用`--noDataTransfer` ）可以提高 GPU 利用率。**当`trtexec`检测到 GPU 未充分利用时，输出日志提供了有关使用哪个标志的指导**。
 
 **Host Latency**
 
@@ -39,7 +39,7 @@ enqueue batch 0
 
 **Enqueue Time**
 
-将执行排入队列的主机延迟，包括调用 `H2D/D2H` CUDA API、运行主机端方法和启动 CUDA 内核。如果这比 GPU 计算时间长，则 GPU 可能未被充分利用，并且吞吐量可能由主机端开销支配。使用 CUDA 图（带有`--useCudaGraph` ）可以减少排队时间。
+将执行排入队列的主机延迟，包括调用 `H2D/D2H` CUDA API、运行主机端方法和启动 CUDA 内核。如果这比 GPU 计算时间长，则 GPU 可能未被充分利用，并且吞吐量可能由主机端开销支配。使用 CUDA graph（带有`--useCudaGraph` ）可以减少排队时间。
 
 **H2D Latency**
 
@@ -52,23 +52,23 @@ enqueue batch 0
 
 **GPU Compute Time**
 
-为执行 CUDA 内核的 GPU 延迟。
+执行 CUDA 内核的 GPU 延迟。
 
 **Total Host Walltime**
 
-从第一个执行（预热后）入队到最后一个执行完成的主机时间。
+从第一个执行（预热后）入队到最后一个执行完成的时间。
 
 
 **Total GPU Compute Time**
 
-所有执行的 GPU 计算时间的总和。如果这明显短于 `Total Host Walltime`，则 GPU 可能由于主机端开销或数据传输而未得到充分利用。
+所有执行的 ` GPU Compute Time` 的总和。如果这明显短于 `Total Host Walltime`，则 GPU 可能由于主机端开销或数据传输而未得到充分利用。
 
 图 1. 在 `Nsight` 系统下运行的正常`trtexec`的性能指标（`ShuffleNet`，`BS=16`，best，TitanRTX@1200MHz）
 
 ![](trtexec.png)
 
 
-将`--dumpProfile`标志添加到`trtexec`以显示每层性能配置文件，这使用户可以了解网络中的哪些层在 GPU 执行中花费的时间最多。每层性能分析也适用于作为 CUDA 图启动推理（需要 `CUDA 11.1` 及更高版本）。此外，使用`--profilingVerbosity=detailed`标志构建引擎并添加`--dumpLayerInfo`标志以显示详细的引擎信息，包括每层详细信息和绑定信息。这可以让你了解引擎中每一层对应的操作及其参数。
+将`--dumpProfile`标志添加到`trtexec`以显示每层性能配置文件，这使用户可以了解网络中的哪些层在 GPU 执行中花费的时间最多。每层性能分析也适用于作为 CUDA graph启动推理（需要 `CUDA 11.1` 及更高版本）。此外，使用`--profilingVerbosity=detailed`标志构建引擎并添加`--dumpLayerInfo`标志以显示详细的引擎信息，包括每层详细信息和绑定信息。这可以让你了解引擎中每一层对应的操作及其参数。
 
 ### A.3.1.2. Serialized Engine Generation
 
@@ -120,7 +120,7 @@ enqueue batch 0
 * `--batch=<N>` ：指定运行推理的批次大小。仅当输入模型为 UFF 或 Caffe 格式时才需要。如果输入模型是 ONNX 格式，或者引擎是使用显式批量维度构建的，请改用`--shapes` 。
 * `--shapes=<shapes>` ：指定要运行推理的输入形状。
 * `--warmUp=<duration in ms> `, `--duration=<duration in seconds>` , `--iterations=<N>` : 指定预热运行的最短持续时间、推理运行的最短持续时间和推理运行的迭代。例如，设置`--warmUp=0 --duration=0 --iterations`允许用户准确控制运行推理的迭代次数。
-* `--useCudaGraph` ：将推理捕获到 CUDA 图并通过启动图来运行推理。当构建的 TensorRT 引擎包含 CUDA 图捕获模式下不允许的操作时，可以忽略此参数。
+* `--useCudaGraph` ：将推理捕获到 CUDA graph并通过启动图来运行推理。当构建的 TensorRT 引擎包含 CUDA graph捕获模式下不允许的操作时，可以忽略此参数。
 * `--noDataTransfers` ：关闭主机到设备和设备到主机的数据传输。
 * `--streams=<N>` ：并行运行多个流的推理。
 * `--verbose` ：打开详细日志记录。
