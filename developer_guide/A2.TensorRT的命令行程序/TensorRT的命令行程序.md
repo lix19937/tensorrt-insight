@@ -39,8 +39,8 @@ enqueue batch 0
 
 **Enqueue Time**
 
-入队列的主机延迟，包括调用 `H2D/D2H` CUDA API、运行主机端方法、启动 CUDA 内核。  
-如果`Enqueue Time >  GPU Compute Time`，则 GPU 可能未被充分利用，并且吞吐量可能由主机端开销支配。使用 CUDA graph（带有`--useCudaGraph` ）可以减少排队时间。
+入队列的主机延迟，包括调用 `H2D/D2H` CUDA API、运行主机端函数、启动 CUDA 内核。  
+如果`Enqueue Time >  GPU Compute Time`，则 GPU 可能未被充分利用，并且吞吐量可能由主机端开销支配。使用 CUDA graph（带有`--useCudaGraph`）可以减少排队时间。
 
 **H2D Latency**
 
