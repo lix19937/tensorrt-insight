@@ -9,7 +9,7 @@ polygraphy surgeon sanitize --fold-constants input_model.onnx  -o folded_model.o
 python run_onnxrt.py     
 
 # onnx2plan 评测时间    
-trtexec --onnx=model_sim.onnx --fp16 --verbose --saveEngine=model_sim.plan --useCudaGraph \
+trtexec --onnx=model_sim.onnx --fp16 --verbose --saveEngine=model_sim.plan  \
 --dumpProfile --dumpLayerInfo --separateProfileRun \
 --noDataTransfers --useCudaGraph --useSpinWait   | tee log
 
