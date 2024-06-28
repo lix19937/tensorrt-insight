@@ -35,7 +35,7 @@ enqueue batch 0
 
 **Host Latency**
 
-`H2D `延迟、GPU 计算时间和 `D2H` 延迟的总和。这是推断单个执行的延迟。
+= `H2D Latency + GPU Compute Time + D2H Latency`。这是推断单个执行的延迟。
 
 **Enqueue Time**
 
