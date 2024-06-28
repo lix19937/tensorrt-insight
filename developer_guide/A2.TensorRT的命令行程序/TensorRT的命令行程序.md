@@ -39,12 +39,12 @@ enqueue batch 0
 
 **Enqueue Time**
 
-将执行排入队列的主机延迟，包括调用 `H2D/D2H` CUDA API、运行主机端方法和启动 CUDA 内核。如果`Enqueue Time >  GPU Compute Time`，则 GPU 可能未被充分利用，并且吞吐量可能由主机端开销支配。使用 CUDA graph（带有`--useCudaGraph` ）可以减少排队时间。
+入队列的主机延迟，包括调用 `H2D/D2H` CUDA API、运行主机端方法、启动 CUDA 内核。  
+如果`Enqueue Time >  GPU Compute Time`，则 GPU 可能未被充分利用，并且吞吐量可能由主机端开销支配。使用 CUDA graph（带有`--useCudaGraph` ）可以减少排队时间。
 
 **H2D Latency**
 
 单个执行的输入张量的主机到设备数据传输的延迟。添加`--noDataTransfer`以禁用 `H2D/D2H `数据传输。
-
 
 **D2H Latency**
 
@@ -61,7 +61,7 @@ enqueue batch 0
 
 **Total GPU Compute Time**
 
-所有执行的 ` GPU Compute Time` 的总和。如果这明显短于 `Total Host Walltime`，则 GPU 可能由于主机端开销或数据传输而未得到充分利用。
+所有执行的 `GPU Compute Time` 的总和。如果这明显短于 `Total Host Walltime`，则 GPU 可能由于主机端开销或数据传输而未得到充分利用。
 
 图 1. 在 `Nsight` 系统下运行的正常`trtexec`的性能指标（`ShuffleNet`，`BS=16`，best，TitanRTX@1200MHz）
 
