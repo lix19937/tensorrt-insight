@@ -1,0 +1,348 @@
+&&&& RUNNING TensorRT.trtexec [TensorRT v8410] # /usr/src/tensorrt/bin/trtexec --onnx=./script.onnx --verbose --dumpProfile --separateProfileRun --best
+[01/10/2022-05:13:48] [I] === Model Options ===
+[01/10/2022-05:13:48] [I] Format: ONNX
+[01/10/2022-05:13:48] [I] Model: ./script.onnx
+[01/10/2022-05:13:48] [I] Output:
+[01/10/2022-05:13:48] [I] === Build Options ===
+[01/10/2022-05:13:48] [I] Max batch: explicit batch
+[01/10/2022-05:13:48] [I] Memory Pools: workspace: default, dlaSRAM: default, dlaLocalDRAM: default, dlaGlobalDRAM: default
+[01/10/2022-05:13:48] [I] minTiming: 1
+[01/10/2022-05:13:48] [I] avgTiming: 8
+[01/10/2022-05:13:48] [I] Precision: FP32+FP16+INT8
+[01/10/2022-05:13:48] [I] LayerPrecisions: 
+[01/10/2022-05:13:48] [I] Calibration: Dynamic
+[01/10/2022-05:13:48] [I] Refit: Disabled
+[01/10/2022-05:13:48] [I] Sparsity: Disabled
+[01/10/2022-05:13:48] [I] Safe mode: Disabled
+[01/10/2022-05:13:48] [I] DirectIO mode: Disabled
+[01/10/2022-05:13:48] [I] Restricted mode: Disabled
+[01/10/2022-05:13:48] [I] Build only: Disabled
+[01/10/2022-05:13:48] [I] Save engine: 
+[01/10/2022-05:13:48] [I] Load engine: 
+[01/10/2022-05:13:48] [I] Profiling verbosity: 0
+[01/10/2022-05:13:48] [I] Tactic sources: Using default tactic sources
+[01/10/2022-05:13:48] [I] timingCacheMode: local
+[01/10/2022-05:13:48] [I] timingCacheFile: 
+[01/10/2022-05:13:48] [I] Input(s)s format: fp32:CHW
+[01/10/2022-05:13:48] [I] Output(s)s format: fp32:CHW
+[01/10/2022-05:13:48] [I] Input build shapes: model
+[01/10/2022-05:13:48] [I] Input calibration shapes: model
+[01/10/2022-05:13:48] [I] === System Options ===
+[01/10/2022-05:13:48] [I] Device: 0
+[01/10/2022-05:13:48] [I] DLACore: 
+[01/10/2022-05:13:48] [I] Plugins:
+[01/10/2022-05:13:48] [I] === Inference Options ===
+[01/10/2022-05:13:48] [I] Batch: Explicit
+[01/10/2022-05:13:48] [I] Input inference shapes: model
+[01/10/2022-05:13:48] [I] Iterations: 10
+[01/10/2022-05:13:48] [I] Duration: 3s (+ 200ms warm up)
+[01/10/2022-05:13:48] [I] Sleep time: 0ms
+[01/10/2022-05:13:48] [I] Idle time: 0ms
+[01/10/2022-05:13:48] [I] Streams: 1
+[01/10/2022-05:13:48] [I] ExposeDMA: Disabled
+[01/10/2022-05:13:48] [I] Data transfers: Enabled
+[01/10/2022-05:13:48] [I] Spin-wait: Disabled
+[01/10/2022-05:13:48] [I] Multithreading: Disabled
+[01/10/2022-05:13:48] [I] CUDA Graph: Disabled
+[01/10/2022-05:13:48] [I] Separate profiling: Enabled
+[01/10/2022-05:13:48] [I] Time Deserialize: Disabled
+[01/10/2022-05:13:48] [I] Time Refit: Disabled
+[01/10/2022-05:13:48] [I] Inputs:
+[01/10/2022-05:13:48] [I] === Reporting Options ===
+[01/10/2022-05:13:48] [I] Verbose: Enabled
+[01/10/2022-05:13:48] [I] Averages: 10 inferences
+[01/10/2022-05:13:48] [I] Percentile: 99
+[01/10/2022-05:13:48] [I] Dump refittable layers:Disabled
+[01/10/2022-05:13:48] [I] Dump output: Disabled
+[01/10/2022-05:13:48] [I] Profile: Enabled
+[01/10/2022-05:13:48] [I] Export timing to JSON file: 
+[01/10/2022-05:13:48] [I] Export output to JSON file: 
+[01/10/2022-05:13:48] [I] Export profile to JSON file: 
+[01/10/2022-05:13:48] [I] 
+[01/10/2022-05:13:48] [I] === Device Information ===
+[01/10/2022-05:13:48] [I] Selected Device: Orin
+[01/10/2022-05:13:48] [I] Compute Capability: 8.7
+[01/10/2022-05:13:48] [I] SMs: 16
+[01/10/2022-05:13:48] [I] Compute Clock Rate: 1.275 GHz
+[01/10/2022-05:13:48] [I] Device Global Memory: 28893 MiB
+[01/10/2022-05:13:48] [I] Shared Memory per SM: 164 KiB
+[01/10/2022-05:13:48] [I] Memory Bus Width: 128 bits (ECC disabled)
+[01/10/2022-05:13:48] [I] Memory Clock Rate: 1.275 GHz
+[01/10/2022-05:13:48] [I] 
+[01/10/2022-05:13:48] [I] TensorRT version: 8.4.10
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::GridAnchor_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::GridAnchorRect_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::NMS_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::Reorg_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::Region_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::Clip_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::LReLU_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::PriorBox_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::Normalize_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::ScatterND version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::RPROI_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::BatchedNMS_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::BatchedNMSDynamic_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::FlattenConcat_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::CropAndResize version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::DetectionLayer_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::EfficientNMS_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::EfficientNMS_ONNX_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::EfficientNMS_Explicit_TF_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::EfficientNMS_Implicit_TF_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::Proposal version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::ProposalLayer_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::PyramidROIAlign_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::ResizeNearest_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::Split version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::SpecialSlice_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::InstanceNormalization_TRT version 1
+[01/10/2022-05:13:48] [V] [TRT] Registered plugin creator - ::InstanceNormalization_TRT version 2
+[01/10/2022-05:13:48] [I] [TRT] [MemUsageChange] Init CUDA: CPU +294, GPU +0, now: CPU 319, GPU 3856 (MiB)
+[01/10/2022-05:13:49] [I] [TRT] [MemUsageSnapshot] Begin constructing builder kernel library: CPU 336 MiB, GPU 3874 MiB
+[01/10/2022-05:13:49] [I] [TRT] [MemUsageSnapshot] End constructing builder kernel library: CPU 648 MiB, GPU 4168 MiB
+[01/10/2022-05:13:49] [I] Start parsing network model
+[01/10/2022-05:13:49] [I] [TRT] ----------------------------------------------------------------
+[01/10/2022-05:13:49] [I] [TRT] Input filename:   ./script.onnx
+[01/10/2022-05:13:49] [I] [TRT] ONNX IR version:  0.0.6
+[01/10/2022-05:13:49] [I] [TRT] Opset version:    13
+[01/10/2022-05:13:49] [I] [TRT] Producer name:    pytorch
+[01/10/2022-05:13:49] [I] [TRT] Producer version: 1.8
+[01/10/2022-05:13:49] [I] [TRT] Domain:           
+[01/10/2022-05:13:49] [I] [TRT] Model version:    0
+[01/10/2022-05:13:49] [I] [TRT] Doc string:       
+[01/10/2022-05:13:49] [I] [TRT] ----------------------------------------------------------------
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::GridAnchor_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::GridAnchorRect_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::NMS_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::Reorg_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::Region_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::Clip_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::LReLU_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::PriorBox_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::Normalize_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::ScatterND version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::RPROI_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::BatchedNMS_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::BatchedNMSDynamic_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::FlattenConcat_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::CropAndResize version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::DetectionLayer_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::EfficientNMS_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::EfficientNMS_ONNX_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::EfficientNMS_Explicit_TF_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::EfficientNMS_Implicit_TF_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::Proposal version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::ProposalLayer_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::PyramidROIAlign_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::ResizeNearest_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::Split version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::SpecialSlice_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::InstanceNormalization_TRT version 1
+[01/10/2022-05:13:49] [V] [TRT] Plugin creator already registered - ::InstanceNormalization_TRT version 2
+[01/10/2022-05:13:49] [V] [TRT] Adding network input: input with dtype: float32, dimensions: (1, 3, 512, 512)
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: input for ONNX tensor: input
+[01/10/2022-05:13:49] [V] [TRT] Importing initializer: linear.bias
+[01/10/2022-05:13:49] [V] [TRT] Importing initializer: 18
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: MatMul_0 [MatMul]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: input
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 18
+[01/10/2022-05:13:49] [V] [TRT] MatMul_0 [MatMul] inputs: [input -> (1, 3, 512, 512)[FLOAT]], [18 -> (512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: 18 for ONNX node: 18
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: MatMul_0 for ONNX node: MatMul_0
+[01/10/2022-05:13:49] [I] [TRT] MatMul_0: broadcasting input1 to make tensors conform, dims(input0)=[1,3,512,512][NONE] dims(input1)=[1,1,512,512][NONE].
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 4 for ONNX tensor: 4
+[01/10/2022-05:13:49] [V] [TRT] MatMul_0 [MatMul] outputs: [4 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Add_1 [Add]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 4
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: linear.bias
+[01/10/2022-05:13:49] [V] [TRT] Add_1 [Add] inputs: [4 -> (1, 3, 512, 512)[FLOAT]], [linear.bias -> (512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: linear.bias for ONNX node: linear.bias
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Add_1 for ONNX node: Add_1
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 5 for ONNX tensor: 5
+[01/10/2022-05:13:49] [V] [TRT] Add_1 [Add] outputs: [5 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: ReduceMean_2 [ReduceMean]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 5
+[01/10/2022-05:13:49] [V] [TRT] ReduceMean_2 [ReduceMean] inputs: [5 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: ReduceMean_2 for ONNX node: ReduceMean_2
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 6 for ONNX tensor: 6
+[01/10/2022-05:13:49] [V] [TRT] ReduceMean_2 [ReduceMean] outputs: [6 -> ()[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Constant_3 [Constant]
+[01/10/2022-05:13:49] [V] [TRT] Constant_3 [Constant] inputs: 
+[01/10/2022-05:13:49] [V] [TRT] Constant_3 [Constant] outputs: [7 -> ()[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Greater_4 [Greater]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 6
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 7
+[01/10/2022-05:13:49] [V] [TRT] Greater_4 [Greater] inputs: [6 -> ()[FLOAT]], [7 -> ()[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: 7 for ONNX node: 7
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Greater_4 for ONNX node: Greater_4
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 8 for ONNX tensor: 8
+[01/10/2022-05:13:49] [V] [TRT] Greater_4 [Greater] outputs: [8 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Cast_5 [Cast]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 8
+[01/10/2022-05:13:49] [V] [TRT] Cast_5 [Cast] inputs: [8 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Casting to type: bool
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Cast_5 for ONNX node: Cast_5
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 9 for ONNX tensor: 9
+[01/10/2022-05:13:49] [V] [TRT] Cast_5 [Cast] outputs: [9 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: If_6 [If]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 9
+[01/10/2022-05:13:49] [V] [TRT] If_6 [If] inputs: [9 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Identity_7 [Identity]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 5
+[01/10/2022-05:13:49] [V] [TRT] Identity_7 [Identity] inputs: [5 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Identity_7 for ONNX node: Identity_7
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 11 for ONNX tensor: 11
+[01/10/2022-05:13:49] [V] [TRT] Identity_7 [Identity] outputs: [11 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Constant_8 [Constant]
+[01/10/2022-05:13:49] [V] [TRT] Constant_8 [Constant] inputs: 
+[01/10/2022-05:13:49] [V] [TRT] Constant_8 [Constant] outputs: [12 -> ()[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Equal_9 [Equal]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 6
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 12
+[01/10/2022-05:13:49] [V] [TRT] Equal_9 [Equal] inputs: [6 -> ()[FLOAT]], [12 -> ()[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: 12 for ONNX node: 12
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Equal_9 for ONNX node: Equal_9
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 13 for ONNX tensor: 13
+[01/10/2022-05:13:49] [V] [TRT] Equal_9 [Equal] outputs: [13 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Cast_10 [Cast]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 13
+[01/10/2022-05:13:49] [V] [TRT] Cast_10 [Cast] inputs: [13 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Casting to type: bool
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Cast_10 for ONNX node: Cast_10
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 14 for ONNX tensor: 14
+[01/10/2022-05:13:49] [V] [TRT] Cast_10 [Cast] outputs: [14 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: If_11 [If]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 14
+[01/10/2022-05:13:49] [V] [TRT] If_11 [If] inputs: [14 -> ()[BOOL]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Sigmoid_12 [Sigmoid]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 5
+[01/10/2022-05:13:49] [V] [TRT] Sigmoid_12 [Sigmoid] inputs: [5 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Sigmoid_12 for ONNX node: Sigmoid_12
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 16 for ONNX tensor: 16
+[01/10/2022-05:13:49] [V] [TRT] Sigmoid_12 [Sigmoid] outputs: [16 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Parsing node: Relu_13 [Relu]
+[01/10/2022-05:13:49] [V] [TRT] Searching for input: 5
+[01/10/2022-05:13:49] [V] [TRT] Relu_13 [Relu] inputs: [5 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: Relu_13 for ONNX node: Relu_13
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 17 for ONNX tensor: 17
+[01/10/2022-05:13:49] [V] [TRT] Relu_13 [Relu] outputs: [17 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: If_11_OutputLayer for ONNX node: If_11_OutputLayer
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 15 for ONNX tensor: 15
+[01/10/2022-05:13:49] [V] [TRT] If_11 [If] outputs: [15 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Registering layer: If_6_OutputLayer for ONNX node: If_6_OutputLayer
+[01/10/2022-05:13:49] [V] [TRT] Registering tensor: 10_0 for ONNX tensor: 10
+[01/10/2022-05:13:49] [V] [TRT] If_6 [If] outputs: [10 -> (1, 3, 512, 512)[FLOAT]], 
+[01/10/2022-05:13:49] [V] [TRT] Marking 10_0 as output: 10
+[01/10/2022-05:13:49] [I] Finish parsing network model
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for (Unnamed Layer* 0) [Constant]_output to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for (Unnamed Layer* 1) [Shuffle]_output to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for input to [-2,2]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 4 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for (Unnamed Layer* 3) [Constant]_output to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for (Unnamed Layer* 4) [Shuffle]_output to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 5 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 6 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for (Unnamed Layer* 7) [Constant]_output to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 8 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 9 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 11 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for (Unnamed Layer* 12) [Constant]_output to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 13 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 14 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 16 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 17 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 15 to [-4,4]
+[01/10/2022-05:13:49] [V] [TRT] Setting dynamic range for 10 to [-4,4]
+[01/10/2022-05:13:49] [I] [TRT] MatMul_0: broadcasting input1 to make tensors conform, dims(input0)=[1,3,512,512][NONE] dims(input1)=[1,1,512,512][NONE].
+[01/10/2022-05:13:49] [W] [TRT] Calibrator is not being used. Users must provide dynamic range for all tensors that are not Int32 or Bool.
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.015748,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] User overriding scale with scale and zero-point Quantization(scale: {0.0314961,}, zero-point: {0,})
+[01/10/2022-05:13:49] [V] [TRT] Configuring builder for Int8 Mode completed in 0.000272992 seconds.
+[01/10/2022-05:13:49] [V] [TRT] Applying generic optimizations to the graph for inference.
+[01/10/2022-05:13:49] [V] [TRT] Original: 20 layers
+[01/10/2022-05:13:49] [V] [TRT] After dead-layer removal: 20 layers
+[01/10/2022-05:13:49] [V] [TRT] Running: ConstShuffleFusion
+[01/10/2022-05:13:49] [V] [TRT] ConstShuffleFusion: Fusing 18 with (Unnamed Layer* 1) [Shuffle]
+[01/10/2022-05:13:49] [V] [TRT] Running: ConstShuffleFusion
+[01/10/2022-05:13:49] [V] [TRT] ConstShuffleFusion: Fusing linear.bias with (Unnamed Layer* 4) [Shuffle]
+[01/10/2022-05:13:49] [V] [TRT] DLA Memory Consumption Summary:
+[01/10/2022-05:13:49] [V] [TRT] 	Number of DLA node candidates offloaded : 0 out of 1
+[01/10/2022-05:13:49] [V] [TRT] 	Total memory required by accepted candidates : Managed SRAM = 0 MiB,	Local DRAM = 0 MiB,	Global DRAM = 0 MiB
+[01/10/2022-05:13:49] [V] [TRT] After Myelin optimization: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] Applying ScaleNodes fusions.
+[01/10/2022-05:13:49] [V] [TRT] After scale fusion: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] After vertical fusions: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] After dupe layer removal: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] After final dead-layer removal: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] After tensor merging: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] After slice removal: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] After concat removal: 1 layers
+[01/10/2022-05:13:49] [V] [TRT] Graph construction and optimization completed in 0.00225069 seconds.
+[01/10/2022-05:13:49] [I] [TRT] ---------- Layers Running on DLA ----------
+[01/10/2022-05:13:49] [I] [TRT] ---------- Layers Running on GPU ----------
+[01/10/2022-05:13:49] [I] [TRT] [GpuLayer] MYELIN: {ForeignNode[18 + (Unnamed Layer* 1) [Shuffle]...If_6_OutputLayer]}
+[01/10/2022-05:13:50] [V] [TRT] Using cublasLt as a tactic source
+[01/10/2022-05:13:50] [I] [TRT] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +534, GPU +503, now: CPU 1183, GPU 4674 (MiB)
+[01/10/2022-05:13:50] [V] [TRT] Using cuDNN as a tactic source
+[01/10/2022-05:13:50] [I] [TRT] [MemUsageChange] Init cuDNN: CPU +85, GPU +108, now: CPU 1268, GPU 4782 (MiB)
+[01/10/2022-05:13:50] [I] [TRT] Local timing cache in use. Profiling results in this builder pass will not be stored.
+[01/10/2022-05:13:50] [V] [TRT] Constructing optimization profile number 0 [1/1].
+[01/10/2022-05:13:50] [V] [TRT] Reserving memory for activation tensors. Host: 0 bytes Device: 6291456 bytes
+[01/10/2022-05:13:50] [V] [TRT] =============== Computing reformatting costs
+[01/10/2022-05:13:50] [V] [TRT] *************** Autotuning Reformat: Float(786432,262144,512,1) -> Half(786432,262144,512,1) ***************
+[01/10/2022-05:13:50] [V] [TRT] --------------- Timing Runner: Optimizer Reformat(input -> <out>) (Reformat)
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 1002 Time: 0.0429463
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 0 Time: 0.0660069
+[01/10/2022-05:13:50] [V] [TRT] Fastest Tactic: 1002 Time: 0.0429463
+[01/10/2022-05:13:50] [V] [TRT] *************** Autotuning Reformat: Float(786432,262144,512,1) -> Half(262144,1:8,512,1) ***************
+[01/10/2022-05:13:50] [V] [TRT] --------------- Timing Runner: Optimizer Reformat(input -> <out>) (Reformat)
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 1002 Time: 0.0747223
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 0 Time: 0.0516206
+[01/10/2022-05:13:50] [V] [TRT] Fastest Tactic: 0 Time: 0.0516206
+[01/10/2022-05:13:50] [V] [TRT] =============== Computing reformatting costs
+[01/10/2022-05:13:50] [V] [TRT] *************** Autotuning Reformat: Half(786432,262144,512,1) -> Float(786432,262144,512,1) ***************
+[01/10/2022-05:13:50] [V] [TRT] --------------- Timing Runner: Optimizer Reformat(<in> -> 10) (Reformat)
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 1002 Time: 0.0440206
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 0 Time: 0.0581623
+[01/10/2022-05:13:50] [V] [TRT] Fastest Tactic: 1002 Time: 0.0440206
+[01/10/2022-05:13:50] [V] [TRT] *************** Autotuning Reformat: Half(262144,1:8,512,1) -> Float(786432,262144,512,1) ***************
+[01/10/2022-05:13:50] [V] [TRT] --------------- Timing Runner: Optimizer Reformat(<in> -> 10) (Reformat)
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 1002 Time: 0.308517
+[01/10/2022-05:13:50] [V] [TRT] Setting a default quantization params because quantization data is missing for 
+[01/10/2022-05:13:50] [V] [TRT] Tactic: 0 Time: 0.0459371
+[01/10/2022-05:13:50] [V] [TRT] Fastest Tactic: 0 Time: 0.0459371
+[01/10/2022-05:13:50] [V] [TRT] =============== Computing costs for 
+[01/10/2022-05:13:50] [V] [TRT] *************** Autotuning format combination: Float(786432,262144,512,1) -> Float(786432,262144,512,1) ***************
+[01/10/2022-05:13:50] [V] [TRT] --------------- Timing Runner: {ForeignNode[18 + (Unnamed Layer* 1) [Shuffle]...If_6_OutputLayer]} (Myelin)
+[01/10/2022-05:13:52] [V] [TRT] Setting a default quantization params because quantization data is missing for {ForeignNode[18 + (Unnamed Layer* 1) [Shuffle]...If_6_OutputLayer]}
+[01/10/2022-05:13:52] [V] [TRT] Tactic: 0 Time: 0.450862
+[01/10/2022-05:13:52] [V] [TRT] Fastest Tactic: 0 Time: 0.450862
+[01/10/2022-05:13:52] [V] [TRT] >>>>>>>>>>>>>>> Chose Runner Type: Myelin Tactic: 0
+[01/10/2022-05:13:52] [V] [TRT] *************** Autotuning format combination: Half(786432,262144,512,1) -> Half(786432,262144,512,1) ***************
+[01/10/2022-05:13:52] [V] [TRT] --------------- Timing Runner: {ForeignNode[18 + (Unnamed Layer* 1) [Shuffle]...If_6_OutputLayer]} (Myelin)
+trtexec: /root/gpgpu/MachineLearning/myelin/src/compiler/ir/graph.cpp:1059: myelin::ir::tensor_t* myelin::ir::graph_t::host_tensor_const(myelin::util::value_t, myelin::lib::ptr_set_t<myelin::ir::tensor_t*>&): Assertion `0 && "Unsupported type"' failed.
