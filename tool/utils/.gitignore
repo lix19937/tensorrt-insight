@@ -1,0 +1,14 @@
+# ONNX Models
+*.tar.gz
+*.onnx
+*.npz
+resnet50/
+
+# TensorRT Engines
+*.plan
+*.engine
+
+# Plugins
+*.d
+*.o
+*.so
