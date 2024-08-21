@@ -13,6 +13,13 @@ https://github.com/lix19937/auto_qat
 https://github.com/NVIDIA/TensorRT/issues/3205
 
 
+https://github.com/NVIDIA/TensorRT/issues/2182    
+Did you start with a pretrained model w/o QAT? If yes, does the FP32 model (unquantized) also shows instability?
+How did you add the QDQ nodes and how did you determine the scales (what SW did you use? did you perform calibration? Was the calibration DS large enough?)?
+Did you perform fine-tuning after adding fake quantization? Did you observe the loss vs accuracy curve? Did you check that you did not overfit?
+Intuitively I think you should verify that your model is not overfitting because an overfitted model will be unstable when we introduce noise from quantization and limited-precision arithmetic (in float arithmetic different operations ordering can produce small differences in output).
+
+
 
 ## 示例  
 * yolox
