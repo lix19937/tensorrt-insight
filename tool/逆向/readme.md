@@ -9,3 +9,5 @@ onnx文件是可以导出为prototxt文件
 + 如果是 dla文件  
 
 
+
+https://github.com/onnx/onnx/blob/main/docs/PythonAPIOverview.md   
