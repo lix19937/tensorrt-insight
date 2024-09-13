@@ -32,7 +32,7 @@
   |src|||
   |test|||
   |tutorial|||      
-更多见 https://github.com/lix19937/history/edit/main/infer/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6.md
+更多见 [设计](设计.md)
 
 ## 技术验证与实现   
 
