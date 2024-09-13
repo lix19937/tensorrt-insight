@@ -21,14 +21,12 @@
 其实由F.normalize(x, p=2.0, dim=-1)导出，可以进行针对性合并。第二个图计算跟第一个图类似，但是为不同代码编写方式，这种最好是修改模型pytorch代码改成同一种norm函数，降低模型图优化代码开发。  
 
 *  SpaceToDepth与DepthToSpace算子   
-图中reshape+transpose(perm=[0, 1, 3, 5, 2, 4])计算等价于SpaceToDepth，由于transpose场景特别多，这里替换后可以在计算上进行更加针对性优化，此外，这个优化使得做NCHW到NHWC等格式转换优化也更加容易    
-
-transpose(perm=[0, 1, 4, 2, 5, 3])等价于DepthToSpace   
+图中reshape+transpose(perm=[0, 1, 3, 5, 2, 4])计算等价于SpaceToDepth，由于transpose场景特别多，这里替换后可以在计算上进行更加针对性优化，此外，这个优化使得做NCHW到NHWC等格式转换优化也更加容易，transpose(perm=[0, 1, 4, 2, 5, 3])等价于DepthToSpace   
 
 *  transpose+reshape+transpose to  transpose
 
 
-* high-mm -> low-mm
+*  high-mm -> low-mm
     
 
 *  矩阵乘+BN 融合
