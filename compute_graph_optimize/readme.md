@@ -65,12 +65,11 @@
 下图中这个稍微复杂点，slice可以替换为gahter，elemwise可以跟着合并，但gatherV2合并需要自定义算子batch gatherV2。   
 
 
-*  调整顺序从而把div折叠到matmul和bias_add参数里面    
-  
-
+*  调整顺序从而把div折叠到matmul和bias_add参数里面       
 通常不鼓励矩阵和大容量内存拷贝的`物理重排`的原因是，数据移动非常昂贵（在能量和性能方面），因此应将其最小化，理想情况下应仅作为`计算的一部分`进行。  
 换句话说，每次我们接触一些数据时，我们都想在存储之前对其进行一些变换。
 
+----------------------------    
 
 更多算子融合相关见 https://github.com/lix19937/llm-deploy/blob/master/op_fusion.md    
 
