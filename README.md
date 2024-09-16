@@ -18,6 +18,7 @@
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |       
 |[incubator](./incubator/)|孵化器|  |         
 |[developer_guide](./developer_guide/)                  |开发者指导|      |           
+|[triton-inference-server](./triton-inference-server/)    | triton|      |          
 
 tensorrt各版本迁移说明    
 https://docs.nvidia.com/deeplearning/tensorrt/migration-guide/index.html     
