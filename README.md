@@ -1,4 +1,4 @@
-tensorrt 是nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎框架/库。提供了cpp/python接口，以及用户自定义插件方法，涵盖了AI 推理引擎技术的方方面面。          
+tensorrt 是nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎框架/库。提供了cpp/python接口，以及用户自定义插件方法，涵盖了AI 推理引擎技术的主要方面。          
 
 
 |**topic**                       | **主题**| **备注**   |      
