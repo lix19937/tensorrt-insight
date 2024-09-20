@@ -21,6 +21,7 @@ tensorrt 是nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎
 |[incubator](./incubator/)|孵化器|  |         
 |[developer_guide](./developer_guide/)                  |开发者指导|      |           
 |[triton-inference-server](./triton-inference-server/)    | triton|      |          
+|[cuda](./cuda/)    | cuda编程|      |          
 
 tensorrt各版本迁移说明    
 https://docs.nvidia.com/deeplearning/tensorrt/migration-guide/index.html     
