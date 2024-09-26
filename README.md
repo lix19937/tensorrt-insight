@@ -25,7 +25,7 @@ Provides cpp/python interfaces and user-defined plugin methods, covering the mai
 |[developer_guide](./developer_guide/)                  |开发者指导|      |           
 |[triton-inference-server](./triton-inference-server/)    | triton|      |          
 |[cuda](./cuda/)    | cuda编程|      |          
-|[onnxruntime op](https://github.com/lix19937/xop)| onnxrt 自定义op|   |      
+|[onnxruntime op](https://github.com/lix19937/xop)| onnxrt 自定义op|辅助图优化，layer输出对齐   |      
 
  
     
