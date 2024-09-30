@@ -1,4 +1,4 @@
-TensorRT 是Nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎框架/库。提供了cpp/python接口，以及用户自定义插件方法，涵盖了AI 推理引擎技术的主要方面。          
+TensorRT 是Nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎框架/库，提供了cpp/python接口，以及用户自定义插件方法，涵盖了AI 推理引擎技术的主要方面。          
 
 TensorRT is a semi-open source high-performance AI inference engine framework/library developed by Nvidia, which spans across nv-gpu architectures.    
 Provides cpp/python interfaces and user-defined plugin methods, covering the main aspects of AI inference engine technology.   
