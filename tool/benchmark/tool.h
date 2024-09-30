@@ -16,13 +16,13 @@ constexpr int divUp(int a, int b) { return (a + b - 1) / b; }
 template <typename T>
 struct TrtDeleter
 {
-	void operator()(T* p) noexcept { p->destroy(); }
+	void operator()(T *p) noexcept { p->destroy(); }
 };
 
 template <typename T>
 struct CuMemDeleter
 {
-	void operator()(T* p) noexcept { checkCudaErrors(cudaFree(p)); }
+	void operator()(T *p) noexcept { checkCudaErrors(cudaFree(p)); }
 };
 
 template <typename T, template <typename> typename DeleterType = TrtDeleter>
@@ -31,8 +31,8 @@ using UniqPtr = std::unique_ptr<T, DeleterType<T>>;
 template <typename T>
 UniqPtr<T, CuMemDeleter> mallocCudaMem(size_t nbElems)
 {
-	T* ptr = nullptr;
-	checkCudaErrors(cudaMalloc((void**)&ptr, sizeof(T) * nbElems));
+	T *ptr = nullptr;
+	checkCudaErrors(cudaMalloc((void **)&ptr, sizeof(T) * nbElems));
 	return UniqPtr<T, CuMemDeleter>{ptr};
 }
 
@@ -41,11 +41,11 @@ class Logger : public nvinfer1::ILogger
 {
 public:
 	Logger(Severity severity = Severity::kWARNING)
-		: reportableSeverity(severity)
+			: reportableSeverity(severity)
 	{
 	}
 
-	void log(Severity severity, const char* msg) override
+	void log(Severity severity, const char *msg) noexcept override
 	{
 		// suppress messages with severity enum value greater than the reportable
 		if (severity > reportableSeverity)
@@ -53,11 +53,21 @@ public:
 
 		switch (severity)
 		{
-		case Severity::kINTERNAL_ERROR: std::cerr << "INTERNAL_ERROR: "; break;
-		case Severity::kERROR: std::cerr << "ERROR: "; break;
-		case Severity::kWARNING: std::cerr << "WARNING: "; break;
-		case Severity::kINFO: std::cerr << "INFO: "; break;
-		default: std::cerr << "UNKNOWN: "; break;
+		case Severity::kINTERNAL_ERROR:
+			std::cerr << "INTERNAL_ERROR: ";
+			break;
+		case Severity::kERROR:
+			std::cerr << "ERROR: ";
+			break;
+		case Severity::kWARNING:
+			std::cerr << "WARNING: ";
+			break;
+		case Severity::kINFO:
+			std::cerr << "INFO: ";
+			break;
+		default:
+			std::cerr << "UNKNOWN: ";
+			break;
 		}
 		std::cerr << msg << std::endl;
 	}
@@ -69,24 +79,29 @@ extern Logger gLogger;
 
 struct StreamDeleter
 {
-	void operator()(CUstream_st* stream) noexcept {
+	void operator()(CUstream_st *stream) noexcept
+	{
 		checkCudaErrors(cudaStreamDestroy(stream));
 	}
 };
 
-std::unique_ptr<CUstream_st, StreamDeleter> makeCudaStream(int flags = cudaStreamDefault) {
+std::unique_ptr<CUstream_st, StreamDeleter> makeCudaStream(int flags = cudaStreamDefault)
+{
 	cudaStream_t stream;
 	checkCudaErrors(cudaStreamCreateWithFlags(&stream, flags));
-	return std::unique_ptr<CUstream_st, StreamDeleter>{ stream };
+	return std::unique_ptr<CUstream_st, StreamDeleter>{stream};
 }
 
-struct EventDeleter {
-	void operator()(CUevent_st* event) noexcept {
+struct EventDeleter
+{
+	void operator()(CUevent_st *event) noexcept
+	{
 		checkCudaErrors(cudaEventDestroy(event));
 	}
 };
 
-std::unique_ptr<CUevent_st, EventDeleter> makeCudaEvent(int flags = cudaEventDefault) {
+std::unique_ptr<CUevent_st, EventDeleter> makeCudaEvent(int flags = cudaEventDefault)
+{
 	cudaEvent_t event;
 	checkCudaErrors(cudaEventCreateWithFlags(&event, flags));
 	return std::unique_ptr<CUevent_st, EventDeleter>{event};
