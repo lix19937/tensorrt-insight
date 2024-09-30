@@ -3,5 +3,5 @@
 ## compile  
 
 ```shell  
-	nvcc main.cpp -lnvinfer -o test
+make -j${proc}
 ```  
