@@ -1,5 +1,7 @@
 ///
+/// ref nv impl
 ///
+/// lix19937
 ///
 
 #include "tools.h"
@@ -136,6 +138,13 @@ std::thread Task::repeatWithSync(Task::SyncType syncType, std::function<void(Tas
 
 int main(int argc, char *argv[])
 {
+	std::cout << "Main ..." << std::endl;
+	if (argc == 1)
+	{
+		std::cout << "Usage: ./test [engine]" << std::endl;
+		return 0;
+	}
+
 	// Configurations
 	const int streamCreateFlags = cudaStreamDefault;
 	const int eventCreateFlags = cudaEventBlockingSync;
@@ -143,6 +152,7 @@ int main(int argc, char *argv[])
 	{
 		// If you want to do something at the begining of each worker threads, put it here.
 		// ...
+		//
 		//
 	};
 	const Task::SyncType syncType = Task::SyncType::Event;
@@ -174,6 +184,8 @@ int main(int argc, char *argv[])
 	for (auto &thrd : workers)
 		thrd.join();
 	workers.clear();
+
+	std::cout << "All done" << std::endl;
 
 	return 0;
 }
