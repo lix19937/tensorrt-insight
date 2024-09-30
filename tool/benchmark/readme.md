@@ -1,12 +1,12 @@
 # trt benchmark 
 
-## compile  
+## Compile  
 
 ```shell  
 make -j${proc}
 ```  
 
-## run  
+## Run  
 
 ```shell  
 ./test ./resnet50.engine  ./vgg.engine
@@ -15,4 +15,4 @@ make -j${proc}
 
 
 ## note   
-it test passed on tensorrt 8.5.10    
+It has test passed on TensorRT 8.5.10, 8.6.0.1    
