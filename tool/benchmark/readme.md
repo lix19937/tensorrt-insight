@@ -8,8 +8,16 @@ make -j${proc}
 
 ## Run  
 
+test gpu engine  
 ```shell  
-./test ./resnet50.engine  ./vgg.engine
+./test  -1
+
+```
+
+
+test dla engine  
+```shell  
+./test  1
 
 ```
 
