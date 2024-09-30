@@ -1,6 +1,6 @@
 ## 脚本与工具    
 
-|脚本名| 说明|  
+|脚本名/目录名| 说明|  
 |----  |----|  
 |build_from_onnx.py | onnx2plan, export plan_json |   
 |np2bin.py| numpy 数据存储为trtexec 可读取的bin文件  |      
