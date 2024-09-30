@@ -3,7 +3,7 @@
 ## Overview
 This sample demonstrates how to enable Multi-Process Service (MPS) on Drive Orin to allow concurrent execution of CUDA kernels from different CUDA contexts on Orin iGPU.
 
-
+https://www.nvidia.cn/content/dam/en-zz/zh_cn/assets/webinars/31oct2019c/20191031_MPS_davidwu.pdf    
 
 This MPS enabling sample is added on an application that already supports to run following tasks in parallel within one CUDA context:
 - Multiple TensorRT GPU inference instances
