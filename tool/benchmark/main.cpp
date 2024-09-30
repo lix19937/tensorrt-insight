@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 	std::cout << "Main ..." << std::endl;
 	if (argc == 1)
 	{
-		std::cout << "Usage: ./test [engine]" << std::endl;
+		std::cout << "Usage: ./test dlaCore_num #-2, -1 use gpu; 0, 1 use dla " << std::endl;
 		return 0;
 	}
 
