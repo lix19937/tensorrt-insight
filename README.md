@@ -4,7 +4,7 @@ TensorRT is a semi-open source high-performance AI inference engine framework/li
 Provides cpp/python interfaces and user-defined plugin methods, covering the main aspects of AI inference engine technology.   
 
 
-|**topic**                       | **主题**| **备注**   |      
+|**topic**                       | **主题**| **notes**   |      
 |    ---                         | --- |     --- |          
 |[overview](./overview.md)       |概述  |   |            
 |[layout](./layout/)    |内存布局|      |            
