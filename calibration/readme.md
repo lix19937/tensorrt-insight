@@ -29,9 +29,12 @@ https://github.com/NVIDIA/TensorRT/issues/3205#issuecomment-1679093598
   详细见 https://github.com/lix19937/pytorch-quantization/blob/main/readme_lix.md
        
 ## 带自定义插件的后量化     
-* onnx 上构建带plugin的层，标记plugin的输出tensor      
-* plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale     
+* onnx 上构建带plugin的层，标记plugin的输出tensor
 
+* 支持int8 的插件开发      
+![int8_q-dq](https://github.com/user-attachments/assets/b2c20a90-1b15-499f-8a80-8033effec0d0)
+
+* plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale      
 ![ptq](https://github.com/lix19937/tensorrt-insight/assets/38753233/0a81fc7c-9351-4e63-b5b0-07eecdd37fa6)    
 
 ## 显示量化设置   
