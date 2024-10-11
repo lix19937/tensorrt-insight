@@ -17,9 +17,9 @@
 * permute + conv [+ permute]
   
 
-*  多个gather可以替换为split    split adjust     
+* 多个gather可以替换为split    split adjust     
 
-*  统一归一化函数  
+* 统一归一化函数  
 其实由F.normalize(x, p=2.0, dim=-1)导出，可以进行针对性合并。第二个图计算跟第一个图类似，但是为不同代码编写方式，这种最好是修改模型pytorch代码改成同一种norm函数，降低模型图优化代码开发。  
 
 *  SpaceToDepth与DepthToSpace算子   
@@ -30,7 +30,8 @@
 
 *  high-mm -> low-mm
     
-
+*  Linear + LayerNorm   --> Matmul + Add +  LayerNormalization   
+  
 *  矩阵乘+BN 融合
 
 
