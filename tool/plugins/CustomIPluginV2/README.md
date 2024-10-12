@@ -53,7 +53,7 @@ g++ -g -std=c++11 -DNDEBUG -shared -o CustomPlugin.so CustomPlugin.o -L/usr/loca
 
 Creating, building, and serializing an engine with the plugin:
 ```
-root@028772c8fd4f:/mnt/CustomIPluginV2# python test_plugin.py  
+root@lix:/mnt/CustomIPluginV2# python test_plugin.py  
 2020-03-13 21:53:39 - __main__ - INFO - Loading plugin library: ./CustomPlugin.so
 Plugin attribute number: 5
 2020-03-13 21:53:39 - __main__ - INFO - Initializing plugin registry
