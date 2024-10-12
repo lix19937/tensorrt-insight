@@ -47,8 +47,15 @@ In other words, the above `trtexec` command will fail without
 Building the plugin library:
 ```
 $ make
-g++ -g -std=c++11 -DNDEBUG -fPIC -MD -MP -I. -I/usr/local/cuda/include -I/usr/src/tensorrt/include -o CustomPlugin.o -c CustomPlugin.cpp
-g++ -g -std=c++11 -DNDEBUG -shared -o CustomPlugin.so CustomPlugin.o -L/usr/local/cuda/lib64 -L/usr/src/tensorrt/lib  -lnvinfer -lcudart
+g++ -g -std=c++11 -DNDEBUG -fPIC -MD -MP -I. \
+-I/usr/local/cuda/include \
+-I/usr/src/tensorrt/include \
+-o CustomPlugin.o -c CustomPlugin.cpp
+
+g++ -g -std=c++11 -DNDEBUG -shared -o CustomPlugin.so CustomPlugin.o \
+-L/usr/local/cuda/lib64 \
+-L/usr/src/tensorrt/lib \
+-lnvinfer -lcudart
 ```
 
 Creating, building, and serializing an engine with the plugin:
