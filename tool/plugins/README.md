@@ -35,16 +35,6 @@ $ python list_plugins.py
 
 ## Registering OSS Plugins 
 
-When building the OSS components, the default plugin library may be overwritten
-or given precendence to the OSS plugin library. As long as you have both .so
-library files, you can load both:
-
-Build OSS Components:
-```
-$ wget https://raw.githubusercontent.com/rmccorm4/tensorrt-utils/master/OSS/build_OSS.sh
-$ source build_OSS.sh
-```
-
 Load and list multiple plugin libraries:
 ```
 $ python list_plugins.py --plugins TensorRT/build/out/libnvinfer_plugin.so
