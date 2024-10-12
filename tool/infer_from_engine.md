@@ -10,7 +10,7 @@ inference with TensorRT.
 
 ## Setup
 
-1. (Optional) Start a TensorRT 7.1 Docker container using the NGC 20.06 TensorRT Release:
+1. (Optional) Start a TensorRT Docker container using the NGC 20.06 TensorRT Release:
 ```
 # Mount current directory to /mnt and use /mnt as workspace inside container
 nvidia-docker run -it -v `pwd`:/mnt -w /mnt nvcr.io/nvidia/tensorrt:20.06-py3
