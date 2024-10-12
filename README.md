@@ -14,7 +14,8 @@ Provides cpp/python interfaces and user-defined plugin methods, covering the mai
 |[calibration](./calibration/)  |标定 |    |                
 |[asp](./asp/)          |稀疏 |        |         
 |[qat](./qat/)          |量化感知训练 |      |           
-|[trtexec](./trtexec/)     |辅助工具 |     |           
+|[trtexec](./trtexec/)     |OSS辅助工具 |     |           
+|[tool](./tool/)     |辅助脚本 |     |           
 |[runtime](./runtime/)     |运行时|        
 |[inferflow](./inferflow/) |模型调度|      |         
 |[mps](./device-benchmark-mps/)| MPS|  |    
