@@ -9,5 +9,6 @@
 |export_onnx_torchvision.py|  by torchvision 得到graph|     
 |onnx_check.py|onnx有效性检查 |     
 |infer_from_engine.py| 使用engine 推理 |   
+|dump_network_from_onnx.py| 将onnx 通过trt build 保存为json |  
 | - | - |    
 |benchmark | trt 性能测试|   
