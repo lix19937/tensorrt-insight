@@ -6,5 +6,6 @@
 |np2bin.py| numpy 数据存储为trtexec 可读取的bin文件  |      
 |qat2ptq.py| 将qat.onnx 的scale存储为ptq 可读取的calib table |     
 |export_onnx_gs.py| by onnx_gs  |       
+|export_onnx_torchvision.py|  by torchvision 得到graph|     
 | - | - |    
 |benchmark | trt 性能测试|   
