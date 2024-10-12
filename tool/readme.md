@@ -11,8 +11,9 @@
 |infer_from_engine.py| 使用engine 推理 |   
 |dump_network_from_onnx.py| 将onnx 通过trt build 保存为json |   
 |list_plugins.py| 列出trt 中支持的plugin|    
-|||  
+|   |   |  
 | - | - |    
-|benchmark  | trt 性能测试|    
+|benchmark  | trt 性能测试     |    
 |calibration| ptq python 后量化|    
-|plugins    | trt 自定义插件|    
+|plugins    | trt 自定义插件   |    
+|IDA        | 模型逆向         |    
