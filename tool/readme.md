@@ -14,6 +14,5 @@
 |   |   |  
 | - | - |    
 |benchmark  | trt 性能测试     |    
-|calibration| ptq python 后量化|    
-|plugins    | trt 自定义插件   |    
+|plugins    | trt 自定义插件参考模板   |    
 |IDA        | 模型逆向         |    
