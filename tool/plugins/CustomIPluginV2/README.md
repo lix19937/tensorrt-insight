@@ -5,13 +5,14 @@ serializing, and de-serializing a TensorRT engine using a custom
 TensorRT Plugin using the IPluginV2 interface.
 
 The goal is to fill any potential gaps in documentation and make
-it more clear how to use plugins in TensorRT.
+it more clear how to use plugins in TensorRT.   
 
+此目录包含使用IPluginV2接口使用自定义TensorRT插件创建、构建、序列化和反序列化TensorRT引擎的最小示例。  
+目标是填补文档中的任何潜在空白，并更清楚地说明如何在TensorRT中使用插件。   
 
 ## Disclaimer
 
 The Plugin interface evolves and gets more features with each release. 
-`IPluginV2` is a rather old interface from TensorRT 5, but still works in TensorRT 6 and 7.
 
 Make sure to check out the 
 [documentation](https://docs.nvidia.com/deeplearning/sdk/tensorrt-developer-guide/index.html#plugin-api-desc)
@@ -26,8 +27,6 @@ I generally follow these follow these rough guidelines:
 ## Usage
 
 ```
-# (Optional) Start a TensorRT 7 Container
-
 
 # Build the plugin library .so
 make
