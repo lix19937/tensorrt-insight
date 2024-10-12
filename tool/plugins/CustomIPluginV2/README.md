@@ -24,6 +24,8 @@ I generally follow these follow these rough guidelines:
 * **TensorRT 7**: Prefer `IPluginV2DynamicExt` or `IPluginV2IOExt`, but 
 `IPluginV2` and `IPluginV2Ext` are still supported.
 
+**注意 Tensorrt 8 不使用此模板**       
+
 ## Usage
 
 ```
