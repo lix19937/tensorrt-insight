@@ -3,7 +3,7 @@
 
 使用的版本   
 > Last updated May 2, 2023    
-> This is the revision history of the NVIDIA TensorRT 8.6 Developer Guide.   
+> This is the revision history of the NVIDIA TensorRT **8.6** Developer Guide.   
 
 NVIDIA TensorRT的中文版开发手册。
 
