@@ -40,8 +40,8 @@ trtexec --verbose \
 --separateProfileRun \
 --loadEngine=bevf-640-1600-48-48_poly.plan \
 --plugins=./libplugin_custom.so \
---dumpLayerInfo --profilingVerbosity=detailed  \
---useCudaGraph --exportLayerInfo=bevf-640-1600-48-48_poly.json \
+--dumpLayerInfo --profilingVerbosity=detailed --exportLayerInfo=bevf-640-1600-48-48_poly.json \
+--useCudaGraph  \
 --loadInputs='img':img-6-3-640-1600.bin,'lidar2img':lidar2img-1-6-4-4.bin,'3':prev_bev-1-2304-256.bin \
 --exportOutput=bevf-640-1600-48-48_poly_out.json
 ```
