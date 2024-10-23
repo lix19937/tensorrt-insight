@@ -3,6 +3,33 @@ https://github.com/NVIDIA/apex/tree/master/apex/contrib/sparsity    commit id:b4
 ### base https://github.com/NVIDIA/apex/commit/b496d85fb88a801d8e680872a12822de310951fd  版本    
 
 -------------------------------
+## 安装  
+cd apex-master  
+
+在 setup.py 增加
+```py
+
+from pprint import pprint 
+pprint(sys.argv)
+print("done by lix19937")
+
+if "--cpp_ext" not in sys.argv: 
+    sys.argv.append('--cpp_ext')
+
+if "--cuda_ext" not in sys.argv: 
+    sys.argv.append('--cuda_ext')
+```
+
+pip --version  
+
+### if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key... 
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" ./
+
+### otherwise
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+
+
+
 
 可以在量化完之后 进行 稀疏，反之则不行      
 Sparse-QAT  
