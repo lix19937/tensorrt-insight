@@ -27,7 +27,10 @@ pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation -
 ### otherwise     
 pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 
+## 测试  
+cd apex/contrib/sparsity  
 
+python ./test/toy_problem.py
 
 ## Sparse-QAT   
 可以在量化完之后 进行 稀疏，反之则不行      
