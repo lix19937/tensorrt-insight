@@ -8,7 +8,6 @@ cd apex-master
 
 在 setup.py 增加
 ```py
-
 from pprint import pprint 
 pprint(sys.argv)
 print("done by lix19937")
@@ -22,17 +21,17 @@ if "--cuda_ext" not in sys.argv:
 
 pip --version  
 
-### if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key... 
+### if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key...     
 pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" ./
 
-### otherwise
+### otherwise     
 pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 
 
 
-
+## Sparse-QAT   
 可以在量化完之后 进行 稀疏，反之则不行      
-Sparse-QAT  
+ 
 
 ## 稀疏原理    
 
