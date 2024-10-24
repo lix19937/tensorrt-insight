@@ -5,7 +5,8 @@ https://github.com/NVIDIA/apex/tree/master/apex/contrib/sparsity    commit id:b4
 -------------------------------
 ## 安装  
 ```
-cd apex-master  
+cd apex-master
+# https://github.com/NVIDIA/apex/tree/6102d2c300fd26f4c312d5136a7b85296286c7a3    torch 2.1.0+cu121
 ```
 
 在 setup.py 增加
@@ -21,7 +22,8 @@ if "--cuda_ext" not in sys.argv:
     sys.argv.append('--cuda_ext')
 ```
 ```
-pip --version  
+pip --version
+# pip 24.0   
 ```
 if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key...     
 ```
@@ -31,6 +33,7 @@ otherwise
 ```
 pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 ```
+
 ## 测试   
 ```
 cd apex/contrib/sparsity  
