@@ -1,7 +1,12 @@
 
-## ffn 导出一个node   
 
-## ffn fp16  
++ 导出onnx 脚本
 
-## ffn int8   
++ 插件实现
+
++ trtexec 性能评测
+
++ 优化 summary    
+
+
 
