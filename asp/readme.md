@@ -264,13 +264,9 @@ if __name__ == '__main__':
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
     main()
 
+# python train.py 
+
 ```
-
-
-python train.py 
- 
-
-
 
  
 简单实现 https://blog.csdn.net/qq_40672115/article/details/130035270?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-130035270-blog-132298127.235%5Ev43%5Epc_blog_bottom_relevance_base6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-130035270-blog-132298127.235%5Ev43%5Epc_blog_bottom_relevance_base6&utm_relevant_index=3
