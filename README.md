@@ -21,6 +21,7 @@ Provides cpp/python interfaces and user-defined plugin methods, covering the mai
 |[mps](./device-benchmark-mps/)| MPS|  |    
 |[deploy](./deploy/)       |基于onnx部署流程， trt 工具使用 | |    
 |[py-tensorrt](./py-tensorrt/) | python tensorrt封装  | 解析 tensorrt `__init__` |        
+|[model_benchmark](./ai_model_benchmark.md) | 模型性能测试 |  |        
 |[cookbook](https://github.com/lix19937/trt-samples-for-hackathon-cn/blob/master/cookbook/) |食谱|      |       
 |[incubator](./incubator/)|孵化器|  |         
 |[developer_guide](./developer_guide/)                  |开发者指导|      |           
