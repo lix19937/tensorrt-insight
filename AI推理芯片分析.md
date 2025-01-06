@@ -4,7 +4,7 @@
 https://en.wikipedia.org/wiki/Tesla_Autopilot_hardware
 
 
-+ GPU VS NPU  
+## GPU VS NPU  
 
 GPU从架构上算术逻辑单元的数量要远远多于Cache(缓存)和Control（控制器），由此导致其只适用于计算密集与数据并行的运算程序。     
 所谓计算密集指：数值计算的比例要远大于内存操作，因此内存访问的延时可以被计算掩盖，对缓存的需求较低；      
@@ -32,7 +32,7 @@ CUDA核在最主流的FP32基础上，先后增加了对FP64、INT32 的计算�
 
 host端如何调cuda kernel ？  
 
-+ 地平线  DSA（Domain Specific Architecture 特定领域架构）的芯片     
+## 地平线  DSA（Domain Specific Architecture 特定领域架构）的芯片     
 
 从物理世界来看，芯片架构就是在方寸之间（目前主流车规级量产芯片尺寸40nm-5nm）做文章：如何在有限的空间内排布算子、存储器以及之间的通信线路，不同的计算需求将导致不同的阵列方式。   
 对于NV GPU来说，端侧以实时推理为第一要务的深度学习任务外，还需要考虑云端的训练和高性能计算等更多的任务，通用性计算与混合精度矩阵计算需求并重，仍需在方寸之间为CUDA核留下不少的位置。    
@@ -56,7 +56,7 @@ batchsize是指神经网络一次批量处理的样本数目。一次批处理�
 直观来看，Xavier集成的Volta GPU，提供了512个CUDA核和64个张量核。相比之下，FSD中负责通用浮点计算的GPU面积远小于其MAC阵列NPU。   
 从需求出发，FSD芯片上只需运行特斯拉的自动驾驶AI，因此完全对标深度学习需求的MAC阵列占据更多的片上位置。     
 
-+ Cadence DSP    
+## Cadence DSP    
 ![image](https://github.com/user-attachments/assets/a4ec33b6-9f0d-4266-a647-039bf6aca46e)
 
 DSP 上有两块 data ram（简称 dram），每一块 data ram 又分为两个宽为 512bit 的 bank。同时，DSP 上有两个 Load/Store 单元，Load/Store 模块访问 data ram 的带宽都是 512bit，所以理论上的访存带宽是 1024bit/cycle，而独立于 Load/Store的SuperGather模块是为了支持 DSP 上高效的 gather/scatter 操作。另外，可以看到 DSP 还有一个 dma 模块，该模块用于片外空间和 dram 之间的数据传输。    
@@ -72,6 +72,6 @@ host端如何调DSP 算子 ？
 ![image](https://github.com/user-attachments/assets/aaae7970-b8f0-4856-8459-542cca51d3e8)
 
  
-+ TI DSP
+## TI DSP
 
 
