@@ -4,7 +4,7 @@
 https://en.wikipedia.org/wiki/Tesla_Autopilot_hardware
 
 
-## GPU VS NPU  
+## NV GPU VS NPU  
 
 GPU从架构上算术逻辑单元的数量要远远多于Cache(缓存)和Control（控制器），由此导致其只适用于计算密集与数据并行的运算程序。     
 所谓计算密集指：数值计算的比例要远大于内存操作，因此内存访问的延时可以被计算掩盖，对缓存的需求较低；      
