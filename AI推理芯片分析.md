@@ -80,6 +80,8 @@ host端如何调DSP 算子 ？
 需要说明一点，CPU 和 DSP 之间一般会使用 IPCM（核间通信模块）实现对一段 ddr 地址空间的共享。但是 DSP 直接访问这段 ddr 的延迟是远大于访问 dram 的延迟，所以对于算子执行过程中需要频繁访问的 ddr 数据，一般是先使用 dma 将其搬运到 dram 上，算子执行结束后，计算的输出再通过 dma 搬回到 ddr。根据DMA的异步特性，可以将计算和内存拷贝 overlap 起来。         
 ![image](https://github.com/user-attachments/assets/aaae7970-b8f0-4856-8459-542cca51d3e8)
 
+TCM    
+与ARM的A系列芯片一样，cadence dsp 和 hexagon dsp 中都有紧耦合内存( TCM )，core从 TCM 中拿到数据的周期和 L1 cache 一致，通常会将需要多次访问的数据放到 DTCM ，多次使用的指令放到 ITCM，提高运行速度，类似于GPU中的shared memory 和 constant memory，这些地址的分配通过ld脚本中的地址设置和 attribute 关键字去分配。
  
 ## TI DSP
 
