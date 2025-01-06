@@ -59,7 +59,7 @@ batchsize是指神经网络一次批量处理的样本数目。一次批处理�
 
 DSP 上有两块 data ram（简称 dram），每一块 data ram 又分为两个宽为 512bit 的 bank。同时，DSP 上有两个 Load/Store 单元，Load/Store 模块访问 data ram 的带宽都是 512bit，所以理论上的访存带宽是 1024bit/cycle，而独立于 Load/Store的SuperGather模块是为了支持 DSP 上高效的 gather/scatter 操作。另外，可以看到 DSP 还有一个 dma 模块，该模块用于片外空间和 dram 之间的数据传输。    
 
-为了充分利用算力和访存能力，Cadence DSP 支持了 **SIMD(Single Instruction, Multiple Data)** 和 **VLIW(Very Long Insruction Word)** 两种特性。前者支持 64lanes * 8bit 或 32lanes * 16bit 等总位宽为 512bit 的**向量访存和向量计算**，后者是一种谋求**指令级并行 (ILP, instruction level parallelism)** 的技术。VLIW 可以将多个指令打包后在一起同时发射，从而获取指令级的并行度。与超标量、乱序执行等其他 ILP 技术不同的是，VLIW 的并行指令排布是在编译期就确定好的，而不需要 CPU 进行复杂的运行时调度。VLIW 使得 DSP 处理器在不需要大幅增加硬件复杂度的情况下，就可以获取 ILP 的加速收益。  
+为了充分利用算力和访存能力，Cadence DSP 支持了 **SIMD(Single Instruction, Multiple Data)** 和 **VLIW(Very Long Insruction Word)** 两种特性。前者支持 64lanes * 8bit 或 32lanes * 16bit 等总位宽为 512bit 的**向量访存和向量计算**，后者是一种谋求**指令级并行 (ILP, instruction level parallelism)** 的技术。VLIW 可以将多个指令打包后在一起同时发射，从而获取指令级的并行度。与超标量、乱序执行等其他 ILP 技术不同的是，VLIW 的并行指令排布是在编译期就确定好的，而不需要 CPU 进行复杂的运行时调度。VLIW 使得 DSP 处理器在不需要大幅增加硬件复杂度的情况下，就可以获取 ILP 的加速收益。 如果遇到前后指令相关依赖的情况，就不能把这些指令放到一个指令包中，这种情况下指令包的指令不是满载的。   
 
 Cadence DSP 是哈弗架构，其指令和数据独立编址，具体的编址规格由 LSP(Linker Support Package) 决定，而用户可以通过名为 memmap.xmm 的内存配置文件来定义和修改 LSP。  
 
