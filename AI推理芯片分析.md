@@ -77,4 +77,5 @@ host端如何调DSP 算子 ？
 
 https://aijishu.com/a/1060000000257512  
 https://en.wikipedia.org/wiki/Tesla_Autopilot_hardware   
+https://developer.nvidia.com/zh-cn/blog/gpudirect-storage/    
 
