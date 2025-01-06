@@ -30,8 +30,11 @@ CUDA核在每个GPU时钟中最多可以执行1个单精度乘法累加运算，
 在扩充适应多样计算需求的算子同时，英伟达也在不断扩充算子所能支持的浮点精度。   
 CUDA核在最主流的FP32基础上，先后增加了对FP64、INT32 的计算能力；张量核则可支持FP16、INT8/INT4/Binary、TF32、 BF16、 FP64等多种数据精度的支持。 
 
-host端如何调cuda kernel ？  
+host端如何调cuda kernel ？   
+CUDA 程序中采用 <<<>>>语法糖发射的接口，这个三尖号语法在编译时会被替换为 Runtime API 的 cudaLaunchKernel 函数，运行时会进一步调用 Driver API 的 cuLaunchKernel 函数。    
+![image](https://github.com/user-attachments/assets/abe641c7-7fe2-4097-8b13-c90f74e03945)
 
+ 
 ## 地平线  DSA（Domain Specific Architecture 特定领域架构）的芯片     
 
 从物理世界来看，芯片架构就是在方寸之间（目前主流车规级量产芯片尺寸40nm-5nm）做文章：如何在有限的空间内排布算子、存储器以及之间的通信线路，不同的计算需求将导致不同的阵列方式。   
