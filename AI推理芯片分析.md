@@ -59,7 +59,16 @@ batchsize是指神经网络一次批量处理的样本数目。一次批处理�
 
 DSP 上有两块 data ram（简称 dram），每一块 data ram 又分为两个宽为 512bit 的 bank。同时，DSP 上有两个 Load/Store 单元，Load/Store 模块访问 data ram 的带宽都是 512bit，所以理论上的访存带宽是 1024bit/cycle，而独立于 Load/Store的SuperGather模块是为了支持 DSP 上高效的 gather/scatter 操作。另外，可以看到 DSP 还有一个 dma 模块，该模块用于片外空间和 dram 之间的数据传输。    
 
-为了充分利用算力和访存能力，Cadence DSP 支持了 **SIMD(Single Instruction, Multiple Data)** 和 **VLIW(Very Long Insruction Word)** 两种特性。前者支持 64lanes * 8bit 或 32lanes * 16bit 等总位宽为 512bit 的**向量访存和向量计算**，后者是一种谋求**指令级并行 (ILP, instruction level parallelism)** 的技术。VLIW 可以将多个指令打包后在一起同时发射，从而获取指令级的并行度。与超标量、乱序执行等其他 ILP 技术不同的是，VLIW 的并行指令排布是在编译期就确定好的，而不需要 CPU 进行复杂的运行时调度。VLIW 使得 DSP 处理器在不需要大幅增加硬件复杂度的情况下，就可以获取 ILP 的加速收益。 如果遇到前后指令相关依赖的情况，就不能把这些指令放到一个指令包中，这种情况下指令包的指令不是满载的。   
+为了充分利用算力和访存能力，Cadence DSP 支持了 **SIMD(Single Instruction, Multiple Data)** 和 **VLIW(Very Long Insruction Word)** 两种特性。
+SIMD 支持 64lanes * 8bit 或 32lanes * 16bit 等总位宽为 512bit 的**向量访存和向量计算**。向量化指令，可以实现向量化访存和向量化计算，即单个指令一次处理多个数据；    
+高通叫 HVX 扩展，ARM叫 NEON 扩展   
+随着计算场景的复杂化，许多高性能DSP的SIMD的计算位宽已经从128 bits升级到1024 bits
+由于SIMD一次需要处理多个数据，所以针对一些场景，也加入了一些新指令
+科学计算中存在很多复数的计算，相邻两位分别是实数和虚数，很多DSP有相应的交织读取指令，单独load实部或者虚部的数据到寄存器，为了提高大数据量的吞吐，部分向量load指令在结束后会完成地址的自加，不需要增加指令去计算新地址和计算指令配套，也需要有向量化的类型转换指令，该功能中有时会合并到一些特殊的load指令中，举个例子就是，16位数据load到32位数据的地址上，类型转换功能包含在该load指令中。
+
+VLIW 是一种谋求**指令级并行 (ILP, instruction level parallelism)** 的技术。VLIW 可以**将多个指令打包后在一起同时发射**，从而获取指令级的并行度。与超标量、乱序执行等其他 ILP 技术不同的是，VLIW 的并行指令排布是在**编译期就确定好的**，而不需要 CPU 进行复杂的运行时调度。VLIW 使得 DSP 处理器在不需要大幅增加硬件复杂度的情况下，就可以获取 ILP 的加速收益。 
+如果遇到前后指令相关依赖的情况，就不能把这些指令放到一个指令包中，这种情况下指令包的指令不是满载的。许多厂商为了提高IPC，会对这种情况做相应的优化；如下图是高通hexagon的优化思路，可以将流水线上数据冲突的指令放在一个指令包上。
+![image](https://github.com/user-attachments/assets/761cf482-a271-4b21-b8d8-d0bc44e5a71a)
 
 Cadence DSP 是哈弗架构，其指令和数据独立编址，具体的编址规格由 LSP(Linker Support Package) 决定，而用户可以通过名为 memmap.xmm 的内存配置文件来定义和修改 LSP。  
 
