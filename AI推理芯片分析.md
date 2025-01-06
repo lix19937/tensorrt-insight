@@ -53,3 +53,23 @@ batchsize是指神经网络一次批量处理的样本数目。一次批处理�
 背后便是应用于云端场景的架构，与完全对标一个品牌需求的车端架构，在芯片布局上的不同。    
 直观来看，Xavier集成的Volta GPU，提供了512个CUDA核和64个张量核。相比之下，FSD中负责通用浮点计算的GPU面积远小于其MAC阵列NPU。   
 从需求出发，FSD芯片上只需运行特斯拉的自动驾驶AI，因此完全对标深度学习需求的MAC阵列占据更多的片上位置。     
+
++ Cadence DSP    
+![image](https://github.com/user-attachments/assets/a4ec33b6-9f0d-4266-a647-039bf6aca46e)
+
+DSP 上有两块 data ram（简称 dram），每一块 data ram 又分为两个宽为 512bit 的 bank。同时，DSP 上有两个 Load/Store 单元，Load/Store 模块访问 data ram 的带宽都是 512bit，所以理论上的访存带宽是 1024bit/cycle，而独立于 Load/Store的SuperGather模块是为了支持 DSP 上高效的 gather/scatter 操作。另外，可以看到 DSP 还有一个 dma 模块，该模块用于片外空间和 dram 之间的数据传输。    
+
+为了充分利用算力和访存能力，Cadence DSP 支持了 SIMD(Single Instruction, Multiple Data) 和 VLIW(Very Long Insruction Word) 两种特性。前者支持 64lanes * 8bit 或 32lanes * 16bit 等总位宽为 512bit 的向量访存和向量计算，后者是一种谋求指令级并行 (ILP, instruction level parallelism) 的技术。VLIW 可以将多个指令打包后在一起同时发射，从而获取指令级的并行度。与超标量、乱序执行等其他 ILP 技术不同的是，VLIW 的并行指令排布是在编译期就确定好的，而不需要 CPU 进行复杂的运行时调度。VLIW 使得 DSP 处理器在不需要大幅增加硬件复杂度的情况下，就可以获取 ILP 的加速收益。  
+
+Cadence DSP 是哈弗架构，其指令和数据独立编址，具体的编址规格由 LSP(Linker Support Package) 决定，而用户可以通过名为 memmap.xmm 的内存配置文件来定义和修改 LSP。  
+
+host端如何调DSP 算子 ？  
+从 CPU 侧发起调用，通过 rpc 协议调起 DSP 侧提供的服务，将 CPU 侧程序称为 rpc_host，而 DSP 侧程序称为 rpc_dsp。rpc_dsp 负责起一个线程监听来自 rpc_host 的 message，并从 message 解析出需要进行的动作，并在执行完该动作后回复 rpc_host 一个 message。需要预先将 rpc_dsp 编译成可执行程序，再将可执行程序 dump 成 bin 文件，这里称为 dsp_bin（包含 iram.bin 和 sram.bin)。而 CPU 侧负责准备算子调用的所有输入，并装载编译好的 dsp_bin 到 DSP 的 dram 中（前文介绍 LSP 的部分有说明应该如何进行内存映射），同时把 rpc_dsp 侧的监听线程 run 起来，最后 rpc_host 发起 rpc 调用并等待 rpc 返回。
+
+需要说明一点，CPU 和 DSP 之间一般会使用 IPCM（核间通信模块）实现对一段 ddr 地址空间的共享。但是 DSP 直接访问这段 ddr 的延迟是远大于访问 dram 的延迟，所以对于算子执行过程中需要频繁访问的 ddr 数据，一般是先使用 dma 将其搬运到 dram 上，算子执行结束后，计算的输出再通过 dma 搬回到 ddr。     
+![image](https://github.com/user-attachments/assets/aaae7970-b8f0-4856-8459-542cca51d3e8)
+
+ 
++ TI DSP
+
+
