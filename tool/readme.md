@@ -8,6 +8,7 @@
 |export_onnx_gs.py| by onnx_gs  |       
 |export_onnx_torchvision.py|  by torchvision 得到graph|     
 |onnx_check.py|onnx有效性检查 |     
+|onnx_op_stats.py|onnx op统计 |      
 |infer_from_engine.py| 使用engine 推理 |    
 |tensor_print_helper.py| tensor 辅助打印|      
 |fp16_to_fp32.py|fp16 onnx模型转为fp32 onnx模型|    
