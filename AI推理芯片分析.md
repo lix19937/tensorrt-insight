@@ -82,7 +82,9 @@ host端如何调DSP 算子 ？
 
 TCM    
 与ARM的A系列芯片一样，cadence dsp 和 hexagon dsp 中都有紧耦合内存( TCM )，core从 TCM 中拿到数据的周期和 L1 cache 一致，通常会将需要多次访问的数据放到 DTCM ，多次使用的指令放到 ITCM，提高运行速度，类似于GPU中的shared memory 和 constant memory，这些地址的分配通过ld脚本中的地址设置和 attribute 关键字去分配。
- 
+
+DSP 编程中应该注意什么  
+
 ## TI DSP
 
 
