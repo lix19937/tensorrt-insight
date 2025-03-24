@@ -22,6 +22,11 @@ Did you perform fine-tuning after adding fake quantization? Did you observe the 
 Intuitively I think you should verify that your model is not overfitting because an overfitted model will be unstable when we introduce noise from quantization and limited-precision arithmetic (in float arithmetic different operations ordering can produce small differences in output).
 ```   
 
+## softmax 如何量化  
+
+## tanh 如何量化  
+
+
 
 ## 示例  
 * yolox
