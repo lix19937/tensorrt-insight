@@ -20,7 +20,10 @@ Did you start with a pretrained model w/o QAT? If yes, does the FP32 model (unqu
 How did you add the QDQ nodes and how did you determine the scales (what SW did you use? did you perform calibration? Was the calibration DS large enough?)?
 Did you perform fine-tuning after adding fake quantization? Did you observe the loss vs accuracy curve? Did you check that you did not overfit?
 Intuitively I think you should verify that your model is not overfitting because an overfitted model will be unstable when we introduce noise from quantization and limited-precision arithmetic (in float arithmetic different operations ordering can produce small differences in output).
-```   
+```
+
+## conv + bn 
+训练时候不进行融合   
 
 ## softmax 如何量化  
 
