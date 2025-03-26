@@ -28,7 +28,7 @@ https://github.com/NVIDIA/TensorRT/issues/3205#issuecomment-1679093598
       
   详细见 https://github.com/lix19937/pytorch-quantization/blob/main/readme_lix.md
 
-calib 过程中，会去计算 activate的 scale 以及weight 的scale； 在 qat fintune 过程中保持不变，改变的 weight 值       
+  **calib 过程中，会去计算 activate的 scale 以及weight 的scale； 在 qat fintune 过程中保持不变，改变的 weight 值**      
 
        
 ## 带自定义插件的后量化     
