@@ -1,6 +1,13 @@
 
 # 量化感知训练   
 
+```
+改造float network graph (insert quant)
+              --> 加载 float 收敛的模型
+                            -->  calib/ ptq  , pth/onnx  fixed scale (act, weight)    
+                                    --> qat finetune  , pth/onnx (weight para will update during training)   
+```
+
 * 带插件的QAT 
   + 在qat onnx生成后替换相应的op   
   + 插件在网络尾部(插件的输出就是网络的输出) ，这时候插件对应的op可以不参与量化训练       
@@ -21,6 +28,7 @@ How did you add the QDQ nodes and how did you determine the scales (what SW did 
 Did you perform fine-tuning after adding fake quantization? Did you observe the loss vs accuracy curve? Did you check that you did not overfit?
 Intuitively I think you should verify that your model is not overfitting because an overfitted model will be unstable when we introduce noise from quantization and limited-precision arithmetic (in float arithmetic different operations ordering can produce small differences in output).
 ```
+
 
 ## conv + bn 
 训练时候不进行融合   
