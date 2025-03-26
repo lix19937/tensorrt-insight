@@ -140,3 +140,51 @@ y: 3e102515
 (Unnamed Layer* 23) [Softmax]_output: 3a53f674
 (Unnamed Layer* 26) [TopK]_output_1: 3bed87ca
 ```
+
+## case 4    
+```py
+    def forward(self, x):
+        x = self.conv1(x)
+        # x = self.relu1(x)
+        # x = self.bn1(x)
+
+        x = self.mp1(x)
+
+        x = self.conv2(x)
+        x = self.bn2(x)
+        x = self.relu2(x)
+
+        x = self.mp2(x)
+        x = x.reshape(-1, 64 * 7 * 7)
+        x = self.fc1(x)
+        x = self.relu3(x)
+        y = self.fc2(x)
+        z = self.st(y)
+        z = t.argmax(z, dim=1)
+        return y, z
+```
+
+```
+TRT-8510-EntropyCalibration2
+x: 4000890a
+/conv1/Conv_output_0: 3f9db09c
+/mp1/MaxPool_output_0: 3f9db09c
+/conv2/Conv_output_0: 3f36030e
+/relu2/Relu_output_0: 3f1b1f66
+/mp2/MaxPool_output_0: 3f1b1f66
+/Reshape_output_0: 3f339145
+(Unnamed Layer* 6) [Constant]_output: 39137939
+(Unnamed Layer* 7) [Matrix Multiply]_output: 3e96eeeb
+(Unnamed Layer* 8) [Constant]_output: 39133ad3
+(Unnamed Layer* 9) [Shuffle]_output: 39133ad3
+/fc1/Gemm_output_0: 3e96f586
+/relu3/Relu_output_0: 3e9a0876
+(Unnamed Layer* 12) [Constant]_output: 398109de
+(Unnamed Layer* 13) [Matrix Multiply]_output: 3e101b49
+(Unnamed Layer* 14) [Constant]_output: 395944c4
+(Unnamed Layer* 15) [Shuffle]_output: 395944c4
+y: 3e10253e
+(Unnamed Layer* 23) [Softmax]_output: 3a53f671
+(Unnamed Layer* 26) [TopK]_output_1: 3bed87c7
+
+```
