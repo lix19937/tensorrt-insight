@@ -3,7 +3,7 @@
 
 ```
 改造float network graph (insert quant)
-              --> 加载 float 收敛的模型
+              --> 加载 float 收敛的模型权重文件       
                             -->  calib/ ptq  , pth/onnx  fixed scale (act, weight)    
                                          --> qat finetune  , pth/onnx (weight para will update during training)   
 ```
