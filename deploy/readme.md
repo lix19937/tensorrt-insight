@@ -22,7 +22,7 @@ trtexec --onnx=model_sim.onnx --fp16 --verbose \
 polygraphy run model_sim.onnx --trt --onnxrt   
 
 ## fp16
-polygraphy run model_sim.onnx --trt --onnxrt --atol 0.001 --rtol 0.001 --fp16
+polygraphy run model_sim.onnx --trt --onnxrt --atol 0.001 --rtol 0.001 --fp16  # --plugins 
 
 ## fp16 dynamic batch    
 polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
