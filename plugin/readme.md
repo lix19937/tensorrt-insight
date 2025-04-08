@@ -23,3 +23,7 @@
 [Detr3d transformer decoder plugin](./svt/svt.md)    
 
 https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/05-Plugin    
+
+
+## todo      
+开发一个插件单元测试工具    
