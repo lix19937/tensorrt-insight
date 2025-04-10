@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
  
+# split single figure to show each resource   
 
 df = pd.read_csv('mainborad.csv')
  
