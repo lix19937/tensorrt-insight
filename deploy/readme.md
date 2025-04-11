@@ -11,7 +11,7 @@ python run_onnxrt.py
 # onnx2plan 评测时间    
 trtexec --onnx=model_sim.onnx --fp16 --verbose \
 --saveEngine=model_sim.plan  \
---dumpProfile --dumpLayerInfo --separateProfileRun \
+--dumpProfile --dumpLayerInfo --separateProfileRun --useCudaGraph \
 --inputIOFormats=fp16:chw,int32:chw,fp16:chw,fp16:chw,fp16:chw \
 --outputIOFormats=fp16:chw \
 --noDataTransfers --useCudaGraph --useSpinWait   | tee log
@@ -39,11 +39,9 @@ polygraphy run model_sim.onnx --trt --onnxrt  --fp16 \
 ```shell 
 trtexec --verbose \
 --fp16 \
---separateProfileRun \
 --loadEngine=bevf-640-1600-48-48_poly.plan \
 --plugins=./libplugin_custom.so \
---useCudaGraph  \
---dumpProfile \
+--useCudaGraph --dumpProfile --separateProfileRun \
 --dumpLayerInfo --profilingVerbosity=detailed \
 --exportLayerInfo=bevf-640-1600-48-48_poly.json \
 --loadInputs='img':img-6-3-640-1600.bin,'lidar2img':lidar2img-1-6-4-4.bin,'3':prev_bev-1-2304-256.bin \
