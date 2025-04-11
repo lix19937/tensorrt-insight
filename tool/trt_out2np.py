@@ -1,3 +1,5 @@
+
+
 import numpy as np
 import json
 import os 
@@ -17,7 +19,7 @@ for file in file_names:
 
   idx = 0
   for it in output_data:
-    print(f" {idx} {it.keys()}  {it['name']}  {type(it['values'])}" )
+    print(f" {idx} {it.keys()}  {it['name']}  {it['dimensions']}  {type(it['values'])}" )
     np_array = np.array(it["values"])  
     np.save(f"{out_dir}{it['name']}.npy", np_array)
     idx+=1
@@ -25,4 +27,3 @@ for file in file_names:
   icnt+=1
 
 print("done")
-
