@@ -3,6 +3,10 @@
 # onnx optimize   
 python -m onnxsim src.onnx  model_sim.onnx
 
+# 
+onnxsim ./float.onnx  ./float_sim.onnx
+
+
 polygraphy surgeon sanitize --fold-constants input_model.onnx  -o folded_model.onnx
 
 # check two onnx output  
