@@ -18,7 +18,7 @@ trtexec --onnx=model_sim.onnx --fp16 --verbose \
 --dumpProfile --dumpLayerInfo --separateProfileRun --useCudaGraph \
 --inputIOFormats=fp16:chw,int32:chw,fp16:chw,fp16:chw,fp16:chw \
 --outputIOFormats=fp16:chw \
---noDataTransfers --useCudaGraph --useSpinWait   | tee log
+--noDataTransfers --useSpinWait   | tee log
 
 
 # onnx vs plan   result align     
