@@ -77,7 +77,7 @@ def feature_sampling_onnx(mlvl_feats, reference_points, pc_range, img_shape, lid
 
     logger.info("lidar2img:{}".format(lidar2img.size()))  # [1, 6, 512, 4, 4]
    
-    ## lidar2img / img_shapes
+    ## lidar2img / img_shapes    see https://github.com/lix19937/tensorrt-insight/blob/main/compute_graph_optimize/test_matmul.py    
     ##  [1, 6, 512, 4, 4] *  [1, 6, 512, 4, 1] --> [1, 6, 512, 4, 1] --> [1, 6, 512, 4] / [1, 6, 1, 4]
     reference_points_cam = torch.matmul(lidar2img, reference_points).squeeze(-1) / img_shapes
     logger.info("reference_points_cam:{}".format(reference_points_cam.size()))  # [1, 6, 512, 4]
