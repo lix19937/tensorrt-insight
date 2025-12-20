@@ -31,5 +31,6 @@ To shut down the daemon, as $UID, run
 echo quit | nvidia-cuda-mps-control
 ```
 
-https://docs.nvidia.com/deploy/topics/topic_6_1_2_2.html
+https://docs.nvidia.com/deploy/topics/topic_6_1_2_2.html     
 https://docs.deep-hybrid-datacloud.eu/en/latest/technical/others/gpu-sharing-with-mps.html
+https://docs.nvidia.com/deploy/mps/index.html#topic_3_3_1_1   
