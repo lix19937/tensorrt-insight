@@ -14,9 +14,10 @@
 |fp16_to_fp32.py|fp16 onnx模型转为fp32 onnx模型|    
 |dump_network_from_onnx.py| 将onnx 通过trt build 保存为json |   
 |list_plugins.py| 列出trt 中支持的plugin|    
-|trt_batch_onnx_build.sh| 指定精度和名称进行批量trt build|  
-|   |   |  
+|trt_batch_onnx_build.sh| 指定精度和名称进行批量trt build|     
+|compare_trt_json   |  compare_trt_json.py |  trt out json 元素对元素进行比较 |    
 | - | - |    
 |benchmark  | trt 性能测试     |    
 |plugins    | trt 自定义插件参考模板   |    
 |IDA        | 模型逆向         |    
+
