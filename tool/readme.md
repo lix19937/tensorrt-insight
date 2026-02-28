@@ -17,10 +17,15 @@
 |trt_batch_onnx_build.sh| 指定精度和名称进行批量trt build|     
 |compare_trt_json.py   | trt out json 元素对元素进行比较 |    
 |batch_compare_np.py   | 批对比np  |     
+|batch_compare_trt_json.py   | 批对比 trt json  |   
+|batch_compare_ort_infer.py  | 批对比 ort infer|    
+|compare_onnx_grpah.py  | 对比 onnx 结构|    
+
 | - | - |    
 |benchmark  | trt 性能测试     |    
 |plugins    | trt 自定义插件参考模板   |    
 |IDA        | 模型逆向         |    
+
 
 
 
