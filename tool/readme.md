@@ -7,6 +7,7 @@
 |qat2ptq.py| 将qat.onnx 的scale存储为ptq 可读取的calib table |     
 |export_onnx_gs.py| by onnx_gs  |       
 |export_onnx_torchvision.py|  by torchvision 得到graph|     
+|get_onnx_io_desc.py|获取onnx 输入输出tensor 属性 |     
 |onnx_check.py|onnx有效性检查 |     
 |onnx_op_stats.py|onnx op统计 |      
 |infer_from_engine.py| 使用engine 推理 |    
@@ -24,6 +25,7 @@
 |benchmark  | trt 性能测试     |    
 |plugins    | trt 自定义插件参考模板   |    
 |IDA        | 模型逆向         |    
+
 
 
 
