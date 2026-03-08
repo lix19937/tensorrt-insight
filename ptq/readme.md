@@ -42,9 +42,13 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 * plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale      
 ![ptq](https://github.com/lix19937/tensorrt-insight/assets/38753233/0a81fc7c-9351-4e63-b5b0-07eecdd37fa6)    
 
+## 带自定义插件的量化训练     
+默认使用pytorch model grpah 方式进行QAT， 此时用户使用torch auto function 构建一个自定义op(该op在tensorrt中对应plugin)   
+
 ## 显示量化设置   
 插入 Q/DQ 在插件层的前后       
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/99191e22-7c9f-4774-ade8-665575e5f155)       
+
 
 ## fuse  
 * PTQ calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差      
