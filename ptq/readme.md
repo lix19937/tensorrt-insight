@@ -17,7 +17,7 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
   |IInt8LegacyCalibrator |Legacy calibrator left for backward compatibility with TensorRT 2.0. This calibrator requires user parameterization, and is provided as a fallback option if the other calibrators yield poor results.  |  
   | IInt8MinMaxCalibrator |  It supports per activation tensor scaling. |
   
-https://github.com/NVIDIA/TensorRT/issues/3205#issuecomment-1679093598      
+  https://github.com/NVIDIA/TensorRT/issues/3205#issuecomment-1679093598      
 
 
 * **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**     
