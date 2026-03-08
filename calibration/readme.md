@@ -18,6 +18,10 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 https://github.com/NVIDIA/TensorRT/issues/3205#issuecomment-1679093598      
 
 
+## 注意：    
+从 https://github.com/NVIDIA/TensorRT/tree/release/10.2/tools/pytorch-quantization 开始推荐使用model-optimizer 进行量化     
+
+
 * **使用 pytorch-quantization 进行Q-DQ设置，然后进行开源方法 PTQ**     
   https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/calib    
   + max   
