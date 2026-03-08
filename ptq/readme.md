@@ -43,7 +43,7 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 ![ptq](https://github.com/lix19937/tensorrt-insight/assets/38753233/0a81fc7c-9351-4e63-b5b0-07eecdd37fa6)    
 
 ## 带自定义插件的量化训练     
-默认使用pytorch model grpah 方式进行QAT， 此时用户使用torch auto function 构建一个自定义op(该op在tensorrt中对应plugin)   
+默认使用pytorch model graph 方式进行QAT， 此时用户使用torch auto function 构建一个自定义op(该op在tensorrt中对应plugin)   
 
 ## 显示量化设置   
 插入 Q/DQ 在插件层的前后       
