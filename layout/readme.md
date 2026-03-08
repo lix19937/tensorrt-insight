@@ -79,7 +79,7 @@ __forceinline__ __device__ void convert_to_chw32plane(const size_t idx, const si
     // voc_idx = idx // voc
     // row_idx = idx % area
     // col_idx = idx // area % 32
-    // chw32_idx = voc_idx * voc + row_idx*32 + col_idx  # find idx in NCHW32 plane
+    // chw32_idx = voc_idx * voc + row_idx*32 + col_idx  # find idx in NC/32HW32 plane
     ////////////////////////////////////////////////////////////////////////////
     const auto voc = area << 5;
     *dst_idx = (idx / voc * voc) + (idx % area << 5) + (idx / area & 31);
