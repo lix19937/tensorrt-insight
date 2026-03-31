@@ -10,6 +10,8 @@ for implicit, TRT try to optimize the best performance, for explicit, TRT need g
 
 So for explicit, we have rules how to propagate the `Q/DQ` nodes and fuse them with other nodes. put `q/dq` everywhere would slowdown the performance, and we have a doc on the `Q/DQ` placements impact on the perf.
 
+https://github.com/NVIDIA/Model-Optimizer/issues/46
+
 ## PTQ     
 * 使用 TensorRT 闭源方法进行 PTQ     
 https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B
