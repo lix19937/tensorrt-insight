@@ -2,7 +2,7 @@
 import os
 from pytorch_quantization import nn as quant_nn
 
-
+# 
 def set_module(model, submodule_key, module):
     tokens = submodule_key.split('.')
     sub_tokens = tokens[:-1]
@@ -11,7 +11,7 @@ def set_module(model, submodule_key, module):
         cur_mod = getattr(cur_mod, s)
     setattr(cur_mod, tokens[-1], module)
 
-
+# 
 def get_module(model, submodule_key):
     sub_tokens = submodule_key.split('.')
     cur_mod = model
@@ -52,6 +52,7 @@ def concat_quant_amax_fuse(ops_list):
     if len(ops_list) <= 1:
         return
 
+    # find the maxest  
     amax = -1
     for op in ops_list:
         if hasattr(op, '_amax'):
