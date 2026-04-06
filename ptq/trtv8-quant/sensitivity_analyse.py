@@ -50,7 +50,7 @@ def quant_sensitivity_analyse(model_ptq, evaler):
         #                        {module_name, mAP, mAP}
         quant_sensitivity.append((k, eval_result[0], eval_result[1]))
         
-        # disable this module sensitivity, analyse next module  !!! 
+        # disable this module sensitivity, analyse next module in next loop !!! 
         module_quant_disable(model_ptq, k)
 
     return quant_sensitivity
