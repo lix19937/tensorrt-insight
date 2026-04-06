@@ -57,6 +57,7 @@ def quant_sensitivity_analyse(model_ptq, evaler):
 
 
 # python3 sensitivity_analyse.py --weights ../../assets/yolov6s_v2_reopt.pt --batch-size 32 --batch-number 4 --conf ../../configs/repopt/yolov6s_opt.py --data-root /path
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', type=str, default='./yolov6s_v2_reopt.pt', help='weights path')
@@ -79,6 +80,7 @@ if __name__ == '__main__':
     cuda = args.device != 'cpu' and torch.cuda.is_available()
     device = torch.device('cuda:0' if cuda else 'cpu')
     assert not (device.type == 'cpu' and args.half), '--half only compatible with GPU export, i.e. use --device 0'
+
     # Load PyTorch model
     model = load_checkpoint(args.weights, map_location=device, inplace=True, fuse=True)  # load FP32 model
     model.eval()
