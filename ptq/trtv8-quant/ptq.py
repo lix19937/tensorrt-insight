@@ -17,10 +17,10 @@ def collect_stats(model, data_loader, batch_number, device='cuda'):
     for name, module in model.named_modules():
         if isinstance(module, quant_nn.TensorQuantizer):
             if module._calibrator is not None:
-                module.disable_quant()
+                module.disable_quant() # 
                 module.enable_calib()
             else:
-                module.disable()
+                module.disable() # 
 
     for i, data_tuple in enumerate(data_loader):
         image = data_tuple[0]
