@@ -64,13 +64,12 @@ def scatter_nd(canvas, indices, updates):
     output = np.copy(canvas)
     update_indices = indices.shape[:-1]
     for idx in np.ndindex(update_indices):
-        # output[tuple(indices[idx])] = updates[idx] !!!
+        # output[tuple(indices[idx])] = updates[idx] !!! donot use this,  error
         output[:, indices[idx]] = updates[idx]
 
     output_ref = np.copy(canvas)
     for idx in range(len(indices)):
         output_ref[:, indices[idx]] = updates[:, idx]
-        
     return output
 
 
