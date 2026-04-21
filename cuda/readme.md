@@ -7,3 +7,6 @@ https://github.com/lix19937/cuda-programming-guide-chinese
 
 + 时序模型cudagraph    
 https://github.com/lix19937/tensorrt-insight/blob/main/cuda/cudagraph.md
+
++ 计算兼容性
+https://developer.nvidia.com/cuda/gpus    
