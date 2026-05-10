@@ -50,6 +50,9 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 ```
 
 ![int8-int8](./int8-int8.png)    
+
+------
+
 ![int8-fp32](./int8-fp32.png)
 
 * plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale      
