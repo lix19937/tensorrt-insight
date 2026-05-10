@@ -44,8 +44,13 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 ## 带自定义插件的后量化     
 * onnx 上构建带plugin的层，标记plugin的输出tensor
 
-* 支持int8 的插件开发      
+* 支持int8 的插件开发
+```
 ![int8_q-dq](https://github.com/user-attachments/assets/b2c20a90-1b15-499f-8a80-8033effec0d0)
+```
+
+![int8-int8](./int8-int8.png)    
+![int8-fp32](./int8-fp32.png)
 
 * plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale      
 ![ptq](https://github.com/lix19937/tensorrt-insight/assets/38753233/0a81fc7c-9351-4e63-b5b0-07eecdd37fa6)    
@@ -55,6 +60,7 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 
 ## 显示量化设置   
 插入 Q/DQ 在插件层的前后       
+
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/99191e22-7c9f-4774-ade8-665575e5f155)       
 
 
