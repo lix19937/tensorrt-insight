@@ -1,4 +1,6 @@
 
+### [trtexec  --best 过程](./resnet18.log) 
+
 ### qat      
 
 ```
