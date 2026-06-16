@@ -12,6 +12,10 @@ So for explicit, we have rules how to propagate the `Q/DQ` nodes and fuse them w
 
 https://github.com/NVIDIA/Model-Optimizer/issues/46
 
+### onnx quant 过程  
+[cll](./modpt-opt-moq.md)   
+
+
 ## PTQ     
 * 使用 TensorRT 闭源方法进行 PTQ     
 https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03-BuildEngineByTensorRTAPI/MNISTExample-pyTorch/C%2B%2B
