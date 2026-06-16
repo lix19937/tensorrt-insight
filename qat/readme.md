@@ -1,5 +1,5 @@
 
-# 量化感知训练   
+### 量化感知训练   
 
 ```
 改造float network graph (insert quant)
@@ -14,7 +14,7 @@
 
 更多 see https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/nn   
 
-# auto qat    
+### auto qat    
 https://github.com/lix19937/auto_qat    
 
 https://github.com/NVIDIA/TensorRT/issues/3205
@@ -30,14 +30,14 @@ Intuitively I think you should verify that your model is not overfitting because
 ```
 
 
-## conv + bn 
+### conv + bn 
 训练时候不进行融合   
 
-## softmax 如何量化  
+### softmax 如何量化  
 
-## tanh 如何量化  
+### tanh 如何量化  
 
-
+### qad  
 
 ## 示例  
 * yolox
