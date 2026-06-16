@@ -57,6 +57,8 @@ Intuitively I think you should verify that your model is not overfitting because
 
 ### sparse-qat     
 
+-------------
+
 ### qad   
 
 
