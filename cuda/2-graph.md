@@ -1,4 +1,7 @@
 ### 0 kernel 执行过程   
+https://developer.nvidia.com/blog/cuda-graphs/
+
+
 
 ### 1 带有历史帧信息的时序模型如何构建graph ?  
 
