@@ -37,8 +37,6 @@ Intuitively I think you should verify that your model is not overfitting because
 
 ### tanh 如何量化  
 
-### qad  
-
 ## 示例  
 * yolox
 
@@ -53,4 +51,11 @@ Intuitively I think you should verify that your model is not overfitting because
 * hrnet
 
 * hourglass
+
+---------------
+
+### sparse-qat     
+
+### qad   
+
 
