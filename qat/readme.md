@@ -1,5 +1,5 @@
 
-### 量化感知训练   
+### qat      
 
 ```
 改造float network graph (insert quant)
@@ -13,6 +13,8 @@
   + 插件在网络尾部(插件的输出就是网络的输出) ，这时候插件对应的op可以不参与量化训练       
 
 更多 see https://github.com/lix19937/pytorch-quantization/tree/main/pytorch_quantization/nn   
+
+----------------------
 
 ### auto qat    
 https://github.com/lix19937/auto_qat    
@@ -28,7 +30,6 @@ How did you add the QDQ nodes and how did you determine the scales (what SW did 
 Did you perform fine-tuning after adding fake quantization? Did you observe the loss vs accuracy curve? Did you check that you did not overfit?
 Intuitively I think you should verify that your model is not overfitting because an overfitted model will be unstable when we introduce noise from quantization and limited-precision arithmetic (in float arithmetic different operations ordering can produce small differences in output).
 ```
-
 
 ### conv + bn 
 训练时候不进行融合   
