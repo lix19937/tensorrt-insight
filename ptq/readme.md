@@ -14,7 +14,7 @@ https://github.com/NVIDIA/Model-Optimizer/issues/46
 
 ### 2 [onnx quant 过程](./modpt-opt-moq.md)   
 
-### 3 [onnx auto quant 过程](./modpt-opt-autotune.md)   
+### 3 [onnx auto tune 过程](./modpt-opt-autotune.md)   
 
 
 ### 4 PTQ     
