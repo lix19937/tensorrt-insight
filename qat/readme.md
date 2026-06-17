@@ -19,11 +19,10 @@
 ----------------------
 
 ### 3 auto qat    
+
 https://github.com/lix19937/auto_qat    
 
 https://github.com/NVIDIA/TensorRT/issues/3205
-
-
 https://github.com/NVIDIA/TensorRT/issues/2182       
 
 ```
@@ -33,24 +32,24 @@ Did you perform fine-tuning after adding fake quantization? Did you observe the 
 Intuitively I think you should verify that your model is not overfitting because an overfitted model will be unstable when we introduce noise from quantization and limited-precision arithmetic (in float arithmetic different operations ordering can produce small differences in output).
 ```
 
-### conv + bn 
+### 4 conv + bn 
 训练时候不进行融合   
 
-### 4 softmax 如何量化  
+### 5 softmax 如何量化  
 
-### 5 tanh 如何量化  
+### 6 tanh 如何量化  
 
 ---------------
 
-### 6 sparse-qat     
+### 7 sparse-qat     
 
 -------------
 
-### 7 qad   
+### 8 qad   
 
 ------------
  
-### 8 function op 怎么量化   
+### 9 function op 怎么量化   
 
 
 
