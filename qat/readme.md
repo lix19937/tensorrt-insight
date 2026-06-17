@@ -1,7 +1,7 @@
 
-### [trtexec  --best 过程](./resnet18.log) 
+### 1 [trtexec  --best 过程](./resnet18.log) 
 
-### qat      
+### 2 qat      
 
 ```
 改造float network graph (insert quant)
@@ -18,7 +18,7 @@
 
 ----------------------
 
-### auto qat    
+### 3 auto qat    
 https://github.com/lix19937/auto_qat    
 
 https://github.com/NVIDIA/TensorRT/issues/3205
@@ -36,31 +36,21 @@ Intuitively I think you should verify that your model is not overfitting because
 ### conv + bn 
 训练时候不进行融合   
 
-### softmax 如何量化  
+### 4 softmax 如何量化  
 
-### tanh 如何量化  
-
-## 示例  
-* yolox
-
-* yolov7
-
-* centernet(lidar seg)
-
-* lidar od
-
-* resnet
-
-* hrnet
-
-* hourglass
+### 5 tanh 如何量化  
 
 ---------------
 
-### sparse-qat     
+### 6 sparse-qat     
 
 -------------
 
-### qad   
+### 7 qad   
+
+------------
+ 
+### 8 function op 怎么量化   
+
 
 
