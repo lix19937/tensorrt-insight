@@ -1,4 +1,6 @@
 
+--------------------
+
 + cuda samples中文指导      
 https://github.com/lix19937/cuda-samples-cn   
 
@@ -11,6 +13,7 @@ https://github.com/lix19937/tensorrt-insight/blob/main/cuda/cudagraph.md
 + 计算兼容性
 https://developer.nvidia.com/cuda/gpus    
 
+--------------------------
 
 采用 STAR 原则（情境、任务、行动、结果）    
 
