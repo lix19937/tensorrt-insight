@@ -50,6 +50,9 @@ Intuitively I think you should verify that your model is not overfitting because
 ------------
  
 ### 9 function op 怎么量化   
+非参数算子（Non-parameterized Operators），它们本身没有权重，其输出依赖于输入数据的缩放因子（Scale）和零点（Zero-point）。   
+量化过程主要涉及 量化张量的对齐。  
+对齐要求：在进行加法或拼接操作前，所有参与计算的张量必须处于相同的量化空间。这意味着它们的 scale 和 zero_point 必须一致，或者需要通过重量化（Requantization）来强制对齐。
 
-
+在量化前的观测阶段，框架会强制这些分支使用同一个 Observer 实例，从而确保生成的 scale 和 zero_point 是全局统一的。
 
