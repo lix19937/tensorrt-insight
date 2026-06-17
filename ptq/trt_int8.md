@@ -5,7 +5,7 @@
 drive os 7030  trt10.10.10     
 nv ResNet50.onnx MD5:6753285a2ad03ef7100673ea6bb4312a     
 
-### 1 使用autotune
+### 1 使用mopt autotune
 
 optimized_final.onnx -->  optimized_final_tofp16.onnx     
 ```bash
@@ -16,7 +16,7 @@ trtexec  --verbose  --stronglyTyped --dumpProfile --separateProfileRun --onnx=./
 [01/09/2022-20:59:38] [I] GPU Compute Time: min = 0.616211 ms, max = 0.62793 ms, mean = 0.618988 ms, median = 0.619141 ms, percentile(90%) = 0.620117 ms, percentile(95%) = 0.620605 ms, percentile(99%) = 0.621094 ms
 ```
 
-### 1.1 使用autotune产生的 baseline  
+### 1.1 使用 mopt autotune产生的 baseline  
 ```bash
 trtexec --verbose --fp16 --dumpProfile --separateProfileRun --onnx=baseline.onnx --profilingVerbosity=detailed --useCudaGraph --dumpLayerInfo --builderOptimizationLevel=5 --tilingOptimizationLevel=3 --warmUp=500 --duration=15 --useSpinWait --noDataTransfers
 ```
@@ -36,3 +36,8 @@ trtexec  --verbose  --fp16 --dumpProfile --separateProfileRun --onnx=./ResNet50.
 ```
 
 ### 3 使用pytorch_quantization    
+
+
+### 4 使用 mopt int8 default cfg   
+
+
