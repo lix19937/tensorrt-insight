@@ -44,8 +44,10 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 
   **calib 过程中，会去计算 activate的 scale 以及weight 的scale； 在 qat fintune 过程中保持不变，改变的 weight 值**      
 
+### 5 [trtexec --int8 流程](trt_int8.md)
+
        
-### 5 带自定义插件的后量化     
+### 6 带自定义插件的后量化     
 * onnx 上构建带plugin的层，标记plugin的输出tensor
 
 * 支持int8 的插件开发
@@ -62,19 +64,19 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 * plugin 需要支持fp32，然后在calib table中查找输出tensor 的scale      
 ![ptq](https://github.com/lix19937/tensorrt-insight/assets/38753233/0a81fc7c-9351-4e63-b5b0-07eecdd37fa6)    
 
-### 6 带自定义插件的qat        
+### 7 带自定义插件的qat        
 默认使用pytorch model graph 方式进行QAT， 此时用户使用torch auto function 构建一个自定义op(该op在tensorrt中对应plugin)   
 
-### 7 显示量化设置   
+### 8 显示量化设置   
 插入 Q/DQ 在插件层的前后       
 
 ![image](https://github.com/lix19937/tensorrt-insight/assets/38753233/99191e22-7c9f-4774-ade8-665575e5f155)       
 
 
-### 8 fuse  
+### 9 fuse  
 * PTQ calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差      
 
-### 9 sensitivity layer profile  
+### 10 sensitivity layer profile  
 * 找到所有 quant layer   
 * 每次仅使能一层quant layer进行指标eval，记录到dict中 {"layer_name":eval_value}
 * 如果是使用 pytorch-quantization calib，则是在pytorch 下寻找敏感层
