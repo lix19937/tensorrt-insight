@@ -12,6 +12,7 @@ So for explicit, we have rules how to propagate the `Q/DQ` nodes and fuse them w
 
 https://github.com/NVIDIA/Model-Optimizer/issues/46
 
+
 ### 2 [onnx quant 过程](./modpt-opt-moq.md)   
 
 ### 3 [onnx auto tune 过程](./modpt-opt-autotune.md)   
