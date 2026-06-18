@@ -78,6 +78,6 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 ### 10 fuse  
 * PTQ calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差      
 
-### 11 ![敏感层分析](sensitivity_layer_profile.md)  
+### 11 [sensitivity_analysis](./sensitivity_analysis.md)  
 
 
