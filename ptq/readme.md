@@ -78,9 +78,6 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 ### 10 fuse  
 * PTQ calib 期间可以进行fuse_bn，减少bn layer的标定，降低标定时间和calib 误差      
 
-### 11 sensitivity layer profile  
-* 找到所有 quant layer   
-* 每次仅使能一层quant layer进行指标eval，记录到dict中 {"layer_name":eval_value}
-* 如果是使用 pytorch-quantization calib，则是在pytorch 下寻找敏感层
-* 如果是使用 TensorRT calib，则是在 fp32 下，使用 TensorRT 或 onnxruntime 下寻找   
+### 11 ![敏感层分析](sensitivity_layer_profile.md)  
+
 
