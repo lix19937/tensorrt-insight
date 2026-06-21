@@ -15,7 +15,7 @@ https://developer.nvidia.com/blog/cuda-graphs/
 会   
 
 ### 3 cudaGraph_t, cudaGraphExec_t 生命周期怎么管理      
-cudaGraph_t 类型的对象定义了kernel graph的结构和内容；
+cudaGraph_t 类型的对象定义了kernel graph的结构和内容；     
 cudaGraphExec_t 类型的对象是一个“可执行的graph实例”：它可以以类似于单个内核的方式启动和执行。
 
 ### 4 graph 捕获和实例化过程中会执行kernel 吗     
