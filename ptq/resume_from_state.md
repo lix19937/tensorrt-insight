@@ -19,8 +19,11 @@
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO - Loaded pattern cache from out/autotuner_state_pattern_cache.yaml (12 patterns, 25 schemes)
 
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO - Ready to profile 53 regions
+
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO - Using baseline from checkpoint: 1.18 ms
+
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO - Starting region profiling (30 schemes per region)
+
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO - Region 1/53 (ID=0, level=0)
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO - Skipping region 0 (pattern already profiled)
 2022-01-14 20:18:02,649 - [modelopt][onnx] - INFO -   Skipping (already profiled)
@@ -180,10 +183,13 @@
 2022-01-14 20:18:02,664 - [modelopt][onnx] - INFO - Region 53/53 (ID=20, level=0)
 2022-01-14 20:18:02,664 - [modelopt][onnx] - INFO - Skipping region 20 (pattern already profiled)
 2022-01-14 20:18:02,664 - [modelopt][onnx] - INFO -   Skipping (already profiled)
+
 2022-01-14 20:18:02,664 - [modelopt][onnx] - INFO - Exporting final optimized model
 2022-01-14 20:18:03,168 - [modelopt][onnx] - INFO - Exported INT8 model with 115 Q/DQ pairs  → out/optimized_final.onnx
+
 2022-01-14 20:18:12,148 - [modelopt][onnx] - INFO - TrtExec benchmark (median): 0.90 ms
 2022-01-14 20:18:12,148 - [modelopt][onnx] - INFO - Results: 1.18 ms → 0.90 ms (1.312x speedup)
+
 2022-01-14 20:18:12,219 - [modelopt][onnx] - INFO - Saved state → out/autotuner_state.yaml (12 patterns, 222 schemes)
 2022-01-14 20:18:12,230 - [modelopt][onnx] - INFO - Saved pattern cache → out/autotuner_state_pattern_cache.yaml (12 patterns, 25 schemes)
 2022-01-14 20:18:12,230 - [modelopt][onnx] - INFO - Saved pattern cache → out/autotuner_state_pattern_cache.yaml
