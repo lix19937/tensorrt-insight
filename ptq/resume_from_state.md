@@ -1,4 +1,5 @@
 
+### has timing cache, out/*.yaml    
 
 ```
 2022-01-14 20:18:02,294 - [modelopt][onnx] - INFO - Trtexec benchmark initialized
