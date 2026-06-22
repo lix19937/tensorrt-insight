@@ -92,8 +92,7 @@ A<<<grid, block, 0, lowPriorityStream>>>(...);
 void fa() { A<<<grid, block, 0, lowPriorityStream>>>(...); }
 void fb() { B<<<grid, block, 0, highPriorityStream>>>(...); }
 
-int main()
-{
+int main() {
     std::thread ta(fa);  
     std::thread tb(fb); 
 
