@@ -111,7 +111,7 @@ Driver 响应：cudaLaunchKernel 内部涉及锁机制（Mutex），驱动程序
 
 #### 3  使用 cudaStreamWaitEvent 实现流之间依赖    
 ```cuda    
-// 假设这是类成员变量
+// 假设这是类成员变量   Create/Destroy event 会导致 CPU 侧 Launch 延迟抖动
 // cudaEvent_t event; 
 // cudaEventCreateWithFlags(&event, cudaEventDisableTiming);
 
@@ -136,7 +136,9 @@ void safeSyncDemo(cudaStream_t streamA, cudaStream_t streamB)
 
 结论： kernelB 提交到 streamB，硬件层面保证 kernelA 执行完才跑 kernelB；
 ```
-cudaEventRecord(event, streamA)       ： 把事件插入 streamA 任务队列，仅当 streamA 中前面所有任务（kernelA）跑完，事件才会被标记完成；       
-cudaStreamWaitEvent(streamB, event, 0)： CPU 侧非阻塞，不会卡住主机，给 streamB 插入一条内部等待指令，GPU 调度器会阻塞 streamB 后续任务，直到 event 完成；
+cudaEventRecord(event, streamA) 
+   把事件插入 streamA 任务队列，仅当 streamA 中前面所有任务（kernelA）跑完，事件才会被标记完成；       
+cudaStreamWaitEvent(streamB, event, 0)
+   CPU 侧非阻塞，不会卡住主机，给 streamB 插入一条内部等待指令，GPU 调度器会阻塞 streamB 后续任务，直到 event 完成；
 ```  
  
