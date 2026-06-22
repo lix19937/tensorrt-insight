@@ -137,7 +137,9 @@ void safeSyncDemo(cudaStream_t streamA, cudaStream_t streamB)
 结论： kernelB 提交到 streamB，硬件层面保证 kernelA 执行完才跑 kernelB；
 ```
 cudaEventRecord(event, streamA) 
-   把事件插入 streamA 任务队列，仅当 streamA 中前面所有任务（kernelA）跑完，事件才会被标记完成；       
+   把事件插入 streamA 任务队列，仅当 streamA 中前面所有任务（kernelA）跑完，事件才会被标记完成；
+
+     
 cudaStreamWaitEvent(streamB, event, 0)
    CPU 侧非阻塞，不会卡住主机，给 streamB 插入一条内部等待指令，GPU 调度器会阻塞 streamB 后续任务，直到 event 完成；
 ```  
