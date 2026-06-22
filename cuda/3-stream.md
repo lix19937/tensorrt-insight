@@ -115,8 +115,7 @@ Driver 响应：cudaLaunchKernel 内部涉及锁机制（mutex），驱动程序
 // cudaEvent_t event; 
 // cudaEventCreateWithFlags(&event, cudaEventDisableTiming);
 
-void safeSyncDemo(cudaStream_t streamA, cudaStream_t streamB)
-{
+void sync(cudaStream_t streamA, cudaStream_t streamB) {
     // 1. 提交任务 A
     kernelA<<<grid, block, 0, streamA>>>(...);
 
