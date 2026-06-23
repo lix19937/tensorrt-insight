@@ -35,9 +35,13 @@ trtexec  --verbose  --fp16 --dumpProfile --separateProfileRun --onnx=./ResNet50.
 [01/09/2022-21:29:26] [I] GPU Compute Time: min = 0.611328 ms, max = 0.627197 ms, mean = 0.617594 ms, median = 0.617676 ms, percentile(90%) = 0.619141 ms, percentile(95%) = 0.620117 ms, percentile(99%) = 0.620605 ms
 ```
 
-### 3 使用pytorch_quantization    
+### 3 export fp16 then --fp16 
 
 
-### 4 使用 mopt int8 default cfg   
+
+### 4 使用pytorch_quantization    
+
+
+### 5 使用 mopt int8 default cfg   
 
 
