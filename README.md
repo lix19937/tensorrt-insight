@@ -11,8 +11,8 @@ Provides cpp/python interfaces and user-defined plugin methods, covering the mai
 |[compute_graph_optimize](./compute_graph_optimize/)    |计算图优化|   |             
 |[dynamic_shape](./dynamic_shape/)  |动态shape |     |         
 |[plugin](./plugin/)    |插件  |      |            
-|[asp](./asp/)          |稀疏 |        |         
-|[ptq](./ptq/)  |标定 |    |              
+|[asp](./asp/)          |稀疏化 |        |         
+|[ptq](./ptq/)  |后量化 |    |              
 |[qat](./qat/)          |量化感知训练 |      |           
 |[trtexec](./trtexec/)     |OSS辅助工具 |     |           
 |[tool](./tool/)     |辅助脚本 |     |           
