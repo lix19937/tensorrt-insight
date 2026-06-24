@@ -5,8 +5,8 @@ TensorRT 是Nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎
 |[overview](./overview.md)       |概述  |   |            
 |[layout](./layout/)    |内存布局|      |            
 |[compute_graph_optimize](./compute_graph_optimize/)    |计算图优化|   |             
-|[dynamic_shape](./dynamic_shape/)  |动态shape |     |         
-|[plugin](./plugin/)    |插件  |      |            
+|[dynamic_shape](./dynamic_shape/)  |动态shape推理 |     |         
+|[plugin](./plugin/)    |插件开发  |      |            
 |[asp](./asp/)          |稀疏化 |        |         
 |[ptq](./ptq/)  |后量化 |    |              
 |[qat](./qat/)          |量化感知训练 |      |           
