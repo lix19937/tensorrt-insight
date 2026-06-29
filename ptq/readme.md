@@ -81,3 +81,5 @@ https://github.com/lix19937/trt-samples-for-hackathon-cn/tree/master/cookbook/03
 ### 11 [sensitivity_analysis](./sensitivity_analysis.md)  
 
 
+### 12 onnx-autotune --> torch-autotune   
+参考onnx 的q-dq插入位置，给torch 插入   
