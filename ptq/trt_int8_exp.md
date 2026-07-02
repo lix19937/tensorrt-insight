@@ -2,8 +2,9 @@
 ## trtexec --int8 流程      
 
 ### 环境 
-drive os 7030  trt10.10.10     
-nv ResNet50.onnx MD5:6753285a2ad03ef7100673ea6bb4312a     
+drive os 7030     
+trt10.10.10       
+nv ResNet50.onnx  MD5:6753285a2ad03ef7100673ea6bb4312a     
 
 ### 1 使用mopt autotune
 
