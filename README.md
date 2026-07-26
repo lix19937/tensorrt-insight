@@ -23,6 +23,7 @@ TensorRT 是Nvidia 推出的跨 nv-gpu架构的半开源高性能AI 推理引擎
 |[developer_guide](./developer_guide/)                  |开发者指导|      |           
 |[triton-inference-server](./triton-inference-server/)    | triton|      |          
 |[cuda](./cuda/)    | cuda编程|      |          
+|[gpu optimizer](gpu_optimizer/)| gpu 性能优化| |  
 |[onnxruntime op](https://github.com/lix19937/xop)| onnxrt 自定义op|辅助图优化，layer输出对齐   |      
 
  
