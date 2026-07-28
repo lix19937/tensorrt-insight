@@ -4,7 +4,8 @@
 
 
 ### 1 单层逐层扰动法        
-+ 具体实现：      
++ 具体实现：
+  * 执行一次ptq（包括用户设置好q-dq） 
   * 找到所有 quant layer   
   * 每次仅使能一层quant layer进行指标eval **基于实际任务指标(mAP/Acc)** ，记录到dict中 {"layer_name":eval_value}
   * 如果是使用 pytorch-quantization calib，则是在pytorch 下寻找敏感层
