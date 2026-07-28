@@ -33,7 +33,8 @@ def quant_sensitivity_analyse(model_ptq, evaler):
     # analyse each quantable layer
     quant_sensitivity = list()
     for k, m in model_ptq.named_modules(): # {name, nn.Module}
-        if isinstance(m, quant_nn.QuantConv2d) or           \
+        # Belongs to one of the following types   
+        if  isinstance(m, quant_nn.QuantConv2d) or           \
             isinstance(m, quant_nn.QuantConvTranspose2d) or \
             isinstance(m, quant_nn.MaxPool2d):
             
