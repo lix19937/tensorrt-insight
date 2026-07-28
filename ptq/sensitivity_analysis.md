@@ -4,11 +4,11 @@
 
 
 ### 1 单层逐层扰动法        
-具体实现：      
-* 找到所有 quant layer   
-* 每次仅使能一层quant layer进行指标eval **基于实际任务指标(mAP/Acc)** ，记录到dict中 {"layer_name":eval_value}
-* 如果是使用 pytorch-quantization calib，则是在pytorch 下寻找敏感层
-* 如果是使用 TensorRT calib，则是在 fp32 下，使用 TensorRT 或 onnxruntime 下寻找
++ 具体实现：      
+  * 找到所有 quant layer   
+  * 每次仅使能一层quant layer进行指标eval **基于实际任务指标(mAP/Acc)** ，记录到dict中 {"layer_name":eval_value}
+  * 如果是使用 pytorch-quantization calib，则是在pytorch 下寻找敏感层
+  * 如果是使用 TensorRT calib，则是在 fp32 下，使用 TensorRT 或 onnxruntime 下寻找
 
 + 其核心思想是：“一次只使用一个量化算子，其余算子保持 FP32 精度”，通过观察不同算子单独量化时对模型指标（如 mAP）的影响，来评估哪些层对量化最敏感。    
 
