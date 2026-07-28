@@ -151,7 +151,7 @@ AIMET 提供了专门的 find_sensitivity API。其内部执行流程如下：
 |NV pytorch_quantizatin |示例采用的单层扰动        |        
 |地平线                  |采样特征图距离法          |        
 |TIDL                   |权重统计分析+特征图尺度分析 |       
-|AEIMET                 |误差传播建模             |   
+|AIMET                 |误差传播建模             |   
 
 ------------------
 
