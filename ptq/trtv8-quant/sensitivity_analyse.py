@@ -35,7 +35,7 @@ def quant_sensitivity_analyse(model_ptq, evaler):
     for k, m in model_ptq.named_modules(): # {name, nn.Module}
         # Belongs to one of the following types   
         if  isinstance(m, quant_nn.QuantConv2d) or           \
-            isinstance(m, quant_nn.QuantConvTranspose2d) or \
+            isinstance(m, quant_nn.QuantConvTranspose2d) or  \
             isinstance(m, quant_nn.MaxPool2d):
             
             # enable current module   !!!      
