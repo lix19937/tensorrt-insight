@@ -752,10 +752,45 @@ Try FP8 instead of INT8
 加速比计算方式：基准时延 ÷ 优化后时延。以上例为例，1.276 倍代表优化后模型速度相比原模型提升约 22%。
 
 若加速比偏低（小于 1.1 倍），常见原因：
-模型属于访存密集型，而非计算密集型
-小规模算子中，Q/DQ 节点带来的开销占主导
-TensorRT 无法在该模型架构上充分发挥量化优势
-建议将量化类型从 INT8 更换为 FP8。
+
+模型属于**访存密集型**，而非计算密集型      
+小规模算子中，Q/DQ 节点带来的开销占主导     
+TensorRT 无法在该模型架构上充分发挥量化优势      
+建议将量化类型从 INT8 更换为 FP8    
+
+---------------------------------------------------------------------------------
+```
+❯ quantization/autotune/workflows.py 中带有 " # lix ----  # -----" 注释的代码是我增加的，是为了找到最短 latency ， 和workflows.py 438-454 找到的并不一样，为什么                                                    
+
+● 这次对比的对象换成了 workflows.py:438-454（final 导出与终测），结论类似但重点不同：optimized_final.onnx 和 exp 快照是两个不同的模型，而且“几百次测量取最小值”天然偏乐观。逐层拆开：
+     
+  1. 两者根本不是同一个模型（Q/DQ 组成不同）
+
+  搜索过程中 lix 块保存的 exp_*.onnx（workflows.py:398-404）用的是 workflows.py:389 导出的 bytes，其 Q/DQ 组成是：
+
+  搜索中 region i 的快照 = best(pattern_0..i-1 已commit) + 当前scheme(region_i)
+                           └── region i+1..N-1 完全未量化 ──┘
+
+  optimized_final.onnx (workflows.py:439-440, 在 436 行 commit 最后一个 region 后导出)
+                         = best(所有 pattern)
+
+  依据：_resolve_scheme_for_region（autotuner_base.py:371-372）对已 commit 的 pattern 取 best_scheme，对当前 pattern 取 current_insertion_scheme_index 指向的 scheme（autotuner_base.py:383-397），其余 region 无
+  scheme。而 final 导出前 set_profile_region(None, commit=True)（workflows.py:436）把最后一个 pattern 也 commit 了。
+
+  所以 final 模型比任何搜索期快照多出后面 region 的 Q/DQ。Q/DQ 插入点集合不同 → engine 不同 → latency 不同，这是第一性的差异。
+
+  2. 为什么“量化更全”的 final 反而可能更慢：贪心串行的组合缺陷
+
+  每个 region 的 best scheme 是在“后面的 region 还是 fp”的上下文里选出来的（workflows.py:371-372 的 commit 时序决定）。当后面的 region 也被量化后：
+
+  - 早期选中的 Q/DQ 边界现在可能产生多余的 reformat 层（int8↔fp 转换）；
+  - 原本 fusion 的子图可能被 Q/DQ 切断；
+  - tactic 选择整体改变。
+
+  搜索从不回头重测早期 region，所以 final 是贪心组合、不是联合最优。可能出现“某个中间快照（少量化几个 region）反而比全量化的 final 快”——这不是矛盾，是贪心的已知缺陷。
+```
+---------------------------------------------------------------------------------
+
 
 ## Deploying Optimized Models
 The optimized ONNX model includes Q/DQ nodes and can be used with TensorRT as follows.
